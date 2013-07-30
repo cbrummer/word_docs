@@ -24,32 +24,16 @@ function adc_category_page_clinic_news() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	
  	echo '<div class="adc-grid-content">';
-	if ( is_page() ) {
-		$category = genesis_get_custom_field('adc-category');
-	}
-	if ($category) {
-		$cat = get_cat_ID($category);
-		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-		$post_per_page = 15;
-		$do_not_show_stickies = 0; // 0 to show stickies
-		$args=array(
-		'category__in' => array($cat),
-		'paged' => $paged,
-		'posts_per_page' => $post_per_page,
-		'caller_get_posts' => $do_not_show_stickies
-		);
-		$temp = $wp_query; // assign orginal query to temp variable for later use
-		$wp_query = null;
-    //$args = array(
-    //    'posts_per_page'=> 15,
-	//	'paged'          => get_query_var( 'paged' ),
-	//	'category_name' => ''.$categoryname.''
-    //);
+    $args = array(
+        'posts_per_page'=> 15,
+		'paged'          => get_query_var( 'paged' ),
+		'category_name' => ''.$categoryname.''
+    );
  
-    //global $wp_query;
+    global $wp_query;
 	$wp_query = new WP_Query( $args );
 	if( $wp_query->have_posts() ): 
-		while( $wp_query->have_posts() ): $wp_query->the_post(); //global $post;
+		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
 			$classes = 'one-third';
 			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
 				$classes .= ' first';
@@ -77,7 +61,6 @@ function adc_category_page_clinic_news() {
 			genesis_posts_nav();
 		endif;
 		wp_reset_query();
-		} // if ($category)
 	echo '</div><!-- end .adc-grid-content -->';
 	
 	echo '</div><!-- end .entry-content -->';
