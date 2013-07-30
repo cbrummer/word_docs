@@ -495,6 +495,28 @@ function adc_surveys_list() {
 	return $output;
 }
 add_shortcode('adc_surveys_list', 'adc_surveys_list');
+// Display blogs list with shortcode
+function adc_blogs_list() {
+	global $post;
+	$args = array(
+	    'category__in' => array (39, 44, 50),
+		'order' => 'ASC',
+		'orderby' => 'title',
+		'posts_per_page'=>-1
+	  );
+	$surveys = new WP_Query($args); 
+		$output = '<ul>';
+		while($surveys->have_posts()) : $surveys->the_post();
+	    	$output .= '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
+	  endwhile;
+	  $output .= '</ul>';
+
+	echo '</ul>';
+	wp_reset_query();
+	// return something
+	return $output;
+}
+add_shortcode('adc_blogs_list', 'adc_blogs_list');
 /************************************************************/
 /*********************** MEDIA *********************
 /*************************************************************/ 

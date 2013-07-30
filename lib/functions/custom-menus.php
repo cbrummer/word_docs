@@ -149,8 +149,8 @@
 					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
 					'theme_location' => 'submenu-7') 
 				);
-			} elseif ( is_page('patient-education') || is_tree( 9447 ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
-				echo '<h4>Patient Education</h4>';
+			} elseif ( is_page('education') || is_tree( 9554 ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
+				echo '<h4>Education</h4>';
 				wp_nav_menu( 
 					array( 
 					'sort_column' => 'menu_order', 

@@ -1,9 +1,9 @@
 <?php 
 /**
- * Template Name: Page of Posts Archive 1
+ * Template Name: Page of Posts Archive 2
  * ADC Twenty Thirteen
  *
- * Description: Archive that allows you to define posts from certain category through custom field in page. This will display a thumbnail and an excerpt. 
+ * Description: Archive that allows you to define posts from certain category through custom field in page. This will display a title link, but no thumbnail or excerpt. 
  *
  * @package      adc-twenty-thirteen
  * @since        1.0.0
@@ -26,17 +26,16 @@ function adc_category_page_clinic_news() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	
  	echo '<div class="adc-grid-content">';
-	global $wp_query;
 	if ( is_page() ) {
 		$category = genesis_get_custom_field('adc-category');
 	}
 	if ($category) {
 		$cat = get_cat_ID($category);
-		$post_per_page = 15;
-		$do_not_show_stickies = 0; // 0 to show sticky posts
+		$post_per_page = -1;
+		$do_not_show_stickies = 0; // 0 to show stickies
 		$args=array(
 		'category__in' => array($cat),
-		'paged' => get_query_var( 'paged' ),
+		'paged'          => get_query_var( 'paged' ),
 		'posts_per_page' => $post_per_page,
 		'caller_get_posts' => $do_not_show_stickies,
 		'order' => 'ASC',
@@ -45,30 +44,19 @@ function adc_category_page_clinic_news() {
 		$temp = $wp_query; // assign orginal query to temp variable for later use
 		$wp_query = null;
 	 
+		//global $wp_query;
 		$wp_query = new WP_Query( $args );
 		if( $wp_query->have_posts() ): 
-			while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
-				$classes = 'one-third';
-				if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
+			while( $wp_query->have_posts() ): $wp_query->the_post(); //global $post;
+				$classes = 'one-half';
+				if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 2 )
 					$classes .= ' first';
 						echo '<div class="'.  $classes . '">';
-							if ( has_post_format( 'video' )) {
-								adc_get_excerpt_bio_thumb();
 								echo '<h4><a href="' . 
 								get_permalink();
 								echo '">';
 								the_title();
 								echo '</a></h4>';
-								the_excerpt();
-							} else {
-								adc_get_excerpt_bio_thumb();
-								echo '<h4><a href="' . 
-								get_permalink();
-								echo '">';
-								the_title();
-								echo '</a></h4>';
-								the_excerpt();	
-							}
 						echo '</div>';
 				
 				endwhile;

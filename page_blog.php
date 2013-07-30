@@ -24,10 +24,12 @@ function adc_category_page_clinic_news() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	
  	echo '<div class="adc-grid-content">';
+	$post_per_page = 15;
     $args = array(
-        'posts_per_page'=> 15,
-		'paged'          => get_query_var( 'paged' ),
-		'category_name' => ''.$categoryname.''
+		'order' => 'ASC',
+		'orderby' => 'title',
+        'posts_per_page' => $post_per_page,
+		'paged' => get_query_var( 'paged' ),
     );
  
     global $wp_query;
