@@ -55,11 +55,8 @@ function custom_do_single_biography_loop() {
 							echo '</a></div><!--end .adc-provider-appt-->';
 						} else {
 							echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
-							echo '<a href="tel://';
 							adc_display_appointment_phone();
-							echo '">';
-							adc_display_appointment_phone();
-							echo '</a></div><!--end .adc-provider-appt-->';
+							echo '</div><!--end .adc-provider-appt-->';
 						}
 					}  elseif ( 'service' == get_post_type()) {
 						echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';

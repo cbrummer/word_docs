@@ -1981,19 +1981,21 @@ table.directory{
 	transition-property: transform, opacity; 
 }
 .multiselect {
-    width:20em;
-    height:15em;
-    border:solid 1px #c0c0c0;
-    overflow:auto;
+    height:auto;
+	padding-bottom: 1rem;
 }
  
 .multiselect label {
     display:block;
+	margin-left: 0;
 }
- 
+input[type=checkbox] {
+	margin-right: 4px;
+	margin-right: 0.25rem;
+}
 .multiselect-on {
     color:#ffffff;
-    background-color:#000099;
+    background-color:#718c45;
 } 
 #adc-grid-content {
 	clear: both;	

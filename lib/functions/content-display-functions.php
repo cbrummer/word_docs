@@ -472,7 +472,6 @@ function adc_forms_list() {
 	// return something
 	return $output;
 }
-add_shortcode('adc_forms_list', 'adc_forms_list');
 // Display surveys list with shortcode
 function adc_surveys_list() {
 	global $post;
@@ -494,29 +493,32 @@ function adc_surveys_list() {
 	// return something
 	return $output;
 }
-add_shortcode('adc_surveys_list', 'adc_surveys_list');
-// Display blogs list with shortcode
-function adc_blogs_list() {
-	global $post;
-	$args = array(
-	    'category__in' => array (39, 44, 50),
-		'order' => 'ASC',
-		'orderby' => 'title',
-		'posts_per_page'=>-1
-	  );
-	$surveys = new WP_Query($args); 
-		$output = '<ul>';
-		while($surveys->have_posts()) : $surveys->the_post();
-	    	$output .= '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
-	  endwhile;
-	  $output .= '</ul>';
 
-	echo '</ul>';
-	wp_reset_query();
+// Display blogs list with shortcode
+function adc_blogs_list( $atts) {
+	extract( shortcode_atts( array( 
+		'limit' => '-1',  
+        'orderby' => 'title', 
+	), $atts ) );
+	$adcblogs = new WP_Query( array('post_parent'  => 9554, 'posts_per_page' => $limit, 'order' => 'ASC', 'orderby' => $orderby ) );
+	if ($adcblogs){
+		while($adcblogs->have_posts()) {
+			$adcblogs->the_post(); 
+			$output .= '<ul>';
+	    	$output .= '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
+			$output .= '</ul>';
+		}
+	}
+	else
 	// return something
 	return $output;
 }
-add_shortcode('adc_blogs_list', 'adc_blogs_list');
+//Register custom shortcodes
+function register_shortcodes(){
+	add_shortcode('adc_forms_list', 'adc_forms_list');
+	add_shortcode('adc_surveys_list', 'adc_surveys_list');
+	add_shortcode('adc_blogs', 'adc_blogs_list');
+}
 /************************************************************/
 /*********************** MEDIA *********************
 /*************************************************************/ 

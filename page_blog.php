@@ -22,6 +22,7 @@ function adc_category_page_clinic_news() {
 	echo '<div class="page hentry entry">';
 	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	echo '<div class="entry-content">' . get_the_content() ;
+	echo do_shortcode("[adc_blogs]");
 	
  	echo '<div class="adc-grid-content">';
 	$post_per_page = 15;

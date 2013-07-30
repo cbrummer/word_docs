@@ -79,6 +79,7 @@
 			'submenu-13' => __( 'Patient Education SubMenu (Vertical side nav)' ) 
 		) 
 	);
+	add_action( 'init', 'register_shortcodes');
  	// Sidebars
 	add_theme_support( 'genesis-footer-widgets', 3 );
 	
