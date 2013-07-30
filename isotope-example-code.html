@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<!--http://www.acegoulet.com/2012/03/isotope-and-wordpress-how-i-did-it/-->
+<ul id="filters" class="option-set filter" data-option-key="filter">
+	<li>Filter: </li>
+	<?php $categories = get_categories('orderby=name&depth=1&title_li=&use_desc_for_title=1&parent=82'); 
+    foreach ($categories as $cat) { ?>
+	<li><a href="#"<?php if ($cat->slug == 'photos') {?> class="show-subnav filter-item" <?php } else {?>class="close-subnav filter-item" <?php }?>id="<?php echo $cat->slug; ?>" data-option-value=".<?php echo $cat->slug; ?>"><?= $cat->cat_name; ?></a></li>
+	<?php } ?>
+	<li><a href="#" data-option-value="*" id="showall" class="selected close-subnav filter-item">show all</a></li>
+</ul>
+
+
+
+<div class="port port-file <?php $post_cats = get_the_category(); foreach( $post_cats as $category ) { echo $category->slug.' ';} ?>" data-category="portfolio">
+	<a class="portfolio-img port-item-link showall <?php $post_cats = get_the_category(); foreach( $post_cats as $category ) { echo $category->slug.' ';} ?>" rel="portfolio" title="<?php the_content(); ?>" id="<?php echo get_post_meta($post->ID, 'trigger_id', true); ?>" href="<?php echo get_post_meta($post->ID, 'port_lg', true); ?>">
+	<?php the_post_thumbnail(); ?></a>
+</div>
+
+
+</body>
+</html>
+
+
+echo '<ul id="filters" class="option-set filter" data-option-key="filter">';
+	echo '<li>Filter: </li>';
+		$term_args = (array(
+			'orderby'=>'name',
+			'order' => 'ASC',
+			)
+		); 
+		$provider_terms = wp_get_object_terms ($post->ID, 'medical-service', $term_args);
+		
+		foreach ($provider_terms as $term) {
+			echo '<li><a href="#"';
+				if ($term->slug == "medical-service") {
+					echo 'class="show-subnav filter-item"';
+				} else { 
+					echo 'class="close-subnav filter-item"';
+				}
+			echo 'id="';
+			echo $term->slug;
+			echo '" data-option-value="';
+			echo $term->slug;
+			echo '">';
+			echo $term->name;
+			echo '</a></li>';
+		}
+	echo '<li><a href="#" data-option-value="*" id="showall" class="selected close-subnav filter-item">show all</a></li></ul>';

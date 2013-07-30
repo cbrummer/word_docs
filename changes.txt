@@ -1,0 +1,11 @@
+Changes:
+
+style.css
+Line 2011
+.provider.one-third {
+	height: 400px;	
+}
+
+archive-biography
+
+$classes = 'one-third provider';

@@ -1,0 +1,70 @@
+@charset "UTF-8";
+@font-face
+{ 
+    font-family: pictonic;
+    src: url('../font/pictonic.eot');
+    src: url('../font/pictonic.eot?#iefix') format('embedded-opentype'),
+        url('../font/pictonic.ttf') format('truetype'),
+        url('../font/pictonic.woff') format('woff'),
+        url('../font/pictonic.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+ 
+.pictonic
+{
+	font-family: "pictonic";
+	font-weight: normal; font-style: normal;
+	-webkit-font-smoothing:  antialiased !important;
+	-moz-font-smoothing:  antialiased !important;
+	font-smoothing:  antialiased !important;
+	line-height:1em;
+}
+ 
+a.pictonic, span.pictonic, small.pictonic {
+	display: -moz-inline-stack;
+	display:inline-block;
+	zoom: 1;
+	*display: inline;
+}
+ 
+[class^="icon-"], [class*=" icon-"]
+{
+	font-family: "pictonic";
+	font-weight: normal; font-style: normal;
+	-webkit-font-smoothing:  antialiased !important;
+	-moz-font-smoothing:  antialiased !important;
+	font-smoothing:  antialiased !important;
+	line-height:1em;
+}
+ 
+a[class^="icon-"], a[class*=" icon-"], span[class^="icon-"], span[class*=" icon-"], small[class^="icon-"], small[class*=" icon-"] {
+	display: -moz-inline-stack;
+	display:inline-block;
+	zoom: 1;
+	*display: inline;
+}
+  
+.icon-rss:before { content:""; } 
+.icon-mail:before { content:""; } 
+.icon-oxp-nav:before { content:""; } 
+.icon-weblink_2:before { content:""; } 
+.icon-kub-locked:before { content:""; } 
+.icon-kub-approve:before { content:""; } 
+.icon-kub-remove:before { content:""; } 
+.icon-kub-search:before { content:""; } 
+.icon-kub-trash:before { content:""; } 
+.icon-kub-cog:before { content:""; } 
+.icon-kub-home:before { content:""; } 
+.icon-kub-warning:before { content:""; } 
+.icon-kub-calendar:before { content:""; } 
+.icon-kub-speech-01:before { content:""; } 
+.icon-instagram:before { content:""; } 
+.icon-pinterest:before { content:""; } 
+.icon-linkedin:before { content:""; } 
+.icon-twitter-3:before { content:""; } 
+.icon-share:before { content:""; } 
+.icon-youtube:before { content:""; } 
+.icon-facebook:before { content:""; } 
+.icon-google__x2B_:before { content:""; } 
+.icon-foursquare_1:before { content:""; }

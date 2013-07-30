@@ -1,0 +1,31 @@
+
+
+	echo '<div class="multiselect one-third first">';
+		echo '<label><input type="checkbox" name="option[]" value=".Female">Female</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".Male" class="current">Male</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".new-patients">Accepting New Patients</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
+	echo '</div><!-- end .multiselect .one-third .first -->';
+	echo'<script>jQuery.fn.multiselect = function() {
+		jQuery(this).each(function() {
+			var checkboxes = jQuery(this).find("input:checkbox");
+			checkboxes.each(function() {
+				var checkbox = $(this);
+				// Highlight pre-selected checkboxes
+				if (checkbox.attr("checked"))
+					checkbox.parent().addClass("multiselect-on");
+	 
+				// Highlight checkboxes that the user selects
+				checkbox.click(function() {
+					if (checkbox.attr("checked"))
+						checkbox.parent().addClass("multiselect-on");
+					else
+						checkbox.parent().removeClass("multiselect-on");
+				});
+			});
+		});
+	};</script>';
+	echo '<script>jQuery(function() {
+		jQuery(".multiselect").multiselect();
+	});</script>';
