@@ -91,7 +91,7 @@
 					'theme_location' => 'submenu-6') 
 				); 
 			// Tools Submenu
-			} elseif ( is_page('patient-tools') || is_tree( 23 ) || is_page( 'qualityreports' ) || '2771' == $post->post_parent || 'qualityreports' == get_post_type() || is_post_type_archive( 'qualityreports' ) || is_singular( 'qualityreports' ) ){
+			} elseif ( is_page('patient-tools') || is_tree( 23 ) || is_page( array('qualityreports','quality_reports-2') ) || '2771' == $post->post_parent || 'qualityreports' == get_post_type() || is_post_type_archive( 'qualityreports' ) || is_singular( 'qualityreports' ) ){
 				echo '<h4>Patient Tools</h4>';
 				wp_nav_menu( 
 					array( 
@@ -159,6 +159,7 @@
 				);	
 			} else {
 			// Show default submenu
+				echo '<h4>Quick Links</h4>';
 				wp_nav_menu( 
 					array( 
 					'sort_column' => 'menu_order', 

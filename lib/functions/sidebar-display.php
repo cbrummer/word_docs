@@ -106,6 +106,8 @@ add_action('get_header','adc_change_genesis_sidebar');
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_patient_tools_nav_extras', 2 );
 	// Quality Assurance Sidebar - nav extras
 		} elseif ( is_page('quality_reports') || is_tree( 2771 ) || 'qualityreports' == get_post_type() || is_post_type_archive( 'qualityreports' ) || is_singular( 'qualityreports' ) ){
+			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
+			add_action( 'genesis_sidebar', 'adc_do_quality_reports_sidebar' );
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_quality_reports_nav_extras', 1 );
 	// Services Sidebar - Main / nav extras
 		} elseif ( array('service', 'specialty' ) == get_post_type() || is_post_type_archive( array('service', 'specialty' )) || is_singular( array('service', 'specialty' ) ) || is_page('medical-services') || is_tree( 19 ) ){
@@ -191,6 +193,10 @@ function adc_do_patient_tools_sidebar() {
 // Patient Tools sidebar extras (these go above the secondary sidebar)
 function adc_do_patient_tools_nav_extras() {
 	dynamic_sidebar( 'patient-tools-extras-sidebar' );
+}
+// Quality Assurance main sidebar
+function adc_do_quality_reports_sidebar() {
+	dynamic_sidebar( 'quality-assurance-sidebar' );
 }
 // Quality Assurance sidebar extras (these go above the secondary sidebar)
 function adc_do_quality_reports_nav_extras() {

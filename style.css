@@ -190,7 +190,8 @@ h2 a:hover,
 .genesis-nav-menu li a:hover,
 .genesis-nav-menu li:hover a,
 .genesis-nav-menu li li a:hover,
-.genesis-nav-menu .current-menu-item a {
+.genesis-nav-menu .current-menu-item a, 
+.widget_nav_menu .menu a:hover {
 	color: #3d88a7;
 	text-decoration:underline;
 }
@@ -221,7 +222,17 @@ input[type="submit"],
 .navigation li.disabled {
 	color: #fff;
 }
-
+#sidebar h2 a,
+#sidebar-alt h2 a,
+#sidebar-alt a {
+	color: #3d88a7;
+}
+#sidebar h2 a:hover,
+#sidebar-alt h2 a:hover, 
+#sidebar-alt a:hover {
+	color: #3d88a7;
+	text-decoration:underline;	
+}
 /* 03b - Font Family ----------- */
 
 body,
@@ -291,8 +302,8 @@ h5 {
 h6,
 .author-box h1,
 .sidebar h2 a {
-	font-size: 16px;
-	font-size: 1rem;
+	font-size: 14px;
+	font-size: 0.875rem;
 }
 
 input,
@@ -1265,6 +1276,22 @@ label {
 	text-indent: 8px;
 	text-indent: 0.5rem;
 }
+.widget_nav_menu .menu {
+	padding: 4px 8px;
+	padding: 0.25rem 0.5rem;
+	text-indent: 0;	
+}
+.widget_nav_menu .menu {
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: 700;	
+}
+
+.widget_nav_menu .menu a {
+	-moz-transition: none;
+	-webkit-transition: none;
+	transition: none;
+}
 .sidebar.widget-area ul li {
 	list-style-type: none;
 	margin-bottom: 6px;
@@ -1288,7 +1315,15 @@ label {
 #sidebar .genesis-nav-menu li {
 	width: 100%;
 }
-
+.sidebar .widget .entry, .sidebar .widget .page .post.entry{
+	padding-right: 16px;
+	padding-right: 1rem;	
+}
+#sidebar-alt.sidebar .widget .entry,
+#sidebar-alt.sidebar .widget .page .post.entry {
+	margin-bottom: 0;
+	padding: 0;	
+}
 /* 10.1 Search Sidebar above header
 ------------------------------------------------------------ */
  
@@ -1348,13 +1383,17 @@ label {
 	padding-left: 8px;
 	padding-left: 0.5rem;	
 }
-.alignleft .attachment-adc_sidebar_thumb, .alignleft .attachment-adc_related-post-thumb {
+.alignleft .attachment-adc_sidebar_thumb, .alignleft .attachment-adc_related-post-thumb, .alignleft attachment-adc_excerpt_thumb {
 	padding-right: 8px;	
     padding-right: 0.5rem;
+	padding-bottom: 16px;
+	padding-bottom: 1rem;
 }
-.alignright .attachment-adc_sidebar_thumb, .alignright .attachment-adc_related-post-thumb {	
+.alignright .attachment-adc_sidebar_thumb, .alignright .attachment-adc_related-post-thumb, .alignright attachment-adc_excerpt_thumb  {	
 	padding-left: 8px;	
     padding-left: 0.5rem;
+	padding-bottom: 16px;
+	padding-bottom: 1rem;
 }
 .featuredpost, 
 .featuredpage {
@@ -1368,6 +1407,10 @@ label {
 .featuredpage p {
 	padding-right: 8px;
 	padding-right: 0.5rem;
+}
+#sidebar p.more-from-category {
+	padding-left: 8px;
+	padding-left: 0.5rem;	
 }
 .widget.adc-pediatric-web-illness-widget {
 	padding-bottom: 0;
@@ -1595,6 +1638,13 @@ input:hover[type="submit"],
 	position: absolute;
 	width: 1px;
 }
+.adc-make-appt a {
+	color: #FFFFFF;
+}
+.adc-make-appt a:hover{
+	color: #FFF;
+	text-decoration: none;
+}
 .adc-provider-appt{
 	margin: 0 0 1em;
 	text-align:center;
@@ -1711,9 +1761,10 @@ img {
 
 img.centered,
 .aligncenter {
-	display: block;
-	margin: 0 auto 24px;
-	margin: 0 auto 1.5rem
+	display: inline;
+	margin: 0 24px 24px 0;
+	margin: 0 1.5rem 1.5rem 0;
+	text-align: left;
 }
 
 img.alignnone {

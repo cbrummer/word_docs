@@ -275,6 +275,17 @@
         'after_title' => '</h4>'
 		)
 	);
+	//Custom Quality Assurance section sidebar area that replaces the primary sidebar area left of the content
+	genesis_register_sidebar( array(
+		'name' => ('QA Sidebar'),
+		'id' => 'quality-assurance-sidebar',
+		'description' => ('The sidebar that replaces the primary sidebar with widgets for the Quality Assurance section'),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>'
+		)
+	);
 //Custom Quality Assurance section subnav sidebar areas that live above the secondary sidebar area
 	genesis_register_sidebar( array(
 		'name' => ('QA Right Sidebar'),

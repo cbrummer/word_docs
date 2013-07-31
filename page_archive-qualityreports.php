@@ -23,9 +23,6 @@ function custom_do_qualityreports_archives_loop() {
 	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	echo '<div class="entry-content">' . get_the_content() ;
 	
-	
-	
-	
 	echo '<div class="adc-grid-content">';
 	$args = array(
 		'post_type' =>array( 
