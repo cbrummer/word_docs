@@ -36,7 +36,7 @@ if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) {
 remove_action( 'genesis_header', 'genesis_do_header' ); 
 add_action( 'genesis_header', 'genesis_do_new_header' ); 
 function genesis_do_new_header() { 
-    echo '<div id="title-area"><img src="' . get_stylesheet_directory_uri() . '/images/ADClogo_90.png" alt="The Austin Diagnostic Clinic" />'; 
+    echo '<div id="title-area"><img class="adc-logo" src="' . get_stylesheet_directory_uri() . '/images/ADClogo_90.png" alt="The Austin Diagnostic Clinic" />'; 
     do_action( 'genesis_site_title' ); 
     do_action( 'genesis_site_description' ); 
     echo  '</div><!-- end #title-area -->' ; 
