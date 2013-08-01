@@ -29,6 +29,7 @@ function adc_category_page_clinic_news() {
 	global $wp_query;
 	if ( is_page() ) {
 		$category = genesis_get_custom_field('adc-category');
+		$tagid = genesis_get_custom_field('adc-tag-id');
 	}
 	if ($category) {
 		$cat = get_cat_ID($category);
@@ -74,8 +75,53 @@ function adc_category_page_clinic_news() {
 				endwhile;
 				genesis_posts_nav();
 			endif;
-			wp_reset_query();
 		} // if ($category)
+		elseif ($tagid) {
+			$post_per_page = 15;
+			$do_not_show_stickies = 0; // 0 to show sticky posts
+			$args=array(
+			'tag__in' => array($tagid),
+			'paged' => get_query_var( 'paged' ),
+			'posts_per_page' => $post_per_page,
+			'caller_get_posts' => $do_not_show_stickies,
+			'order' => 'ASC',
+			'orderby' => 'title',
+			);
+			$temp = $wp_query; // assign orginal query to temp variable for later use
+			$wp_query = null;
+		 
+			$wp_query = new WP_Query( $args );
+			if( $wp_query->have_posts() ): 
+				while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
+					$classes = 'one-third';
+					if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
+						$classes .= ' first';
+							echo '<div class="'.  $classes . '">';
+								if ( has_post_format( 'video' )) {
+									adc_get_excerpt_bio_thumb();
+									echo '<h4><a href="' . 
+									get_permalink();
+									echo '">';
+									the_title();
+									echo '</a></h4>';
+									the_excerpt();
+								} else {
+									adc_get_excerpt_bio_thumb();
+									echo '<h4><a href="' . 
+									get_permalink();
+									echo '">';
+									the_title();
+									echo '</a></h4>';
+									the_excerpt();	
+								}
+							echo '</div>';
+					
+					endwhile;
+					genesis_posts_nav();
+				endif;
+			
+		wp_reset_query();	
+		}// if ($tagid)
 	echo '</div><!-- end .adc-grid-content -->';
 	
 	echo '</div><!-- end .entry-content -->';

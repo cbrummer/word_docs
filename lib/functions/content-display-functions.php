@@ -445,7 +445,7 @@ function adc_subpage_peek() {
 	return $output;
 }
     add_shortcode('adc_subpage_peek', 'adc_subpage_peek');
-
+// SHORTCODES - these functions were working up until July 30, when they stopped
 // Display forms list with shortcode
 function adc_forms_list() {
 	global $post;
