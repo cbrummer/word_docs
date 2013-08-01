@@ -377,6 +377,9 @@ function adc_leader_story() {
 				echo "</ul>";
 				endwhile;
             wp_reset_postdata();	
+			echo '<ul><li><a href="';
+			echo get_tag_link( 679 ); 
+			echo '">Read more staff stories</a></li></ul>';
 }
 
 //This function checks to see if a provider is a hospitalist and displays the right phone number if not

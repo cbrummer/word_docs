@@ -1538,6 +1538,10 @@ label {
 .footer-widgets a:hover {
 	text-decoration:underline;
 }
+.footer-widgets .widget_nav_menu .menu a:hover {
+	color: #FFFFFF;	
+}
+
 .footer-widgets .widget {
 	margin-bottom: 24px;
 	margin-bottom: 1.5rem;
