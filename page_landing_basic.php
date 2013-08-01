@@ -1,6 +1,6 @@
 <?php 
 /**
- * Template: Landing - Basic
+ * Template Name: Landing - Basic
  * ADC Twenty Thirteen
  *
  * @package      adc-twenty-thirteen

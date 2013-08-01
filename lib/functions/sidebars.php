@@ -331,32 +331,11 @@
 		)
 	);
 	
-//Reassess whether these sidebar areas are needed
-//Flu page bottom widget boxes
+//Flu page sidebar area that replaces the primary sidebar area left of the content
 	genesis_register_sidebar( array(
-		'name' => ('Flu Left Box'),
-		'id' => 'flu-left-box',
-		'description' => ('The widget that appears in the content area on the bottom left of the flu page (above the footer)'),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h4 class="widget-title">',
-        'after_title' => '</h4>'
-		)
-	);
-	genesis_register_sidebar( array(
-		'name' => ('Flu Center Box'),
-		'id' => 'flu-center-box',
-		'description' => ('The widget that appears in the content area on the bottom center of the flu page (above the footer)'),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget' => '</aside>',
-		'before_title' => '<h4 class="widget-title">',
-        'after_title' => '</h4>'
-		)
-	);
-	genesis_register_sidebar( array(
-		'name' => ('Flu Right Box'),
-		'id' => 'flu-right-box',
-		'description' => ('The widget that appears in the content area on the bottom right of the flu page (above the footer)'),
+		'name' => ('Flu Sidebar'),
+		'id' => 'flu-sidebar',
+		'description' => ('The sidebar that holds widgets for the Flu pages)'),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget' => '</aside>',
 		'before_title' => '<h4 class="widget-title">',

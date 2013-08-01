@@ -114,6 +114,9 @@ add_action('get_header','adc_change_genesis_sidebar');
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 			add_action( 'genesis_sidebar', 'adc_do_medical_services_sidebar' );
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_medical_services_nav_extras', 2 );
+		} elseif ( is_page('flu') || is_tree( 7334 ) ){
+			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
+			add_action( 'genesis_sidebar', 'adc_do_flu_sidebar' );
 		}
 	}
 
@@ -209,4 +212,8 @@ function adc_do_medical_services_sidebar() {
 // Medical Services sidebar extras (these go above the secondary sidebar)
 function adc_do_medical_services_nav_extras() {
 	dynamic_sidebar( 'services-extras-sidebar' );
+}
+// Flu sidebar main sidebar
+function adc_do_flu_sidebar() {
+	dynamic_sidebar( 'flu-sidebar' );
 }

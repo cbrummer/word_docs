@@ -55,7 +55,7 @@ function adc_category_page_clinic_news() {
 						echo '<div class="'.  $classes . '">';
 							if ( has_post_format( 'video' )) {
 								adc_get_excerpt_bio_thumb();
-								echo '<h4><a href="' . 
+								echo '<h4>' . adc_video_post() . ' <a href="' . 
 								get_permalink();
 								echo '">';
 								the_title();
@@ -99,7 +99,7 @@ function adc_category_page_clinic_news() {
 							echo '<div class="'.  $classes . '">';
 								if ( has_post_format( 'video' )) {
 									adc_get_excerpt_bio_thumb();
-									echo '<h4><a href="' . 
+									echo '<h4>' . adc_video_post() . ' <a href="' . 
 									get_permalink();
 									echo '">';
 									the_title();

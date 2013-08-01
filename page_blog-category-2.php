@@ -62,8 +62,42 @@ function adc_category_page_clinic_news() {
 				endwhile;
 				genesis_posts_nav();
 			endif;
-			wp_reset_query();
 		} // if ($category)
+		elseif ($tagid) {
+			$post_per_page = 15;
+			$do_not_show_stickies = 0; // 0 to show sticky posts
+			$args=array(
+			'tag__in' => array($tagid),
+			'paged' => get_query_var( 'paged' ),
+			'posts_per_page' => $post_per_page,
+			'caller_get_posts' => $do_not_show_stickies,
+			'order' => 'ASC',
+			'orderby' => 'title',
+			);
+			$temp = $wp_query; // assign orginal query to temp variable for later use
+			$wp_query = null;
+		 
+			$wp_query = new WP_Query( $args );
+			if( $wp_query->have_posts() ): 
+				while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
+					$classes = 'one-half';
+					if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 2 )
+						$classes .= ' first';
+							echo '<div class="'.  $classes . '">';
+
+									echo '<h4><a href="' . 
+									get_permalink();
+									echo '">';
+									the_title();
+									echo '</a></h4>';
+							echo '</div>';
+					
+					endwhile;
+					genesis_posts_nav();
+				endif;
+			
+		wp_reset_query();	
+		}// if ($tagid)
 	echo '</div><!-- end .adc-grid-content -->';
 	
 	echo '</div><!-- end .entry-content -->';
