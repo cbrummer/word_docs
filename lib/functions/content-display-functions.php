@@ -901,13 +901,14 @@ function author_box_gravatar_size( $size ) {
 add_action( 'genesis_after_post', 'adc_related_posts', 15 );
 /**
  * Outputs related posts with thumbnail
+ * Only shows related posts on single posts in Clinic News or Your health life categories
  * 
  * @author Nick the Geek
  * @url http://designsbynickthegeek.com/tutorials/related-posts-genesis
  * @global object $post 
  */
 function adc_related_posts() {     
-    if ( is_single ( ) ) {
+    if ( in_category( array( 39, 44 )) ) {
         global $post;
  
         $count = 0;
