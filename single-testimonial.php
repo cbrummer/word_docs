@@ -26,14 +26,22 @@ function custom_do_single_testimonial_loop() {
 		while ( have_posts() ) : the_post();
 			echo '<div class="page hentry entry entry-content adc-testimonial">';
 			echo '<h1 class="entry-title">'. get_the_title() . '</h1>';
-			echo '<h2>';
-			adc_staff_info();
-			echo '</h2>';
-			echo '<h3>';
-			adc_start_date();
-			echo '</h3>';
-			the_content();
-			adc_display_video_4();
+			if (in_category( 'staff-testimonials' )){
+				echo '<h2>';
+				adc_staff_info();
+				echo '</h2>';
+				echo '<h3>';
+				adc_start_date();
+				echo '</h3>';
+				the_content();
+				adc_display_video_4();
+			} elseif (in_category( 'patient-testimonials' )){
+				the_content();
+				adc_display_video_4();	
+			} else {
+				the_content();	
+			}
+			
 			echo '</div><!-- end .page .hentry .entry .adc-testimonial-->';			
 		endwhile;
 	endif;

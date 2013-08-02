@@ -1257,8 +1257,8 @@ label {
 .sidebar .widget, .adc-submenu-area {
 	margin-bottom: 32px;
 	margin-bottom: 2rem;
-	padding-bottom: 32px;
-	padding-bottom: 2rem;
+	/*padding-bottom: 32px;*/
+	/*padding-bottom: 2rem;*/
 	overflow: hidden;
 }
 
@@ -1326,6 +1326,14 @@ label {
 #sidebar-alt.sidebar .widget .page .post.entry {
 	margin-bottom: 0;
 	padding: 0;	
+}
+.adc-linkedin-widget{
+	margin-bottom: 0 !important;
+	padding-bottom: 0 !important;
+}
+.adc-linkedin-widget h4 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;	
 }
 /* 10.1 Search Sidebar above header
 ------------------------------------------------------------ */
@@ -1443,16 +1451,11 @@ label {
 }
 
 /*Sidebar testimonial and provider quotes*/
-.adc-testimonial, .adc-important-info, .adc-info-box {
+.adc-important-info, .adc-info-box {
 	background: #f9f9f9;
     border: 1px solid #E0E0E0;
 	margin: 0 auto 1em;	
     padding: 1em;	
-}
-.adc-testimonial p{
-	font-size: 1.125em; /* 18px / 16 px*/
-	font-style:italic;
-	font-weight:bold;
 }
 .adc-testimonial ul {
 	list-style: none;
