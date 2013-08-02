@@ -36,37 +36,8 @@ function custom_do_biography_archives_loop() {
 		echo '<label><input type="checkbox" name="option[]" value=".new-patients">Accepting New Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
-		echo '<label><input type="checkbox" name="option[]" value="*">Clear Filters</label>';
+		echo '<a href="#" id="adc-clear-filters">Clear Filters</a>';
 	echo '</div><!-- end .multiselect .one-third .first -->';
-	echo'<script> var filter = [];
-	jQuery.fn.multiselect = function() {
-		jQuery(this).each(function() {
-			var checkboxes = jQuery(this).find("input:checkbox");
-			checkboxes.each(function() {
-				var checkbox = $(this);
-				// Highlight pre-selected checkboxes
-				if (checkbox.attr("checked"))
-					checkbox.parent().addClass("multiselect-on");
-	 
-				// Highlight checkboxes that the user selects
-				checkbox.click(function() {
-					var value = checkbox.val();
-					if (checkbox.attr("checked")) {
-						filter.push(value);
-						checkbox.parent().addClass("multiselect-on");
-					} else {
-						filter = jQuery.grep(filter, function(val) { return val != value; });  
-						checkbox.parent().removeClass("multiselect-on");
-					}
-					var filterString = filter ? filter.join("") : "*";
-					jQuery("#adc-grid-content").isotope({ filter: filterString });
-				});
-			});
-		});
-	};</script>';
-	echo '<script>jQuery(function() {
-		jQuery(".multiselect").multiselect();
-	});</script>';
 	echo '<select id="adc-specialty-select" class="one-third"><option value="*">Choose a Specialty</option>';
 	foreach($medTerms as $medTerm) {
 		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
@@ -78,32 +49,6 @@ function custom_do_biography_archives_loop() {
 		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
 	}
 	echo '</select>';
-	echo '<script>jQuery(function(){
-			jQuery("#adc-specialty-select").change(function(){
-				var str = "";
-  				jQuery("#adc-specialty-select option:selected").each(function () {
-        		str += $(this).val() + " ";
-      			});
-				jQuery("#adc-grid-content").isotope({
-					filter: str	
-				});	
-			}
-		)
-		}
-	);
-	jQuery(function(){
-			jQuery("#adc-location-select").change(function(){
-				var str = "";
-  				jQuery("#adc-location-select option:selected").each(function () {
-        		str += $(this).val() + " ";
-      			});
-				jQuery("#adc-grid-content").isotope({
-					filter: str	
-				});	
-			}
-		)
-		}
-	)</script>';
 	echo '</div><!--end #filters-->';
 
 
@@ -125,7 +70,7 @@ function custom_do_biography_archives_loop() {
 	
 	if( $wp_query->have_posts() ): 
 		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
-			$classes = 'one-third provider';
+			$classes = 'one-third adc-provider';
 			foreach( get_the_terms( $post->ID, 'medicalservice') as $term) {
 				$classes .= ' ' . $term->slug;
 			}

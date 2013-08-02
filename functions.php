@@ -392,10 +392,10 @@ add_action( 'genesis_meta', 'adc_load_javascript_files' );
 // Register Isotope Parameters, so it can be called anytime
 // Create minified isotope-parameters version at http://jscompress.com
 // isotope-parameters file named: isotope-parameters.min.js
-		wp_register_script( 'adc-isotope-parameters', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters1.js', array( 'adc-isotope' ), '1.5.21', true );
-		//if ( is_archive ('biography') ){
-		//	wp_enqueue_script('adc-isotope-parameters');
-		//}
+		wp_register_script( 'adc-isotope-parameters', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters.js', array( 'adc-isotope' ), '1.5.21', true );
+		if ( is_archive ('biography') ){
+			wp_enqueue_script('adc-isotope-parameters');
+		}
   // Enqueue Isotope Scripts only when needed (page template, custom field set)
 		//global $post; // Remove if not using get_post_meta()
 		//if ( is_page('doctors') || is_page('medical-services') || get_post_meta( $post->ID, 'adc_isotope' ) );
