@@ -25,7 +25,8 @@ function custom_do_testimonial_archives_loop() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	echo '<div class="adc-provider-excerpt .adc-grid-content">';
 	$args = array(
-		'post_type' =>'testimonial',
+		'post_type' => array( 'testimonial', 'post' ),
+		'category__in' => array( 537, 1080 ),
 		'posts_per_page' => -1,
 		'orderby' => 'title',
 		'order' => 'ASC',
