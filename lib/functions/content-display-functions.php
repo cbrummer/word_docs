@@ -409,6 +409,8 @@ function adc_check_if_hospitalist() {
 		echo '</div>';
 	 } //end check to see if hospitalist
 }
+//Grid loop post display
+
 /**
  /*EDITING
  */
