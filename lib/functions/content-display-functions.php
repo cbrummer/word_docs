@@ -1000,6 +1000,31 @@ function adc_related_posts() {
     }
 }
 
+function output_testimonials($wp_query) {
+	// Intro Text (from page content)
+	echo '<div class="page hentry entry">';
+	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
+	echo '<div class="entry-content">' . get_the_content() ;
+	echo '<div class="adc-provider-excerpt .adc-grid-content">';
+	if( $wp_query->have_posts() ): 
+		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
+				$classes = 'one-third';
+				if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
+					$classes .= ' first';
+						echo '<div class="'.  $classes . '">';
+							echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
+							echo '<h4><a href="' . get_permalink() . '">' . get_the_title() . '</a></h4>';
+							the_excerpt();	
+						echo '</div>';
+			endwhile;
+			genesis_posts_nav();
+		endif;
+		wp_reset_query();
+	echo '</div><!-- end .adc-provider-excerpt .adc-grid-content -->';
+	echo '</div><!-- end .entry-content -->';
+	echo '</div><!-- end .page .hentry .entry -->';
+}
+
 /************************************************************/
 /*********************** ECOMMERCE *********************
 /*************************************************************/ 
