@@ -2098,6 +2098,14 @@ body.landing-page {
 	font-size: 24px;	
 	font-size: 1.5rem;	
 }
+/* Events
+-------------------------------------------------------------------------------------*/
+#tribe-events-content {
+	margin-bottom: 48px;
+	padding: 0 20px 20px 0;
+	position: relative;
+	max-width: 728px;
+}
 /*
 19 Mobile Elements
 ---------------------------------------------------------------------------------------------------- */

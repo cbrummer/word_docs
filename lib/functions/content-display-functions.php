@@ -409,6 +409,36 @@ function adc_check_if_hospitalist() {
 		echo '</div>';
 	 } //end check to see if hospitalist
 }
+// Display Imaging service links
+function adc_display_imaging_links(){
+	$args = array(
+		'post_parent' => 2085,
+		'post_type' => 'service',
+		'posts_per_page' => -1,
+		'orderby' => 'title', 
+		'order' => 'ASC'
+	); 
+	$imagingservices = new WP_Query($args);
+	if ($imagingservices->have_posts()){
+		$first = true;
+			while ($imagingservices->have_posts()): $imagingservices->the_post();
+					if ($first == true) { echo '<h4>All Imaging Services</h4><ul class="adc-num-list">';
+						$first = false;
+					 }
+				echo '<li><a href="';
+				the_permalink(); 
+				echo '" title="';
+				printf( esc_attr__( 'Link to %s', 'adc-twenty-thirteen' ),the_title_attribute( 'echo=0' ) ); 
+				echo '" rel="bookmark">';
+				the_title();
+				echo '</a></li>';	
+			endwhile;
+			echo '</ul>';
+			} else { 
+		}
+ wp_reset_query();
+}
+
 //Grid loop post display
 
 /**
