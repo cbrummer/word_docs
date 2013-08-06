@@ -110,13 +110,18 @@ add_action('get_header','adc_change_genesis_sidebar');
 			add_action( 'genesis_sidebar', 'adc_do_quality_reports_sidebar' );
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_quality_reports_nav_extras', 1 );
 	// Services Sidebar - Main / nav extras
-		} elseif ( array('service', 'specialty' ) == get_post_type() || is_post_type_archive( array('service', 'specialty' )) || is_singular( array('service', 'specialty' ) ) || is_page('medical-services') || is_tree( 19 ) ){
+		} elseif ( array('service', 'specialty' ) == get_post_type() || is_post_type_archive( array('service', 'specialty' )) || is_page('medical-services') || is_tree( 19 ) || is_singular( array('service', 'specialty' ) ) && !is_single( array( 2085, 2090, 2086, 2088, 2092, 4409, 4410, 4511, 2089, 4513, 2087 ) ) ){
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 			add_action( 'genesis_sidebar', 'adc_do_medical_services_sidebar' );
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_medical_services_nav_extras', 2 );
+	// Flu Sidebar - Main
 		} elseif ( is_page('flu') || is_tree( 7334 ) ){
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 			add_action( 'genesis_sidebar', 'adc_do_flu_sidebar' );
+	// Imaging Sidebar - Main
+		} elseif ( is_single( array( 2085, 2090, 2086, 2088, 2092, 4409, 4410, 4511, 2089, 4513, 2087 ) )  || is_tree( 2085 ) ){
+			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
+			add_action( 'genesis_sidebar', 'adc_do_imaging_sidebar' );
 		}
 	}
 
@@ -213,7 +218,11 @@ function adc_do_medical_services_sidebar() {
 function adc_do_medical_services_nav_extras() {
 	dynamic_sidebar( 'services-extras-sidebar' );
 }
-// Flu sidebar main sidebar
+// Flu main sidebar
 function adc_do_flu_sidebar() {
 	dynamic_sidebar( 'flu-sidebar' );
+}
+// Imaging main sidebar
+function adc_do_imaging_sidebar() {
+	dynamic_sidebar( 'imaging-sidebar' );
 }

@@ -117,8 +117,8 @@
 					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
 					'theme_location' => 'submenu-10') 
 				);
-			// Specialties Submenu
-			} elseif ( is_page('medical-services') || is_tree( 19 ) || 'specialty' == get_post_type() || is_post_type_archive( 'specialty' ) || is_singular( 'biography' )){
+			// Specialties and Services Page Submenu
+			} elseif ( is_page('medical-services') ){
 				echo '<h4>Our Specialties</h4>';
 				wp_nav_menu( 
 					array( 
@@ -133,6 +133,15 @@
 					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
 					'theme_location' => 'submenu-11') 
 				);	
+			// Specialties Submenu
+			} elseif ( is_tree( 19 ) || 'specialty' == get_post_type() || is_post_type_archive( 'specialty' ) || is_singular( 'biography' )){
+				echo '<h4>Our Specialties</h4>';
+				wp_nav_menu( 
+					array( 
+					'sort_column' => 'menu_order', 
+					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
+					'theme_location' => 'submenu-7') 
+				);
 			// Services Submenu
 			} elseif ('service' == get_post_type() || is_post_type_archive( 'service' ) || is_singular( 'service' )){
 				echo '<h4>Our Services</h4>';
@@ -142,13 +151,6 @@
 					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
 					'theme_location' => 'submenu-11') 
 				);	
-				echo '<h4>Our Specialties</h4>';
-				wp_nav_menu( 
-					array( 
-					'sort_column' => 'menu_order', 
-					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
-					'theme_location' => 'submenu-7') 
-				);
 			} elseif ( is_page('education') || is_tree( 9554 ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
 				echo '<h4>Education</h4>';
 				wp_nav_menu( 

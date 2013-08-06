@@ -220,22 +220,11 @@
         'after_title' => '</h4>'
 		)
 	);
-//Custom Events section sidebar area that replaces the primary sidebar area left of the content
+//Custom Imaging section sidebar area that replaces the primary sidebar area left of the content
 	genesis_register_sidebar( array(
-		'name' => ('Event Sidebar'),
-		'id' => 'event-sidebar',
-		'description' => ('The sidebar that holds widgets for the Events pages'),
-		'before_widget' => '<li id="%1$s" class="widget %2$s">',
-		'after_widget' => '</li>',
-		'before_title' => '<h4 class="widget-title">',
-        'after_title' => '</h4>'
-		)
-	);	
-//Custom Events page page subnav sidebar areas that lives above the secondary sidebar area
-	genesis_register_sidebar( array(
-		'name' => ('Event Nav Extras'),
-		'id' => 'event-extras-sidebar',
-		'description' => ('The sidebar that holds the submenu extras for event displays'),
+		'name' => ('Imaging Sidebar'),
+		'id' => 'imaging-sidebar',
+		'description' => ('The sidebar that holds widgets for the Imaging pages'),
 		'before_widget' => '<li id="%1$s" class="widget %2$s">',
 		'after_widget' => '</li>',
 		'before_title' => '<h4 class="widget-title">',

@@ -29,7 +29,7 @@ function custom_do_single_service_loop() {
 			//Left column
 			echo '<div class="one-half first">';
 				echo '<div class="adc-service-appt btn">';
-				echo '<h3>Information</h3>';
+				echo '<h3>Appointments</h3>';
 				adc_display_appointment_phone();
 				echo '</div><!--end .adc-service-appt-->';
 				the_content();
@@ -42,179 +42,21 @@ function custom_do_single_service_loop() {
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
             output_location_info();
-			
 			echo '</div><!-- end .one-half-->';
-			
-			
-			
 			//Left column
 			echo '<div class="one-half first">';
-			
-			//Place education links here
-			//Show list of related educational materials EXCEPT those in patient education category 
-            $visitinfo = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
-             	if ($visitinfo->have_posts()){
-                	$first = true;
-						while ($visitinfo->have_posts()): $visitinfo->the_post();
-							if ( in_category( array('instructions', 'patient-forms', 'procedure-preparations', 'resource-materials', 'office-policies', 'patient-surveys') )) {					
-							if ($first == true) { 
-								echo '<h3>Prepare for your visit</h3><ul class="adc-col-list">';
-								$first = false;
-							 }
-                             	echo '<li><a href="' ;
-								the_permalink();
-								echo '">';
-								the_title();
-								echo '</a></li>';
-							}
-					endwhile;
-				} else { 
-					}
-				echo '</ul>';
-			wp_reset_query();
-           
-             //Show list of related educational materials EXCEPT those in patient education category--> 
-             $education = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
-             	if ($education->have_posts()){
-                	$first = true;
-						while ($education->have_posts()): $education->the_post();
-							if ( in_category( 'patient-education' )) {
-								if ($first == true) { 
-									echo '<h3>Educational Materials</h3><ul class="adc-col-list">';
-								$first = false;
-							 }
-                           		echo '<li><a href="' ;
-								the_permalink();
-								echo '">';
-								the_title();
-								echo '</a></li>';
-							}
-					endwhile;
-				} else {
-					}
-				echo '</ul>';
-			wp_reset_query(); 
-            
-            //Related patient education
-            $healtharticles = get_blog_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');	
-             	if ($healtharticles->have_posts()){
-                	$first = true;
-						while ($healtharticles->have_posts()): $healtharticles->the_post();
-						static $counter = 0;
-							if ( in_category( 'health-articles' )) {	
-						
-							if ($first == true) { echo '<h3>Related Health News</h3><ul class="adc-col-list">';
-								$first = false;
-							 }
-							 if ($counter == "5") { break;
-							 } else {
-                           		echo '<li><a href="' ;
-								the_permalink();
-								echo '">';
-								the_title();
-								echo '</a></li>';
-							$counter++;
-							};
-						}
-					endwhile;
-				} else { 
-					}
-				echo '</ul>';
-			wp_reset_query();
-           //Show list of related quality reports
-             $qareports = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
-             	if ($qareports->have_posts()){
-                	$first = true;
-						while ($qareports->have_posts()): $qareports->the_post();
-							if ( 'qualityreports' == get_post_type()) {
-								if ($first == true) { echo '<h4>Quality Reports</h4><ul class="adc-col-list">';
-								$first = false;
-							 }
-                          		echo '<li><a href="' ;
-								the_permalink();
-								echo '">';
-								the_title();
-								echo '</a></li>';
-							}
-					endwhile;
-				} else {
-					}
-				echo '</ul>';
-			wp_reset_query();
+			//Education links
+			output_patient_visit_links();
+            output_related_education_links();
+            output_related_blog_links();
+            output_quality_reports_links();
 			echo '</div><!--end .one-half first-->';
 			
 			
 			//Right column
 			echo '<div class="one-half">';
 			//Doctors associated with this specialty
-			$providers = get_provider_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
-			if ($providers->have_posts()){
-				echo '<h3>Doctors &amp; Providers</h3>';
-                	while ($providers->have_posts()): $providers->the_post();
-						if ( 'biography' == get_post_type()) {
-							if (pa_in_taxonomy('cliniclocation', 'cedar-bend')){
-                              echo '<div class="adc-list-excerpt adc-provider-basic-info">';  
-                            echo '<div class="adc-list-excerpt-img">';
-							adc_get_related_post_thumb();
-							echo '</div><!--.adc-list-excerpt-img-->';
-                            echo '<div class="adc-list-excerpt-info">';
-                            echo '<h4><a href="';
-							the_permalink();
-							echo '">';
-							the_title();
-							echo ', ';
-							adc_display_suffix();
-							echo '</a></h4>';
-							echo '<ul>';
-							adc_display_accept_new_patients();
-							echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
-                            echo '</ul>';
-                            echo '</div><!-- end .adc-list-excerpt-info-->';
-                         	echo '</div><!-- end .adc-list-excerpt-->';
-							  
-						} elseif (pa_in_taxonomy('cliniclocation', 'circle-c')){
-							echo '<div class="adc-list-excerpt">';  
-                            echo '<div class="adc-list-excerpt-img">';
-							adc_get_related_post_thumb();
-							echo '</div><!--.adc-list-excerpt-img-->';
-                            echo '<div class="adc-list-excerpt-info">';
-                            echo '<h4><a href="';
-							the_permalink();
-							echo '">';
-							the_title();
-							echo ', ';
-							adc_display_suffix();
-							echo '</a></h4>';
-							echo '<ul>';
-							adc_display_accept_new_patients();
-							echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
-                            echo '</ul>';
-                            echo '</div><!-- end .adc-list-excerpt-info-->';
-                         	echo '</div><!-- end .adc-list-excerpt-->';
-                         } else {
-                        	echo '<div class="adc-list-excerpt">';  
-                            echo '<div class="adc-list-excerpt-img">';
-							adc_get_related_post_thumb();
-							echo '</div><!--.adc-list-excerpt-img-->';
-                            echo '<div class="adc-list-excerpt-info">';
-                            echo '<h4><a href="';
-							the_permalink();
-							echo '">';
-							the_title();
-							echo ', ';
-							adc_display_suffix();
-							echo '</a></h4>';
-							echo '<ul>';
-							adc_display_accept_new_patients();
-							echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
-                            echo '</ul>';
-                            echo '</div><!-- end .adc-list-excerpt-info-->';
-                         	echo '</div><!-- end .adc-list-excerpt-->';
-						 }
-						}
-                  endwhile;
-				  }
-        	 	wp_reset_query();
+			output_doctor_list_1();
 			echo '</div><!-- end .one-half-->';
 			echo '</div><!-- end .page .hentry .entry .adc-provider-->';			
 		endwhile;
