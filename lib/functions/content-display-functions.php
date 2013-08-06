@@ -872,6 +872,20 @@ function adc_display_location_4_list(){
 	 echo '<li><strong>Hours:</strong> ' . $hours4 . '</li>';
 	 }	
 }
+function adc_display_location_5_list(){
+	$mainphone5 = genesis_get_custom_field( 'ecpt_fifthlocationphone' ); 
+	$fax5 = genesis_get_custom_field( 'ecpt_fifthlocationfax' );
+	$hours5 = genesis_get_custom_field( 'ecpt_fifthlocationhours' );
+	 if( $mainphone5 ) {	
+	 echo '<li><strong>Main line:</strong> ' . $mainphone5 . '</li>';
+	 }
+	 if( $fax5 ) {	
+	 echo '<li><strong>FAX:</strong> ' . $fax5 . '</li>';
+	 }
+	 if( $hours5 ) {	
+	 echo '<li><strong>Hours:</strong> ' . $hours5 . '</li>';
+	 }	
+}
 //Display insurance meta fields
 function adc_display_insurance_notes() {
     if( genesis_get_custom_field( 'ecpt_notes' ) )
@@ -1054,7 +1068,61 @@ function output_testimonials($wp_query) {
 	echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';
 }
-
+function output_location_info() {
+	$location1 = genesis_get_custom_field( 'ecpt_location1' );
+		echo '<h4 class="adc-info-numbers"><a href="';
+		echo bloginfo('url') . '/locations/' . sanitize_title( $location1 ) .'/';
+		echo '">';
+		echo $location1;
+		echo '</a></h4>';
+		echo '<ul class="adc-num-list">';
+		adc_display_location_1_list();
+		echo'</ul><!--end location 1 important numbers list-->';
+	$location2 = genesis_get_custom_field( 'ecpt_location2' );	
+		if( $location2 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $location2 ) . '/';
+			echo '">';
+			echo $location2;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_location_2_list();
+			echo '</ul><!--end location 2 important numbers list-->';
+		}
+	$location3 = genesis_get_custom_field( 'ecpt_location3' );
+		if( $location3 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $location3 ) . '/';
+			echo '">';
+			echo $location3;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_location_3_list();
+			echo '</ul><!--end location 3 important numbers list-->';
+		}
+	 $location4 = genesis_get_custom_field( 'ecpt_location4' );
+		if( $location4 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $location4 ) . '/';
+			echo '">';
+			echo $location4;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_location_4_list();
+			echo '</ul><!--end important numbers list-->';
+		}	
+	 $location5 = genesis_get_custom_field( 'ecpt_location5' );
+		if( $location5 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $location4 ) . '/';
+			echo '">';
+			echo $location4;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_location_5_list();
+			echo '</ul><!--end important numbers list-->';
+		}	
+}
 /************************************************************/
 /*********************** ECOMMERCE *********************
 /*************************************************************/ 

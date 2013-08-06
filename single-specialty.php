@@ -49,48 +49,7 @@ function custom_do_single_specialty_loop() {
 			echo '<div class="one-half">';
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
-            $location1 = genesis_get_custom_field( 'ecpt_location1' );
-				echo '<h4 class="adc-info-numbers"><a href="';
-				echo bloginfo('url') . '/locations/' . sanitize_title( $location1 ) .'/';
-				echo '">';
-				echo $location1;
-				echo '</a></h4>';
-				echo '<ul class="adc-num-list">';
-			 	adc_display_location_1_list();
-        	 	echo'</ul><!--end location 1 important numbers list-->';
-            $location2 = genesis_get_custom_field( 'ecpt_location2' );
-				if( $location2 ) {
-					echo '<h4 class="adc-info-numbers"><a href="';
-					echo bloginfo('url') . '/locations/' . sanitize_title( $location2 ) . '/';
-					echo '">';
-					echo $location2;
-					echo '</a></h4>';
-					echo '<ul class="adc-num-list">';
-					adc_display_location_2_list();
-					echo '</ul><!--end location 2 important numbers list-->';
-				}
-        	$location3 = genesis_get_custom_field( 'ecpt_location3' );
-				if( $location3 ) {
-					echo '<h4 class="adc-info-numbers"><a href="';
-					echo bloginfo('url') . '/locations/' . sanitize_title( $location3 ) . '/';
-					echo '">';
-					echo $location3;
-					echo '</a></h4>';
-					echo '<ul class="adc-num-list">';
-					adc_display_location_3_list();
-					echo '</ul><!--end location 3 important numbers list-->';
-				}
-             $location4 = genesis_get_custom_field( 'ecpt_location4' );
-				if( $location4 ) {
-					echo '<h4 class="adc-info-numbers"><a href="';
-					echo bloginfo('url') . '/locations/' . sanitize_title( $location4 ) . '/';
-					echo '">';
-					echo $location4;
-					echo '</a></h4>';
-					echo '<ul class="adc-num-list">';
-					adc_display_location_4_list();
-					echo '</ul><!--end important numbers list-->';
-				}
+           output_location_info();
 			
 			echo '</div><!-- end .one-half-->';
 			
