@@ -699,7 +699,37 @@ function adc_video_post(){
     }	
 	return $output;
 }
-	
+// Display next HRM event
+function adc_next_HRM_event() {
+	global $post;
+	$all_events = tribe_get_events(array(
+		'eventCat'=> '505',
+		'eventDisplay'=>'upcoming',
+		'posts_per_page'=>'1'
+	));
+	foreach($all_events as $post) {
+	setup_postdata($post);
+		echo '<h4 class="adc-event-title"><a href="';
+		the_permalink();
+		echo '">';
+		the_title();
+		echo '</a></h4>';
+		if ( function_exists('has_post_thumbnail') && has_post_thumbnail() ) {
+			echo '<a href="';
+			the_permalink(); 
+			echo '">';
+			the_post_thumbnail('thumbnail', array('class' => 'alignright') );
+			echo '</a><p>';
+			echo tribe_get_start_date( $post->ID, true, 'D. M j, Y' );
+			echo '</p></div>';
+		} else {
+			echo '<p>';
+			echo tribe_get_start_date( $post->ID, true, 'D. M j, Y' );
+			echo '</p>';
+		}
+		wp_reset_query();
+	}
+}
 /************************************************************/
 /*********************** METABOXES *********************
 /*************************************************************/ 

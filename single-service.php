@@ -42,19 +42,20 @@ function custom_do_single_service_loop() {
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
             output_location_info();
-			echo '</div><!-- end .one-half-->';
-			//Left column
-			echo '<div class="one-half first">';
+			//if this is the HRM page, show the next HRM event-->
+            if (is_single('2079')) {
+				echo '<div class="adc-event">';
+                echo '<h4>Register for Our Next Event</h4>';
+				adc_next_HRM_event();
+				echo '</div>';
+			} else {
+				
+			}
 			//Education links
-			output_patient_visit_links();
-            output_related_education_links();
-            output_related_blog_links();
-            output_quality_reports_links();
-			echo '</div><!--end .one-half first-->';
-			
-			
-			//Right column
-			echo '<div class="one-half">';
+				output_patient_visit_links();
+				output_related_education_links();
+				output_related_blog_links();
+				output_quality_reports_links();
 			//Doctors associated with this specialty
 			output_doctor_list_1();
 			echo '</div><!-- end .one-half-->';

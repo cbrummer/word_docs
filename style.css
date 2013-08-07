@@ -2106,6 +2106,23 @@ body.landing-page {
 	position: relative;
 	max-width: 728px;
 }
+.adc-event {
+	background: #eeeeee;
+	border: solid #B1B1B1 1px;
+	/*padding: 0 8px 8px;
+	padding: 0 0.5rem 0.5rem;*/
+
+}
+.adc-event h4:first-child {
+	background-color: #CCC;
+	line-height: 2;
+	margin-top: 0;
+	text-indent: 0.5rem;	
+}
+.adc-event p, h4.adc-event-title {
+	margin: 0 8px 16px;
+	margin: 0 0.5rem 1rem;	
+}
 /*
 19 Mobile Elements
 ---------------------------------------------------------------------------------------------------- */
