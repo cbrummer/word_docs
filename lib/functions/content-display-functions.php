@@ -758,7 +758,7 @@ function adc_second_location_main_phone() {
 //Display just the suffix
 function adc_display_suffix() {
     if( genesis_get_custom_field( 'ecpt_suffix' ) )
-        echo genesis_get_custom_field( 'ecpt_suffix' );
+        echo ', ' . genesis_get_custom_field( 'ecpt_suffix' );
 }
 //Display just the extra suffix
 function adc_display_more_suffix() {
@@ -811,9 +811,14 @@ function adc_provider_other_language() {
         echo '<li><span class="icon-oxp-check"></span> Also speaks: ' . genesis_get_custom_field( 'ecpt_otherlanguages' ) . '</li>';
 	}
 }
-//EasyCare note
+//EasyCare notes
 function adc_easycare_note() {
 	if( genesis_get_custom_field( 'ecpt_easycare' ) ) {
+        echo '<p><span class="adc-special-note">EasyCare providers are not available as primary care providers.</span></p>';
+	}
+}
+function adc_easycare_note_page() {
+	if( is_single( 'easycare-after-hours' ) ) {
         echo '<p><span class="adc-special-note">EasyCare providers are not available as primary care providers.</span></p>';
 	}
 }
@@ -1255,68 +1260,52 @@ $providers = get_provider_posts_related_by_taxonomy(get_the_ID(), 'medicalservic
 if ($providers->have_posts()){
 	echo '<h3>Doctors &amp; Providers</h3>';
 		while ($providers->have_posts()): $providers->the_post();
+			$classes = 'one-fourth adc-provider';
+			if( 0 == $providers->current_post || 0 == $providers->current_post % 4 )
+					$classes .= ' first';
 			if ( 'biography' == get_post_type()) {
-				if (pa_in_taxonomy('cliniclocation', 'cedar-bend')){
-				  echo '<div class="adc-list-excerpt adc-provider-basic-info">';  
-				echo '<div class="adc-list-excerpt-img">';
-				adc_get_related_post_thumb();
-				echo '</div><!--.adc-list-excerpt-img-->';
-				echo '<div class="adc-list-excerpt-info">';
+				echo '<div class="'.  $classes . '">';
+				adc_get_excerpt_bio_thumb();
 				echo '<h4><a href="';
 				the_permalink();
 				echo '">';
 				the_title();
-				echo ', ';
 				adc_display_suffix();
 				echo '</a></h4>';
-				echo '<ul>';
+				echo '<ul class="adc-provider-basic-info">';
 				adc_display_accept_new_patients();
 				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
 				echo '</ul>';
-				echo '</div><!-- end .adc-list-excerpt-info-->';
-				echo '</div><!-- end .adc-list-excerpt-->';
-				  
-			} elseif (pa_in_taxonomy('cliniclocation', 'circle-c')){
-				echo '<div class="adc-list-excerpt">';  
-				echo '<div class="adc-list-excerpt-img">';
-				adc_get_related_post_thumb();
-				echo '</div><!--.adc-list-excerpt-img-->';
-				echo '<div class="adc-list-excerpt-info">';
-				echo '<h4><a href="';
-				the_permalink();
-				echo '">';
-				the_title();
-				echo ', ';
-				adc_display_suffix();
-				echo '</a></h4>';
-				echo '<ul>';
-				adc_display_accept_new_patients();
-				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
-				echo '</ul>';
-				echo '</div><!-- end .adc-list-excerpt-info-->';
-				echo '</div><!-- end .adc-list-excerpt-->';
-			 } else {
-				echo '<div class="adc-list-excerpt">';  
-				echo '<div class="adc-list-excerpt-img">';
-				adc_get_related_post_thumb();
-				echo '</div><!--.adc-list-excerpt-img-->';
-				echo '<div class="adc-list-excerpt-info">';
-				echo '<h4><a href="';
-				the_permalink();
-				echo '">';
-				the_title();
-				echo ', ';
-				adc_display_suffix();
-				echo '</a></h4>';
-				echo '<ul>';
-				adc_display_accept_new_patients();
-				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
-				echo '</ul>';
-				echo '</div><!-- end .adc-list-excerpt-info-->';
-				echo '</div><!-- end .adc-list-excerpt-->';
-			 }
+				echo '</div><!-- end .$classes-->';
 			}
-	  endwhile;
+	  	endwhile;
+	  }
+	wp_reset_query();
+}
+function output_doctor_list_2() {
+$providers = get_provider_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
+if ($providers->have_posts()){
+	echo '<h3>Providers</h3>';
+		while ($providers->have_posts()): $providers->the_post();
+			$classes = 'one-fourth adc-provider';
+			if( 0 == $providers->current_post || 0 == $providers->current_post % 4 )
+					$classes .= ' first';
+			if ( 'biography' == get_post_type()) {
+				echo '<div class="'.  $classes . '">';
+				adc_get_excerpt_bio_thumb();
+				echo '<h4><a href="';
+				the_permalink();
+				echo '">';
+				the_title();
+				adc_display_suffix();
+				echo '</a></h4>';
+				echo '<ul class="adc-provider-basic-info">';
+				adc_display_accept_new_patients();
+				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
+				echo '</ul>';
+				echo '</div><!-- end .$classes-->';
+			}
+	  	endwhile;
 	  }
 	wp_reset_query();
 }

@@ -89,7 +89,6 @@ function custom_do_biography_archives_loop() {
 				get_permalink();
 				echo '">';
 				the_title();
-				echo ', ';
 				adc_display_suffix();
 				echo '</a></h4>';
 				echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );

@@ -1032,7 +1032,9 @@ h6,
 	margin-bottom: 24px;
 	margin-bottom: 1.5rem;
 }
-
+.adc-one-half h3:first-child {
+	margin-top: 0;
+}
 
 /*
 07 Lists
@@ -1135,7 +1137,11 @@ h6,
 	margin-left: 0rem !important;
 }
 
-
+.adc-one-half ol li,
+.adc-one-half ul li {
+	margin-left: 0;
+	list-style-type: none;
+}
 /*
 08 Post Navigation
 ---------------------------------------------------------------------------------------------------- */

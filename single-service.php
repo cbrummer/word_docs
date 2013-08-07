@@ -38,7 +38,7 @@ function custom_do_single_service_loop() {
 			echo '</div><!--end .one-half first-->';
 			
 			//Right column
-			echo '<div class="one-half">';
+			echo '<div class="one-half adc-one-half">';
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
             output_location_info();
@@ -56,14 +56,18 @@ function custom_do_single_service_loop() {
 				output_related_education_links();
 				output_related_blog_links();
 				output_quality_reports_links();
-			//Doctors associated with this specialty
-			output_doctor_list_1();
+			
 			echo '</div><!-- end .one-half-->';
+			
+			//Show doctors and providers associated with this service in a grid
+			echo '<div id="adc-grid-content" class="adc-grid-content">';
+				output_doctor_list_2();
+			echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
+			adc_easycare_note_page();
 			echo '</div><!-- end .page .hentry .entry .adc-provider-->';			
 		endwhile;
 	endif;
 	wp_reset_query();
-
 }
 	
 /** Remove Post Info */

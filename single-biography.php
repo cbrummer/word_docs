@@ -25,7 +25,7 @@ function custom_do_single_biography_loop() {
 	if( $wp_query->have_posts() ): 
 		while ( have_posts() ) : the_post();
 			echo '<div class="page hentry entry entry-content adc-provider">';
-			echo '<h1 class="entry-title">'. get_the_title() . ', ';
+			echo '<h1 class="entry-title">'. get_the_title();
 			adc_display_suffix();
 			echo '</h1>';
 			adc_display_more_suffix();
