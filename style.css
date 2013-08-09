@@ -633,9 +633,6 @@ blockquote::before {
 	margin: 1.2rem;
 }
 
-h4.adc-info-numbers {
-	color:#708c45;
-}
 .adc-related-content ul {
 	overflow:hidden;
 	margin: 0 0 1.625rem 0;
@@ -1136,11 +1133,33 @@ h6,
 	list-style-type: none !important;
 	margin-left: 0rem !important;
 }
-
+/*
+* Services/specialties pages styles----------------------------*/
+.adc-grid-content h3 {
+	background: #CCC;
+	border: solid #B1B1B1 1px;
+	line-height: 2;
+	margin-top: 0;
+	text-indent: 8px;
+	text-indent: 0.5rem;	
+}
 .adc-one-half ol li,
 .adc-one-half ul li {
 	margin-left: 0;
 	list-style-type: none;
+}
+div.adc-special-note {
+	clear: both;	
+}
+.adc-special-note p {
+	font-weight:700;	
+}
+.adc-special-note span {
+	color: #b50043;	
+	font-size:20px;
+	font-size: 1.25rem;
+	padding-right: 4px;
+	padding-right: 0.25rem;
 }
 /*
 08 Post Navigation

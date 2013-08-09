@@ -814,12 +814,12 @@ function adc_provider_other_language() {
 //EasyCare notes
 function adc_easycare_note() {
 	if( genesis_get_custom_field( 'ecpt_easycare' ) ) {
-        echo '<p><span class="adc-special-note">EasyCare providers are not available as primary care providers.</span></p>';
+        echo '<p class="adc-special-note"><span class="icon-cr-warning"></span> EasyCare providers are not available as primary care providers.</p>';
 	}
 }
 function adc_easycare_note_page() {
 	if( is_single( 'easycare-after-hours' ) ) {
-        echo '<p><span class="adc-special-note">EasyCare providers are not available as primary care providers.</span></p>';
+        echo '<div class="adc-special-note"><p><span class="icon-cr-warning"></span>EasyCare providers are not available as primary care providers.</p></div>';
 	}
 }
 //Staff information
