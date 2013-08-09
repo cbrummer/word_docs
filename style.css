@@ -1030,7 +1030,12 @@ h6,
 	margin-bottom: 1.5rem;
 }
 .adc-one-half h3:first-child {
+	background: #CCC;
+	border: solid #B1B1B1 1px;
+	line-height: 2;
 	margin-top: 0;
+	text-indent: 8px;
+	text-indent: 0.5rem;
 }
 
 /*
@@ -1150,6 +1155,16 @@ h6,
 }
 div.adc-special-note {
 	clear: both;	
+}
+p.adc-special-note {
+	font-size: 12px;
+	font-size: 0.75rem;
+	font-weight:700;
+	font-style: normal;	
+}
+p.adc-special-note span {
+	font-size: 16px;
+	font-size: 1rem;
 }
 .adc-special-note p {
 	font-weight:700;	
