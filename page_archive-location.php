@@ -21,14 +21,14 @@ function custom_do_location_archives_loop() {
     	
 	// Intro Text (from page content)
 	echo '<div class="page hentry entry">';
-	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
-	echo '<div class="entry-content">' . get_the_content() ;
+	//echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
+	//echo '<div class="entry-content">' . get_the_content() ;
 	
 	//Main locations
 	echo '<h3>Clinic Locations</h3>';
 	echo '<div class="main-locations adc-grid-content">';
 	$args = array(
-		'post_type' =>'location',
+		'post_type' =>'wpseo_locations',
 		'posts_per_page' => -1,
 		'orderby' => 'title',
 		'order' => 'ASC',
@@ -65,7 +65,7 @@ function custom_do_location_archives_loop() {
 	echo '<h3>Nephrology Satellites</h3>';
 	echo '<div class="neph-locations adc-grid-content">';
 	$args = array(
-		'post_type' => 'location',
+		'post_type' => 'wpseo_locations',
 		'post_status' => 'publish',
 		'tax_query' => array(
 			array(

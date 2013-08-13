@@ -82,7 +82,7 @@
 					'theme_location' => 'submenu-5') 
 				); 	
 			//Locations Submenu
-			} elseif ( is_page('locations') || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_singular( 'location' ) ){
+			} elseif ( is_page('locations') || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_singular( 'location' ) || is_post_type_archive( 'wpseo_locations' ) || 'wpseo_locations' == get_post_type() || is_singular( 'wpseo_locations' )  ){
 				echo '<h4>Our Locations</h4>';
 				wp_nav_menu( 
 					array( 

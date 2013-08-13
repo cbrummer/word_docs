@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Locations custom post type
- * ADC Twenty Thirteen
+ * Template Name: Single Location
+ *
  *
  * @package      adc-twenty-thirteen
  * @since        1.0.0
@@ -10,16 +10,15 @@
  * @copyright    Copyright (c) 2013, Cindy Brummer
  * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  *
+ *
  */
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_sidebar_content' );
 
-remove_action( 'genesis_loop', 'genesis_do_loop' );
+	
+/** Remove Post Info */
+remove_action( 'genesis_before_post_content', 'genesis_post_info' );
+remove_action('genesis_after_post_content','genesis_post_meta');
 
-add_action('genesis_loop', 'adc_do_location_loop');
-	function adc_do_location_loop() {
-		global $paged;
-		$args = array('post_type' => 'location');
-		// Accepts WP_Query args 
-		// (http://codex.wordpress.org/Class_Reference/WP_Query)
-		genesis_custom_loop( $args );
  
-	}
+genesis();
+

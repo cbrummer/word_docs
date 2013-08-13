@@ -835,6 +835,97 @@ function adc_start_date() {
         echo 'Team member since ' . genesis_get_custom_field( 'ecpt_startdate' );
 	}
 }
+/*
+ *Locations display
+******************************************************************/
+
+//Locations grid
+function adc_featured_locations() {
+	$args = array(
+		'post_type' =>'wpseo_locations',
+		'posts_per_page' => -1,
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'cliniclocation',
+				'field' => 'slug',
+				'terms' => 'neph-satellite',
+				'operator' => 'NOT IN',
+			),
+		  ),
+		);
+	
+	global $wp_query;
+	$wp_query = new WP_Query( $args );
+	if( $wp_query->have_posts() ): 
+		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
+			$classes = 'one-third';
+			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
+				$classes .= ' first';
+					echo '<div class="'.  $classes . '">';
+						echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
+						echo '<h4><a href="' . get_permalink() . '">' . get_the_title() . '</a></h4>';
+						if( function_exists( 'wpseo_local_show_address' ) ) { 
+							wpseo_local_show_address( array( 
+								'echo' => true,
+								'show_phone' => true,
+								'oneline' => false,
+							 ) 
+							); 
+						}
+					echo '</div>';
+			
+			endwhile;
+		endif;
+		wp_reset_query();
+}
+//Nephrology Locations grid
+function adc_neph_locations(){
+	$args = array(
+		'post_type' => 'wpseo_locations',
+		'post_status' => 'publish',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'cliniclocation',
+				'field' => 'slug',
+				'terms' => array('north','south','west'),
+				'operator' => 'NOT IN',
+			),
+		  ),
+		'posts_per_page' => 10,
+		'orderby' => 'title',
+		'order' => 'ASC',
+		);
+	
+	global $wp_query;
+	$wp_query = new WP_Query( $args );
+	if( $wp_query->have_posts() ): 
+		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
+			$classes = 'one-third';
+			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
+				$classes .= ' first';
+					echo '<div class="'.  $classes . '">';
+						echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
+						echo '<h4><a href="' . 
+						get_permalink();
+						echo '">';
+						the_title();
+						echo '</a></h4>';
+						if( function_exists( 'wpseo_local_show_address' ) ) { 
+							wpseo_local_show_address( array( 
+								'echo' => true,
+								'show_phone' => true,
+								'oneline' => false,
+							 ) 
+							); 
+						}
+					echo '</div>';
+			
+			endwhile;
+		endif;
+		wp_reset_query();	
+}
 //Locations metabox functions
 // Location 1 list
 function adc_display_location_1_list(){
@@ -1294,8 +1385,7 @@ wp_reset_query();
 }
 //show grid of patient education links
 function adc_patient_links() {
-	$qareports = output_quality_reports_links();
-	if ($qareports) {
+	if( function_exists ( 'output_quality_reports_links' )){
 			echo '<h3>Patient Resources</h3>';
 			echo '<div class="one-fourth first">';
 			output_patient_visit_links();
@@ -1309,7 +1399,7 @@ function adc_patient_links() {
 			echo '<div class="one-fourth">';
 			output_quality_reports_links();
 			echo '</div><!--end .one-fourth-->';
-	} else {
+	} elseif ( !function_exists ( 'output_quality_reports_links' )) {
 		echo '<h3>Patient Resources</h3>';
 		echo '<div class="one-third first">';
 		output_patient_visit_links();
@@ -1320,6 +1410,8 @@ function adc_patient_links() {
 		echo '<div class="one-third">';
 		output_related_blog_links();
 		echo '</div><!--end .one-third-->';
+	} else {
+		
 	}
 }
 //Show list of doctors with thumbnail, title, clinic locations and if they accept new patients

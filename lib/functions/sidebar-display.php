@@ -95,7 +95,7 @@ add_action('get_header','adc_change_genesis_sidebar');
 			add_action( 'genesis_sidebar', 'adc_do_biography_sidebar' );
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_biography_nav_extras' );
 	// Locations Sidebar - Main / nav extras
-		} elseif ( is_singular( 'location' ) || is_page( 'locations' ) || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) ){
+		} elseif ( is_singular( 'location' ) || is_page( 'locations' ) || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_post_type_archive( 'wpseo_locations' ) || 'wpseo_locations' == get_post_type() || is_singular( 'wpseo_locations' ) ){
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 			add_action( 'genesis_sidebar', 'adc_do_locations_sidebar' );
 			add_action( 'genesis_before_sidebar_alt_widget_area', 'adc_do_locations_nav_extras' );
