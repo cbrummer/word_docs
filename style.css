@@ -743,7 +743,9 @@ p.pages,
 .first {
 	clear: both;
 }
-
+.adc-grid-content.first {
+	clear: none;
+}
 .clear-line {
 	border-bottom: 1px solid #ccc;
 	margin-bottom: 26px;
@@ -1029,7 +1031,8 @@ h6,
 	margin-bottom: 24px;
 	margin-bottom: 1.5rem;
 }
-.adc-col h3:first-child {
+.adc-col h3:first-child,
+.adc-section h3 {
 	background: #CCC;
 	border: solid #B1B1B1 1px;
 	line-height: 2;
@@ -1078,8 +1081,9 @@ h6,
 	margin-left: 0;
 	list-style-type: none;
 }
-.first.adc-grid-content{
-	clear: none;
+
+.adc-grid-content h3 {
+	clear: both;
 }
 /*Biography styles*/
 .adc-specialty-link {
@@ -1695,16 +1699,19 @@ input:hover[type="submit"],
 	color: #FFF;
 	text-decoration: none;
 }
-.adc-provider-appt{
+.adc-provider-appt,
+.adc-service-appt {
 	margin: 0 0 1em;
 	text-align:center;
 	width: 50%;
 }
-.adc-provider-appt h3 {
+.adc-provider-appt h3,
+.adc-service-appt h3 {
 	line-height: 2em;
 	margin-top: 0;	
 }
-.adc-provider-appt a {
+.adc-provider-appt a,
+.adc-service-appt a {
 	color:#ffffff;
 	text-decoration: none;	
 }

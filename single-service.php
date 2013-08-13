@@ -57,7 +57,7 @@ function custom_do_single_service_loop() {
 			}
 			echo '</div><!-- end .one-third-->';
 			//Education links
-			echo '<div class="adc-grid-content">';
+			echo '<div class="adc-grid-content adc-section">';
 			adc_patient_links();
 			echo '</div><!-- end .adc-grid-content .adc-section-->';
 			//Show doctors and providers associated with this service in a grid

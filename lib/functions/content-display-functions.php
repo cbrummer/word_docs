@@ -763,7 +763,7 @@ function adc_display_suffix() {
 //Display just the extra suffix
 function adc_display_more_suffix() {
     if( genesis_get_custom_field( 'ecpt_othersuffix' ) )
-        echo '<p>' . genesis_get_custom_field( 'ecpt_othersuffix' ) . '</p>';
+        echo ', ' . genesis_get_custom_field( 'ecpt_othersuffix' );
 }
 //Display both suffix and extra suffix
 function adc_display_provider_suffix_all() {
@@ -1294,8 +1294,9 @@ wp_reset_query();
 }
 //show grid of patient education links
 function adc_patient_links() {
-	$qareports = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
-	if ($qareports->have_posts()) {
+	$qareports = output_quality_reports_links();
+	if ($qareports) {
+			echo '<h3>Patient Resources</h3>';
 			echo '<div class="one-fourth first">';
 			output_patient_visit_links();
 			echo '</div><!--end .one-fourth first-->';
@@ -1309,6 +1310,7 @@ function adc_patient_links() {
 			output_quality_reports_links();
 			echo '</div><!--end .one-fourth-->';
 	} else {
+		echo '<h3>Patient Resources</h3>';
 		echo '<div class="one-third first">';
 		output_patient_visit_links();
 		echo '</div><!--end .one-third first-->';
@@ -1374,6 +1376,98 @@ if ($providers->have_posts()){
 	  	endwhile;
 	  }
 	wp_reset_query();
+}
+//Display related videos for providers
+function adc_provider_related_videos() {
+	$relatedvideos = get_posts_related_by_taxonomy(get_the_ID(),'provider');
+		if ($relatedvideos->have_posts()){
+			$first = true;
+				while ($relatedvideos->have_posts()): $relatedvideos->the_post();
+					$classes = 'one-fourth';
+					if( 0 == $relatedvideos->current_post || 0 == $relatedvideos->current_post % 4 )
+					static $counter = 0;
+						if ( has_post_format( 'video' )) {
+							if ($first == true) { 
+								echo '<h3>Related Videos</h3>';
+								$first = false;
+							}
+							if ($counter == "8") { 
+								break;
+							} else {
+							echo '<div class="'.  $classes . '">';
+							adc_get_excerpt_thumb();
+							echo '<h4><a href="';
+							get_permalink();
+							echo '">';
+							the_title();
+							echo '</a></h4>';
+							echo '<p><span class="adc-date">' . the_time('F j, Y') . '</span><p>';
+							echo '</div><!-- end .$classes-->';
+							$counter++;
+							};
+					} 
+				 endwhile; 
+			 } 
+		 wp_reset_query();	
+}
+////Check to see if provider is a hospitlist and display appropriate phone number
+function adc_display_provider_appointment(){
+	if( genesis_get_custom_field('ecpt_hospitalist') == true) { //check to see if this doctor is a hospitalist
+		echo '';
+	} elseif (pa_in_taxonomy('otherdepartment', 'administration')) {
+		echo '<div class="adc-provider-appt">';
+		echo '<h3>Information</h3><a href="tel://512.901.1111/" title="Dial phone number from a mobile device">512-901-1111</a>';
+		echo '</div>';
+	} else {
+	//Display appointment phone number of a section related by the provider's name
+	$providerphone = get_posts_related_by_taxonomy(get_the_ID(),'provider');
+	if ($providerphone->have_posts()){
+		while ($providerphone->have_posts()): $providerphone->the_post();
+			if ( 'specialty' == get_post_type() ) {
+				if ( is_single( array( 447, 3342, 3352, 3389, 3130 )) ) {
+					echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
+					echo '<a href="tel://';
+					adc_second_location_appt_phone();
+					echo '">';
+					adc_second_location_appt_phone();
+					echo '</a></div><!--end .adc-provider-appt-->';
+				} else {
+					echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
+					adc_display_appointment_phone();
+					echo '</div><!--end .adc-provider-appt-->';
+				}
+			}  elseif ( 'service' == get_post_type()) {
+				echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
+				echo '<a href="tel://';
+				adc_display_main_phone();
+				echo '">';
+				adc_display_main_phone();
+				echo '</a></div><!--end .adc-provider-appt-->';
+			} else {
+				
+			}
+		 endwhile;
+	  } 
+	  wp_reset_query();
+	 
+	  } //end check to see if hospitalist */
+}
+function adc_display_start_date() {
+	if ( genesis_get_custom_field( 'ecpt_startdate_2' )) {
+		echo '<h4>ADC provider since ' . genesis_get_custom_field('ecpt_startdate_2') . '</h4>';
+	}	
+}
+function adc_display_provider_quote() {
+	if ( genesis_get_custom_field( 'ecpt_quote')) {
+		echo '<div class="adc-testimonial">' . genesis_get_custom_field('ecpt_startdate_2') . '<br />- ';
+		echo get_the_title();
+		echo'</div>';	
+	}	
+}
+function adc_display_doctor_honors() {
+	if ( genesis_get_custom_field( 'ecpt_honorsawards' )) {
+		echo '<div class="adc-provider-awards"><h4>Awards</h4>' . genesis_get_custom_field( 'ecpt_honorsawards' ) . '</div>';	
+	}	
 }
 /************************************************************/
 /*********************** ECOMMERCE *********************

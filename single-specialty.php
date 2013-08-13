@@ -45,17 +45,17 @@ function custom_do_single_specialty_loop() {
 			adc_display_video_3();
 			echo '</div><!--end .two-thirds first-->';
 			//Right column
-			echo '<div class="one-third">';
+			echo '<div class="one-third adc-col">';
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
            	output_location_info();
 			echo '</div><!-- end .one-third-->';
 			//Education links
-			echo '<div class="adc-grid-content">';
+			echo '<div class="adc-grid-content adc-section">';
 			adc_patient_links();
 			echo '</div><!-- end .adc-grid-content -->';
 			//Show doctors and providers associated with this service in a grid
-			echo '<div id="adc-grid-content" class="adc-grid-content ">';
+			echo '<div id="adc-grid-content" class="adc-grid-content adc-section">';
 				output_doctor_list_1();
 			echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
 			echo '</div><!-- end .page .hentry .entry .adc-provider-->';			
