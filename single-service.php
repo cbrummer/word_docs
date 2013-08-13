@@ -27,18 +27,23 @@ function custom_do_single_service_loop() {
 			echo '<div class="page hentry entry entry-content adc-medical-service">';
 			echo '<h1 class="entry-title">'. get_the_title() . '</h1>';
 			//Left column
-			echo '<div class="one-half first">';
-				echo '<div class="adc-service-appt btn">';
-				echo '<h3>Appointments</h3>';
-				adc_display_appointment_phone();
-				echo '</div><!--end .adc-service-appt-->';
+			echo '<div class="two-thirds first">';
+				 if (!is_single('2087')) { //Make sure this is not the X-ray page
+				 	//if not X-ray, display appointment button
+					 echo '<div class="adc-service-appt btn">';
+					 echo '<h3>Appointments</h3>';
+					 adc_display_appointment_phone();
+					 echo '</div><!--end .adc-service-appt-->';
+				} else {
+				//If is is X-ray, don't display anything
+				}
 				the_content();
 			// Check if there is a video URL and display embedded player
 				adc_display_video_3();
-			echo '</div><!--end .one-half first-->';
+			echo '</div><!--end .two-thirds first-->';
 			
 			//Right column
-			echo '<div class="one-half adc-one-half">';
+			echo '<div class="one-third adc-col">';
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
             output_location_info();
@@ -49,18 +54,14 @@ function custom_do_single_service_loop() {
 				adc_next_HRM_event();
 				echo '</div>';
 			} else {
-				
 			}
+			echo '</div><!-- end .one-third-->';
 			//Education links
-				output_patient_visit_links();
-				output_related_education_links();
-				output_related_blog_links();
-				output_quality_reports_links();
-			
-			echo '</div><!-- end .one-half-->';
-			
+			echo '<div class="adc-grid-content">';
+			adc_patient_links();
+			echo '</div><!-- end .adc-grid-content .adc-section-->';
 			//Show doctors and providers associated with this service in a grid
-			echo '<div id="adc-grid-content" class="adc-grid-content">';
+			echo '<div id="adc-grid-content" class="adc-grid-content adc-section">';
 				output_doctor_list_2();
 			echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
 			adc_easycare_note_page();

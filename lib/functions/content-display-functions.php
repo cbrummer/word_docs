@@ -843,6 +843,10 @@ function adc_display_location_1_list(){
 	$hours = genesis_get_custom_field( 'ecpt_hours' );
 	$floor = genesis_get_custom_field( 'ecpt_floor_2' );
 	$wing = genesis_get_custom_field( 'ecpt_wing_2');
+	$services1 = genesis_get_custom_field( 'ecpt_servicesoffered1');
+	 if( $services1 ) {	
+		echo '<li><strong>Services at this Location:</strong> ' . $services1 . '</li>';
+	 }
 	 if( $floor) {	
 		echo '<li><strong>Floor:</strong> ' . $floor . '</li>';
 	 }
@@ -866,7 +870,11 @@ function adc_display_location_2_list() {
 	$mainphone2 = genesis_get_custom_field( 'ecpt_secondarylocationphone' ); 
 	$fax2 = genesis_get_custom_field( 'ecpt_secondarylocationfax' );
 	$hours2 = genesis_get_custom_field( 'ecpt_secondarylocationhours' );
-	 if( $apptphone2 ) {
+	$services2 = genesis_get_custom_field( 'ecpt_servicesoffered2');
+	if( $services2 ) {	
+		echo '<li><strong>Services at this Location:</strong> ' . $services2 . '</li>';
+	 }	
+	if( $apptphone2 ) {
 		echo '<li><strong>Appointments: </strong> ' . $apptphone2 . '</li>';
 	}
 	 if( $mainphone2 )  {	
@@ -883,6 +891,10 @@ function adc_display_location_3_list(){
 	$mainphone3 = genesis_get_custom_field( 'ecpt_thirdlocationphone' ); 
 	$fax3 = genesis_get_custom_field( 'ecpt_thirdlocationfax' );
 	$hours3 = genesis_get_custom_field( 'ecpt_thirdlocationhours' );
+	$services3 = genesis_get_custom_field( 'ecpt_servicesoffered3');
+	if( $services3 ) {	
+		echo '<li><strong>Services at this Location:</strong> ' . $services3 . '</li>';
+	 }	
 	 if( $mainphone3 ) {	
 		echo '<li><strong>Main line:</strong> ' . $mainphone3 . '</li>';
 	 }
@@ -897,6 +909,10 @@ function adc_display_location_4_list(){
 	$mainphone4 = genesis_get_custom_field( 'ecpt_fourthlocationphone' ); 
 	$fax4 = genesis_get_custom_field( 'ecpt_fourthlocationfax' );
 	$hours4 = genesis_get_custom_field( 'ecpt_fourthlocationhours' );
+	$services4 = genesis_get_custom_field( 'ecpt_servicesoffered4');
+	 if( $services4 ) {	
+		echo '<li><strong>Services at this Location:</strong> ' . $services4 . '</li>';
+	 }
 	 if( $mainphone4 ) {	
 	 echo '<li><strong>Main line:</strong> ' . $mainphone4 . '</li>';
 	 }
@@ -911,6 +927,10 @@ function adc_display_location_5_list(){
 	$mainphone5 = genesis_get_custom_field( 'ecpt_fifthlocationphone' ); 
 	$fax5 = genesis_get_custom_field( 'ecpt_fifthlocationfax' );
 	$hours5 = genesis_get_custom_field( 'ecpt_fifthlocationhours' );
+	$services5 = genesis_get_custom_field( 'ecpt_servicesoffered5');
+	 if( $services5 ) {	
+		echo '<li><strong>Services at this Location:</strong> ' . $services5 . '</li>';
+	 }
 	 if( $mainphone5 ) {	
 	 echo '<li><strong>Main line:</strong> ' . $mainphone5 . '</li>';
 	 }
@@ -919,7 +939,25 @@ function adc_display_location_5_list(){
 	 }
 	 if( $hours5 ) {	
 	 echo '<li><strong>Hours:</strong> ' . $hours5 . '</li>';
-	 }	
+	 }		
+}
+function adc_display_location_6_list(){
+	$mainphone6 = genesis_get_custom_field( 'ecpt_sixthlocationphone' ); 
+	$fax6 = genesis_get_custom_field( 'ecpt_sixthlocationfax' );
+	$hours6 = genesis_get_custom_field( 'ecpt_sixthlocationhours' );
+	$services6 = genesis_get_custom_field( 'ecpt_servicesoffered6');
+	 if( $services6 ) {	
+		echo '<li><strong>Services at this Location:</strong> ' . $services6 . '</li>';
+	 }
+	 if( $mainphone6 ) {	
+	 echo '<li><strong>Main line:</strong> ' . $mainphone6 . '</li>';
+	 }
+	 if( $fax6 ) {	
+	 echo '<li><strong>FAX:</strong> ' . $fax6 . '</li>';
+	 }
+	 if( $hours6 ) {	
+	 echo '<li><strong>Hours:</strong> ' . $hours6 . '</li>';
+	 }		
 }
 //Display insurance meta fields
 function adc_display_insurance_notes() {
@@ -1166,7 +1204,7 @@ function output_patient_visit_links(){
 				while ($visitinfo->have_posts()): $visitinfo->the_post();
 					if ( in_category( array('instructions', 'patient-forms', 'procedure-preparations', 'resource-materials', 'office-policies', 'patient-surveys') )) {					
 					if ($first == true) { 
-						echo '<h3>Prepare for your visit</h3><ul class="adc-col-list">';
+						echo '<h4>Prepare for your visit</h4><ul class="adc-col-list">';
 						$first = false;
 					 }
 						echo '<li><a href="' ;
@@ -1189,7 +1227,7 @@ function output_related_education_links(){
 			while ($education->have_posts()): $education->the_post();
 				if ( in_category( 'patient-education' )) {
 					if ($first == true) { 
-						echo '<h3>Educational Materials</h3><ul class="adc-col-list">';
+						echo '<h4>Educational Materials</h4><ul class="adc-col-list">';
 					$first = false;
 				 }
 					echo '<li><a href="' ;
@@ -1213,7 +1251,7 @@ if ($healtharticles->have_posts()){
 			static $counter = 0;
 				if ( in_category( 'health-articles' )) {	
 			
-				if ($first == true) { echo '<h3>Related Health News</h3><ul class="adc-col-list">';
+				if ($first == true) { echo '<h4>Related Health News</h4><ul class="adc-col-list">';
 					$first = false;
 				 }
 				 if ($counter == "5") { break;
@@ -1253,6 +1291,34 @@ if ($qareports->have_posts()){
 	}
 echo '</ul>';
 wp_reset_query();	
+}
+//show grid of patient education links
+function adc_patient_links() {
+	$qareports = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
+	if ($qareports->have_posts()) {
+			echo '<div class="one-fourth first">';
+			output_patient_visit_links();
+			echo '</div><!--end .one-fourth first-->';
+			echo '<div class="one-fourth">';
+			output_related_education_links();
+			echo '</div><!--end .one-fourth-->';
+			echo '<div class="one-fourth">';
+			output_related_blog_links();
+			echo '</div><!--end .one-fourth-->';
+			echo '<div class="one-fourth">';
+			output_quality_reports_links();
+			echo '</div><!--end .one-fourth-->';
+	} else {
+		echo '<div class="one-third first">';
+		output_patient_visit_links();
+		echo '</div><!--end .one-third first-->';
+		echo '<div class="one-third">';
+		output_related_education_links();
+		echo '</div><!--end .one-third-->';
+		echo '<div class="one-third">';
+		output_related_blog_links();
+		echo '</div><!--end .one-third-->';
+	}
 }
 //Show list of doctors with thumbnail, title, clinic locations and if they accept new patients
 function output_doctor_list_1() {

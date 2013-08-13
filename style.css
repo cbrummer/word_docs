@@ -1029,7 +1029,7 @@ h6,
 	margin-bottom: 24px;
 	margin-bottom: 1.5rem;
 }
-.adc-one-half h3:first-child {
+.adc-col h3:first-child {
 	background: #CCC;
 	border: solid #B1B1B1 1px;
 	line-height: 2;
@@ -1140,7 +1140,7 @@ h6,
 }
 /*
 * Services/specialties pages styles----------------------------*/
-.adc-grid-content h3 {
+.adc-section h3 {
 	background: #CCC;
 	border: solid #B1B1B1 1px;
 	line-height: 2;
@@ -1148,8 +1148,8 @@ h6,
 	text-indent: 8px;
 	text-indent: 0.5rem;	
 }
-.adc-one-half ol li,
-.adc-one-half ul li {
+.adc-col ol li,
+.adc-col ul li {
 	margin-left: 0;
 	list-style-type: none;
 }

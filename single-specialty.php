@@ -27,7 +27,7 @@ function custom_do_single_specialty_loop() {
 			echo '<div class="page hentry entry entry-content adc-medical-service">';
 			echo '<h1 class="entry-title">'. get_the_title() . '</h1>';
 			//Left column
-			echo '<div class="one-half first">';
+			echo '<div class="two-thirds first">';
 			//Check to see if specialty is pediatrics and display appropriate phone number
 			if( has_term( 'pediatrics', 'medical-service' ) ) { //check to see if this is the pediatrics page
 				echo '<div class="adc-service-appt btn">';
@@ -43,30 +43,21 @@ function custom_do_single_specialty_loop() {
 			the_content();
 			// Check if there is a video URL and display embedded player
 			adc_display_video_3();
-			echo '</div><!--end .one-half first-->';
-			
+			echo '</div><!--end .two-thirds first-->';
 			//Right column
-			echo '<div class="one-half">';
+			echo '<div class="one-third">';
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
-           output_location_info();
-			echo '</div><!-- end .one-half-->';
-			
-			//Left column
-			echo '<div class="one-half first">';
+           	output_location_info();
+			echo '</div><!-- end .one-third-->';
 			//Education links
-			output_patient_visit_links();
-            output_related_education_links();
-            output_related_blog_links();
-            output_quality_reports_links();
-			echo '</div><!--end .one-half first-->';
-			
-			
-			//Right column
-			echo '<div class="one-half">';
-			//Doctors associated with this specialty
-			output_doctor_list_1();
-			echo '</div><!-- end .one-half-->';
+			echo '<div class="adc-grid-content">';
+			adc_patient_links();
+			echo '</div><!-- end .adc-grid-content -->';
+			//Show doctors and providers associated with this service in a grid
+			echo '<div id="adc-grid-content" class="adc-grid-content ">';
+				output_doctor_list_1();
+			echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
 			echo '</div><!-- end .page .hentry .entry .adc-provider-->';			
 		endwhile;
 	endif;
