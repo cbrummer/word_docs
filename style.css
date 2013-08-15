@@ -1108,7 +1108,9 @@ h6,
 	font-size: 1.25rem;	
 }
 .adc-provider-basic-info li{
-	margin: 0.25em 0;
+	list-style: none !important;
+	margin: 4px 0 4px 16px !important;
+	margin: 0.25rem 0 0.25rem 1rem !important;
 }
 .adc-provider-basic-info li span {
 	color:#718c45;	
@@ -1119,9 +1121,9 @@ h6,
 .adc-info-excerpt li{
     margin: 0.25em 0;
 }
-.adc-provider-awards ul{
-	list-style: disc outside none;
-	margin-left: 5%;
+.adc-provider-awards li {
+	margin-left: 16px !important;
+	margin-left: 1rem !important;
 }
 .adc-video-excerpt ul{
 	padding-top: 0.4em;
@@ -1501,7 +1503,9 @@ label {
 }
 
 /*Sidebar testimonial and provider quotes*/
-.adc-important-info, .adc-info-box {
+.adc-testimonial,
+.adc-important-info, 
+.adc-info-box {
 	background: #f9f9f9;
     border: 1px solid #E0E0E0;
 	margin: 0 auto 1em;	
@@ -1511,9 +1515,9 @@ label {
 	list-style: none;
 	margin: 0;
 }
-.adc-provider-extras .adc-testimonial {
-	font-size:14px;
-	font-style:italic;	
+.adc-testimonial span {
+	font-style:italic;
+	font-weight:bold;
 }
 
 /*Span styles*/
@@ -1871,14 +1875,16 @@ p.wp-caption-text {
 	color: #ffffff;
 }
 /* Media elements----------------------*/
-iframe {
+/*iframe {
 	margin: 16px 0;
 	margin: 1rem 0;	
-}
+}*/
 .video-container {
-	position: relative;
+	margin: 16px 0;
+	margin: 1rem 0;	
 	padding-bottom: 56.25%;
-	padding-top: 30px; 
+	padding-top: 30px;
+	position: relative; 
 	height: 0; 
 	overflow:hidden;	
 }
@@ -2195,6 +2201,11 @@ body.landing-page {
 .adc-event p, h4.adc-event-title {
 	margin: 0 8px 16px;
 	margin: 0 0.5rem 1rem;	
+}
+.tribe-events-adv-list-widget li > h4 a {
+	font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-size: 1rem;
 }
 /*
 19 Mobile Elements

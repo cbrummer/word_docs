@@ -264,7 +264,7 @@ function adc_redirect_term_to_post() {
             if ( is_tax() ) {
                         $term = $wp_query->get_queried_object();
                         if ( 'cliniclocation' == $term->taxonomy ) {
-                                    $post_id = adc_get_post_id_by_slug( $term->slug, 'location' );
+                                    $post_id = adc_get_post_id_by_slug( $term->slug, 'wpseo_locations' );
                                     if ( !empty( $post_id ) )
                                                 wp_redirect( get_permalink( $post_id ), 301 );
                         } elseif ( 'medicalservice' == $term->taxonomy ) {

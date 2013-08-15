@@ -627,7 +627,10 @@ function adc_display_video_4() {
 		if( genesis_get_custom_field( 'ecpt_videoid_4' ) ) {
 			if ($videosite == 'YouTube')
 			{
-				echo '<div class="video-container"><iframe width="560" height="315" src="http://www.youtube.com/embed/'.$videoid.'" frameborder="0" modestbranding="1" showinfo="0" theme="light" allowfullscreen></iframe></div>';
+				echo '<div class="video-container">';
+				$embed_code = wp_oembed_get('http://www.youtube.com/watch?v=' . $videoid, array('width'=>640, 'height'=>480) );
+				echo $embed_code;
+				echo '</div>';
 			}
 			else if ($videosite == 'Vimeo')
 			{
@@ -644,9 +647,9 @@ function adc_display_video_3() {
 $videoID = genesis_get_custom_field( 'ecpt_videoid_3');
 // Check if there is in fact a video URL
 	if ($videoID) {
-		echo '<div class="adc-video-container">';
+		echo '<div class="video-container">';
 	// Echo the embed code via oEmbed
-		$embed_code = wp_oembed_get('http://www.youtube.com/watch?v=' . $videoID, array('width'=>420, 'height'=>236) );
+		$embed_code = wp_oembed_get('http://www.youtube.com/watch?v=' . $videoID, array('width'=>640, 'height'=>480) );
 		echo $embed_code;
 		echo '</div>';
 	} 
@@ -669,13 +672,13 @@ function adc_display_blog_video() {
 				else if ($videosite == 'Vimeo')
 				{
 					echo '<div class="video-container">';
-					echo '<iframe src="http://player.vimeo.com/video/'.$videoid.'" width="560" height="315" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
+					echo '<iframe src="http://player.vimeo.com/video/'.$videoid.'" width="640" height="480" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
 					echo '</div>';
 				}
 				else if ($videosite == 'KXAN')
 				{
 					echo '<div class="video-container">';
-					echo '<iframe width="560" height="410" src="http://www.youtube.com/embed/'.$videoid.'" frameborder="0" modestbranding="1" showinfo="0" theme="light" allowfullscreen></iframe>';
+					echo '<iframe width="640" height="480" src="http://www.youtube.com/embed/'.$videoid.'" frameborder="0" modestbranding="1" showinfo="0" theme="light" allowfullscreen></iframe>';
 					echo '</div>';
 				}
 				else
@@ -799,8 +802,8 @@ function adc_display_accept_new_medicare() {
 //Does provider speak Spanish?
 function adc_provider_spanish() {
     if( genesis_get_custom_field( 'ecpt_spanish' ) && genesis_get_custom_field( 'ecpt_spanishnotes' ) ) {
-	echo '<li>Speaks Spanish (' . genesis_get_custom_field( 'ecpt_spanishnotes' ) . ')</li>';
-		}elseif ( genesis_get_custom_field( 'ecpt_spanish' ) ){
+	echo '<li><span class="icon-oxp-check"></span> Speaks Spanish (' . genesis_get_custom_field( 'ecpt_spanishnotes' ) . ')</li>';
+		} elseif ( genesis_get_custom_field( 'ecpt_spanish' ) ){
 			echo '<li><span class="icon-oxp-check"></span> Speaks Spanish</li>';	
 		} else {
 		}
@@ -1551,9 +1554,9 @@ function adc_display_start_date() {
 }
 function adc_display_provider_quote() {
 	if ( genesis_get_custom_field( 'ecpt_quote')) {
-		echo '<div class="adc-testimonial">' . genesis_get_custom_field('ecpt_startdate_2') . '<br />- ';
+		echo '<div class="adc-testimonial">' . genesis_get_custom_field('ecpt_quote') . '<span>';
 		echo get_the_title();
-		echo'</div>';	
+		echo'</span></div>';	
 	}	
 }
 function adc_display_doctor_honors() {
