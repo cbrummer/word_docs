@@ -46,7 +46,8 @@ function custom_do_medicalservice_archives_loop() {
 			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
 				$classes .= ' first';
 					echo '<div class="'.  $classes . '">';
-						echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
+						echo '<div class="excerpt-thumb">';
+						adc_get_excerpt_thumb();
 						echo '<h4><a href="' . 
 						get_permalink();
 						echo '">';
@@ -54,7 +55,8 @@ function custom_do_medicalservice_archives_loop() {
 						echo '</a></h4>';
 						echo '<ul><li><strong>Appointments</strong></li><li>';
 						adc_display_appointment_phone();
-						echo '</li></ul>';	
+						echo '</li></ul>';
+						echo '</div>';	
 					echo '</div>';
 			
 			endwhile;

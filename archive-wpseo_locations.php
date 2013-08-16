@@ -25,14 +25,13 @@ function custom_do_location_archives_loop() {
 	//echo '<div class="entry-content">' . get_the_content() ;
 	if ( !get_query_var( 'paged' ) ) {
 		$pt = get_post_type_object( get_post_type() );
-		echo '</pre>
-		<h1 class="entry-title">'.$pt->labels->name.'</h1>
-		<pre>
-		';
+		echo '<h1 class="entry-title">'.$pt->labels->name.'</h1>';
+		
 		}
+
 	//Main locations
 	
-	echo '<div class="adc-grid-content featured-clinics adc-section">';
+	echo '<div class="adc-grid-content featured-clinics adc-section adc-locations-grid">';
 	echo '<h3>Clinic Locations</h3>';
 	adc_featured_locations();
 	echo '</div><!-- end .adc-grid-content .featured-clinics .adc-section-->';
@@ -41,7 +40,7 @@ function custom_do_location_archives_loop() {
 	echo '<div class="adc-grid-content neph-clinics adc-section">';
 	echo '<h3>Nephrology Satellites</h3>';
 	adc_neph_locations();
-	echo '</div><!-- end .adc-grid-content .neph-clinics .adc-section-->';
+	echo '</div><!-- end .adc-grid-content .neph-clinics .adc-section adc-locations-grid-->';
 	
 	//echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';

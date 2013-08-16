@@ -1085,6 +1085,7 @@ h6,
 .adc-grid-content h3 {
 	clear: both;
 }
+
 /*Biography styles*/
 .adc-specialty-link {
 	font-size: 24px;
@@ -1182,11 +1183,17 @@ p.adc-special-note span {
 	padding-right: 4px;
 	padding-right: 0.25rem;
 }
+.adc-locations-grid h3 {
+	display: none;
+}
 .featured-clinics {
 	
 }
 .neph-clinics {
 	
+}
+pre.wpseo-location {
+	font-family: "Droid Serif", "Times New Roman", Times, serif !important;
 }
 /*
 08 Post Navigation
@@ -1861,9 +1868,14 @@ p.wp-caption-text {
 	margin-top: 0.75rem;
 }
 
-.excerpt-thumb img, img.related-thumb, img.adc-related-content, img.adc-page-thumb, img.adc-featured-image, .widget-thumb img{
+img.related-thumb, img.adc-related-content, img.adc-page-thumb, img.adc-featured-image, .widget-thumb img{
 	margin: 0.5em 1em;
 	padding: 0.4em;
+}
+.excerpt-thumb img {
+	margin: 8px 0;
+	margin: 0.5rem 0;
+	padding: 0;
 }
 /* 13.2 - MyADC sign up ----------- */
 .myadc-btn {

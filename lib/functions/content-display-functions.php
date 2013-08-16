@@ -864,18 +864,35 @@ function adc_featured_locations() {
 	if( $wp_query->have_posts() ): 
 		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
 			$classes = 'one-third';
+			$postid = get_the_ID();
 			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
 				$classes .= ' first';
 					echo '<div class="'.  $classes . '">';
-						echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
+						echo '<div class="excerpt-thumb">';
 						echo '<h4><a href="' . get_permalink() . '">' . get_the_title() . '</a></h4>';
+						if( function_exists( 'wpseo_local_show_map' ) ) {
+						$params = array(
+							'echo' => true,
+							'id' => $postid,
+							'zoom' => 14,
+							'show_route' => false
+						);
+						wpseo_local_show_map( $params );
+					}
+						echo '</div>';
 						if( function_exists( 'wpseo_local_show_address' ) ) { 
-							wpseo_local_show_address( array( 
+							$args = array(
 								'echo' => true,
+								'id' => $postid,
+								'show_state' => false,
+								'show_country' => false,
 								'show_phone' => true,
+								'show_email' => false,
 								'oneline' => false,
-							 ) 
-							); 
+						);
+						echo '<ul><li>';
+						wpseo_local_show_address( $args );
+						echo '</li></ul>';
 						}
 					echo '</div>';
 			
