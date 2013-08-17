@@ -425,7 +425,7 @@ add_action( 'genesis_before', 'adc_add_selectnav', 2 );
 			}); 
 		});</script>';
 	}
-add_action( 'genesis_before', 'adc_add_isotope_parameters' );
+add_action( 'genesis_after', 'adc_add_isotope_parameters' );
 	function adc_add_isotope_parameters() {
 		if ( is_archive ('biography') ){
 			wp_enqueue_script('adc-isotope-parameters');

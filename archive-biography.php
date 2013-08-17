@@ -31,8 +31,9 @@ function custom_do_biography_archives_loop() {
 	echo '<h4 class="one-half"><a href="#" data-filter="*">Show all providers</a></h4>';
 	
 	echo '<div class="multiselect one-third first">';
-		echo '<label><input type="checkbox" name="option[]" value=".Female">Female</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".Male" class="current">Male</label>';
+		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
+		echo '<label><input type="radio" name="gender" value=".Female">Female</label>';
+		echo '<label><input type="radio" name="gender" value=".Male" class="current">Male</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".new-patients">Accepting New Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
@@ -71,8 +72,10 @@ function custom_do_biography_archives_loop() {
 	if( $wp_query->have_posts() ): 
 		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
 			$classes = 'one-third adc-provider';
+			$service = null;
 			foreach( get_the_terms( $post->ID, 'medicalservice') as $term) {
 				$classes .= ' ' . $term->slug;
+				$service = str_ireplace('adc-', '', $term->slug);
 			}
 			foreach( get_the_terms( $post->ID, 'cliniclocation') as $location) {
 				$classes .= ' ' . $location->slug;
@@ -83,7 +86,7 @@ function custom_do_biography_archives_loop() {
 			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewmedicarepatients') == "on") ? " new-medicare" : "");
 			$classes .= ((genesis_get_custom_field( 'ecpt_spanish') == "on") ? " spanish" : "");
 			
-			echo '<div class="'.  $classes . '">';
+			echo "<div class=\"$classes\" data-category=\"$service\">";
 				echo '<div class="excerpt-thumb">'. adc_get_excerpt_bio_thumb().'</div>';
 				echo '<h4><a href="' . 
 				get_permalink();

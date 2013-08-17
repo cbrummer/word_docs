@@ -2134,6 +2134,10 @@ table.directory{
 	-moz-transition-property: -moz-transform, opacity;     
 	transition-property: transform, opacity; 
 }
+
+.adc-provider {
+	min-height: 430px;
+}
 div#filters {
 	background-color: #eeeeee;
 	border: solid #B1B1B1 1px;
