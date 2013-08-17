@@ -1192,8 +1192,8 @@ p.adc-special-note span {
 .neph-clinics {
 	
 }
-pre.wpseo-location {
-	font-family: "Droid Serif", "Times New Roman", Times, serif !important;
+.wpseo-location {
+	font-family: 'Droid Sans', Helvetica, Arial, sans-serif !important;
 }
 /*
 08 Post Navigation
@@ -1697,7 +1697,9 @@ input:hover[type="submit"],
 .btn:hover {
 	background-color: #718c45;
 }
-
+.btn:hover {
+	color: #fff;	
+}
 .enews input[type="submit"],
 .search-form input[type="submit"] {
 	border: 0;
@@ -2131,6 +2133,23 @@ table.directory{
 	-webkit-transition-property: -webkit-transform, opacity;     
 	-moz-transition-property: -moz-transform, opacity;     
 	transition-property: transform, opacity; 
+}
+div#filters {
+	background-color: #eeeeee;
+	border: solid #B1B1B1 1px;
+	padding: 0 1% 16px;
+	padding: 0 1% 1rem;
+}
+div#filters h4 {
+	text-align: right;	
+}
+#adc-clear-filters {
+	font-weight:bold;	
+}
+.adc-clear-filters {
+	clear: both;
+	margin-bottom: 0.5rem;
+	text-align: right;	
 }
 .multiselect {
     height:auto;
@@ -2587,6 +2606,11 @@ and (max-width : 768px) {
 	.footer-widgets {
 		width: 95%;	
 	}
+	.one-third,
+	.one-fourth {
+		float: none;
+		width: 100%;	
+	}
 }
 
 /* iPads (portrait and landscape) ----------- */
@@ -2756,6 +2780,19 @@ and (orientation : portrait) {
 	#header ul.menu a {
 		padding: 0.5rem 1rem;	
 	}
+	/*Doctor search*/
+	.multiselect {
+		font-size: 18px;
+		font-size: 1.125rem;
+	}
+	div#filters h4 {
+		text-align: left;	
+	}
+	.adc-clear-filters {
+		text-align: left;
+		margin: 16px 0;
+		margin: 1rem 0;	
+	}
 @media handheld, screen and (max-width: 480px) {
 
 	html {
@@ -2865,6 +2902,25 @@ and (max-width : 320px) {
 only screen and (-webkit-min-device-pixel-ratio : 1.5),
 only screen and (min-device-pixel-ratio : 1.5) {
 /* Styles */
+	.archive-page,
+	.five-sixths,
+	.four-fifths,
+	.four-sixths,
+	.one-fifth,
+	.one-fourth,
+	.one-half,
+	.one-sixth,
+	.one-third,
+	.three-fifths,
+	.three-fourths,
+	.three-sixths,
+	.two-fifths,
+	.two-fourths,
+	.two-sixths,
+	.two-thirds {
+		margin: 0;
+		width: 100%;
+	}
 	.footer-widgets-1,
 	.footer-widgets-2,
 	.footer-widgets-3,

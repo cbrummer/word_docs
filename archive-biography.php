@@ -20,15 +20,15 @@ function custom_do_biography_archives_loop() {
 	
 	$medTerms = get_terms(array('medicalservice'), array('hierarchical'  => false));
 	$locationTerms = get_terms(array('cliniclocation'), array('hierarchical'  => false));
-    	
+	
 	// Intro Text (from page content)
 	echo '<div class="page hentry entry">';
 	echo '<h1 class="entry-title">All Provider Biographies</h1>';
 	echo '<div class="entry-content">';
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	echo '<h3>Search for a Provider</h3>';
-	echo '<h4><a href="#" data-filter="*">Show all providers</a></h4>';
+	echo '<h3 class="one-half first">Search for a Provider</h3>';
+	echo '<h4 class="one-half"><a href="#" data-filter="*">Show all providers</a></h4>';
 	
 	echo '<div class="multiselect one-third first">';
 		echo '<label><input type="checkbox" name="option[]" value=".Female">Female</label>';
@@ -36,7 +36,6 @@ function custom_do_biography_archives_loop() {
 		echo '<label><input type="checkbox" name="option[]" value=".new-patients">Accepting New Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
-		echo '<a href="#" id="adc-clear-filters">Clear Filters</a>';
 	echo '</div><!-- end .multiselect .one-third .first -->';
 	echo '<select id="adc-specialty-select" class="one-third"><option value="*">Choose a Specialty</option>';
 	foreach($medTerms as $medTerm) {
@@ -49,6 +48,7 @@ function custom_do_biography_archives_loop() {
 		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
 	}
 	echo '</select>';
+	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';
 	echo '</div><!--end #filters-->';
 
 

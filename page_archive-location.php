@@ -23,88 +23,23 @@ function custom_do_location_archives_loop() {
 	echo '<div class="page hentry entry">';
 	//echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	//echo '<div class="entry-content">' . get_the_content() ;
-	
+	if ( !get_query_var( 'paged' ) ) {
+		$pt = get_post_type_object( get_post_type() );
+		echo '<h1 class="entry-title">'.$pt->labels->name.'</h1>';
+		}
+
 	//Main locations
+	echo '<div class="adc-grid-content featured-clinics adc-section adc-locations-grid">';
 	echo '<h3>Clinic Locations</h3>';
-	echo '<div class="main-locations adc-grid-content">';
-	$args = array(
-		'post_type' =>'wpseo_locations',
-		'posts_per_page' => -1,
-		'orderby' => 'title',
-		'order' => 'ASC',
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'cliniclocation',
-				'field' => 'slug',
-				'terms' => 'neph-satellite',
-				'operator' => 'NOT IN',
-			),
-		  ),
-		);
-	
-	global $wp_query;
-	$wp_query = new WP_Query( $args );
-	if( $wp_query->have_posts() ): 
-		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
-			$classes = 'one-third';
-			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
-				$classes .= ' first';
-					echo '<div class="'.  $classes . '">';
-						echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
-						echo '<h4><a href="' . get_permalink() . '">' . get_the_title() . '</a></h4>';
-						echo genesis_get_custom_field( 'ecpt_address' );
-						echo genesis_get_custom_field( 'ecpt_phone' );	
-					echo '</div>';
-			
-			endwhile;
-			genesis_posts_nav();
-		endif;
-		wp_reset_query();
-	echo '</div><!-- end .adc-grid-content -->';
+	adc_featured_locations();
+	echo '</div><!-- end .adc-grid-content .featured-clinics .adc-section-->';
 	//Nephrology Satellites
+	echo '<div class="adc-grid-content neph-clinics adc-section">';
 	echo '<h3>Nephrology Satellites</h3>';
-	echo '<div class="neph-locations adc-grid-content">';
-	$args = array(
-		'post_type' => 'wpseo_locations',
-		'post_status' => 'publish',
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'cliniclocation',
-				'field' => 'slug',
-				'terms' => array('north','south','west'),
-				'operator' => 'NOT IN',
-			),
-		  ),
-		'posts_per_page' => 10,
-		'orderby' => 'title',
-		'order' => 'ASC',
-		);
+	adc_neph_locations();
+	echo '</div><!-- end .adc-grid-content .neph-clinics .adc-section adc-locations-grid-->';
 	
-	global $wp_query;
-	$nephrologylist = new WP_Query( $args );
-	if( $nephrologylist->have_posts() ): 
-		while( $nephrologylist->have_posts() ): $nephrologylist->the_post(); global $post;
-			$classes = 'one-third';
-			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
-				$classes .= ' first';
-					echo '<div class="'.  $classes . '">';
-						echo '<div class="excerpt-thumb">'. adc_get_excerpt_thumb().'</div>';
-						echo '<h4><a href="' . 
-						get_permalink();
-						echo '">';
-						the_title();
-						echo '</a></h4>';
-						echo genesis_get_custom_field( 'ecpt_address' );
-						echo genesis_get_custom_field( 'ecpt_phone' );	
-					echo '</div>';
-			
-			endwhile;
-			genesis_posts_nav();
-		endif;
-		wp_reset_query();
-	echo '</div><!-- end .adc-grid-content -->';
-	
-	echo '</div><!-- end .entry-content -->';
+	//echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';
 }
 	
