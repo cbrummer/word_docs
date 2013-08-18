@@ -122,7 +122,10 @@ add_action('get_header','adc_change_genesis_sidebar');
 		} elseif ( is_single( array( 2085, 2090, 2086, 2088, 2092, 4409, 4410, 4511, 2089, 4513, 2087 ) )  || is_tree( 2085 ) ){
 			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
 			add_action( 'genesis_sidebar', 'adc_do_imaging_sidebar' );
-		}
+		} elseif ( is_page('education') || is_tree( 9554 ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
+			remove_action( 'genesis_sidebar', 'genesis_do_sidebar' );
+			add_action( 'genesis_sidebar', 'adc_do_education_sidebar' );
+		} 
 	}
 
 //Functions to output custom sidebars
@@ -225,4 +228,8 @@ function adc_do_flu_sidebar() {
 // Imaging main sidebar
 function adc_do_imaging_sidebar() {
 	dynamic_sidebar( 'imaging-sidebar' );
+}
+// Education main sidebar
+function adc_do_education_sidebar() {
+	dynamic_sidebar( 'education-sidebar' );
 }

@@ -22,7 +22,12 @@ function custom_do_pediatricweb_loop() {
 	echo '<div class="page hentry entry">';
 	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	echo '<div class="entry-content">' . get_the_content() ;
-	
+	if ( is_page( '4824' ) ) {  
+    	echo '<div class="one-half first"><h3>Pediatric Web Topics</h3>';
+        echo '<ul>';
+        wp_list_pages('child_of=4824&depth=1&title_li=' );
+        echo '</ul></div>';
+    }
 	if (is_page('4738')){ 
 		//Illness page content
 		$PostPage = "http://www.pediatricweb.com/webpost/Illness.asp?";
@@ -30,7 +35,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/is-my-child-sick/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/is-my-child-sick/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -80,7 +85,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/pediatric-medical-conditions/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/pediatric-medical-conditions/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -130,7 +135,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/pediatric-medicine-and-dosages/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/pediatric-medicine-and-dosages/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -179,7 +184,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/behavior/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/behavior/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -205,6 +210,7 @@ function custom_do_pediatricweb_loop() {
 		
 		
 		$query = $PostPage . $variables;
+
 		$url = parse_url($query);
 		$host = $url["host"];
 		$path = $url["path"] . "?" . $url["query"];
@@ -228,7 +234,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/breastfeeding/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/breastfeeding/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -278,7 +284,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/whats-going-around/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/whats-going-around/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -328,7 +334,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/newborns/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/newborns/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -378,7 +384,7 @@ function custom_do_pediatricweb_loop() {
 		$variables = "pw_groupid=270";
 		$variables = $variables . "&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041";
 		$variables = $variables . "&pw_url=";
-		$variables = $variables . "&pw_articlepage=" . "/patient-tools/pediatric-patient-education/teens/";
+		$variables = $variables . "&pw_articlepage=" . "/education/pediatric-patient-education/teens/";
 		if ($_GET["tArticleId"] > "")  {
 		   $variables = $variables . "&tArticleId=" . $_GET["tArticleId"];
 		} else {
@@ -423,7 +429,7 @@ function custom_do_pediatricweb_loop() {
 		echo $varResult;
 					
 	}
-        echo '<div><p class="disclaimer pediweb-helper">Content provided by PediWeb. Content authors are not and have not ever been associated with The Austin Diagnostic Clinic.</p></div>';
+        echo '<div><p class="pediweb-helper"><span class="icon-cr-info"></span> Content provided by PediWeb.<br />Content authors are not and have not ever been associated with The Austin Diagnostic Clinic.</p></div>';
 
 	
 

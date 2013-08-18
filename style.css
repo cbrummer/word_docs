@@ -790,7 +790,11 @@ p.pages,
 .author-box {
 	clear: both;	
 }
-
+.pediweb-helper {
+	clear: both;
+	line-height: 1.25em;
+	padding: 1em 0;
+}	
 /*
 05 Menus
 ---------------------------------------------------------------------------------------------------- */
@@ -2153,6 +2157,8 @@ div#filters h4 {
 .adc-clear-filters {
 	clear: both;
 	margin-bottom: 0.5rem;
+	padding-top: 16px;
+	padding-top: 1rem;
 	text-align: right;	
 }
 .multiselect {

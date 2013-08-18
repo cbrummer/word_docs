@@ -331,3 +331,14 @@
         'after_title' => '</h4>'
 		)
 	);
+//Education page sidebar area that replaces the primary sidebar area left of the content
+	genesis_register_sidebar( array(
+		'name' => ('Education Sidebar'),
+		'id' => 'education-sidebar',
+		'description' => ('The sidebar that holds widgets for the Education pages)'),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>'
+		)
+	);
