@@ -106,7 +106,9 @@ function custom_do_biography_archives_loop() {
 			$classes .= ((genesis_get_custom_field( 'ecpt_spanish') == "on") ? " spanish" : "");
 			
 			echo "<div class=\"$classes\" data-category=\"$service\">";
-				echo '<div class="excerpt-thumb">'. adc_get_excerpt_bio_thumb().'</div>';
+				echo '<div class="excerpt-thumb">'; 
+				adc_get_excerpt_bio_thumb();
+				echo '</div>';
 				echo '<h4><a href="' . 
 				get_permalink();
 				echo '">';

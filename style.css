@@ -2717,6 +2717,9 @@ and (orientation : portrait) {
 		float: none;
 		padding: 0.5rem 0;
 	}
+	.excerpt-thumb img{
+			
+	}
 	/* - Font Size ----------- */
 
 	#title {
