@@ -17,12 +17,44 @@ remove_action ('genesis_loop', 'genesis_do_loop');
 add_action( 'genesis_loop', 'custom_do_biography_archives_loop' );
 
 function custom_do_biography_archives_loop() {
-    	
+	
+	$medTerms = get_terms(array('medicalservice'), array('hierarchical'  => false));
+	$locationTerms = get_terms(array('cliniclocation'), array('hierarchical'  => false));
+	
 	// Intro Text (from page content)
 	echo '<div class="page hentry entry">';
 	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	echo '<div class="entry-content">' . get_the_content() ;
-	echo '<div class="adc-grid-content">';
+	// Set menu for Isotope filters
+	echo '<div id="filters">';
+	echo '<h3 class="one-half first">Search for a Provider</h3>';
+	echo '<h4 class="one-half"><a href="#" data-filter="*">Show all providers</a></h4>';
+	
+	echo '<div class="multiselect one-third first">';
+		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
+		echo '<label><input type="radio" name="gender" value=".Female">Female</label>';
+		echo '<label><input type="radio" name="gender" value=".Male" class="current">Male</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".new-patients">Accepting New Patients</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
+	echo '</div><!-- end .multiselect .one-third .first -->';
+	echo '<select id="adc-specialty-select" class="one-third"><option value="*">Choose a Specialty</option>';
+	foreach($medTerms as $medTerm) {
+		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
+		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
+	}
+	echo '</select>';
+	echo '<select id="adc-location-select" class="one-third"><option value="*">Choose a Location</option>';
+	foreach($locationTerms as $locationTerm) {
+		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
+	}
+	echo '</select>';
+	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';
+	echo '</div><!--end #filters-->';
+
+
+	//Show grid content
+	echo '<div id="adc-grid-content" class="adc-grid-content">';
 	$args = array(
 		'post_type' =>'biography',
 		'post_status' => 'publish',
@@ -36,28 +68,41 @@ function custom_do_biography_archives_loop() {
 	
 	global $wp_query;
 	$wp_query = new WP_Query( $args );
+	
 	if( $wp_query->have_posts() ): 
 		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
-			$classes = 'one-third';
-			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
-				$classes .= ' first';
-					echo '<div class="'.  $classes . '">';
-						echo '<div class="excerpt-thumb">'. adc_get_excerpt_bio_thumb().'</div>';
-						echo '<h4><a href="' . 
-						get_permalink();
-						echo '">';
-						the_title();
-						adc_display_suffix();
-						echo '</a></h4>';
-						echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
-						echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
-					echo '</div>';
+			$classes = 'one-third adc-provider';
+			$service = null;
+			foreach( get_the_terms( $post->ID, 'medicalservice') as $term) {
+				$classes .= ' ' . $term->slug;
+				$service = str_ireplace('adc-', '', $term->slug);
+			}
+			foreach( get_the_terms( $post->ID, 'cliniclocation') as $location) {
+				$classes .= ' ' . $location->slug;
+			}
+			
+			$classes .= ' ' . genesis_get_custom_field( 'ecpt_gender');
+			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewpatients') == "on") ? " new-patients" : "");
+			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewmedicarepatients') == "on") ? " new-medicare" : "");
+			$classes .= ((genesis_get_custom_field( 'ecpt_spanish') == "on") ? " spanish" : "");
+			
+			echo "<div class=\"$classes\" data-category=\"$service\">";
+				echo '<div class="excerpt-thumb">'. adc_get_excerpt_bio_thumb().'</div>';
+				echo '<h4><a href="' . 
+				get_permalink();
+				echo '">';
+				the_title();
+				adc_display_suffix();
+				echo '</a></h4>';
+				echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
+				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
+			echo '</div>';
 			
 			endwhile;
 			genesis_posts_nav();
 		endif;
 		wp_reset_query();
-	echo '</div><!-- end .adc-grid-content -->';
+	echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
 	echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';
 }
