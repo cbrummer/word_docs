@@ -20,6 +20,7 @@ function custom_do_biography_archives_loop() {
 	
 	$medTerms = get_terms(array('medicalservice'), array('hierarchical'  => false));
 	$locationTerms = get_terms(array('cliniclocation'), array('hierarchical'  => false));
+	$catTerms = get_terms(array('category'), array('hierarchical'  => false));
 	
 	// Intro Text (from page content)
 	echo '<div class="page hentry entry">';
@@ -27,10 +28,11 @@ function custom_do_biography_archives_loop() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	echo '<h3 class="one-half first">Search for a Provider</h3>';
-	echo '<h4 class="one-half"><a href="#" data-filter="*">Show all providers</a></h4>';
+	//echo '<h3 class="one-half first">Find a Provider</h3>';
+	//echo '<h4 class="one-half"><a href="#" data-filter="*">Show all providers</a></h4>';
 	
 	echo '<div class="multiselect one-third first">';
+		echo '<h5>Search by provider</h5>';
 		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="gender" value=".Female">Female</label>';
 		echo '<label><input type="radio" name="gender" value=".Male" class="current">Male</label>';
@@ -38,17 +40,30 @@ function custom_do_biography_archives_loop() {
 		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
 	echo '</div><!-- end .multiselect .one-third .first -->';
-	echo '<select id="adc-specialty-select" class="one-third"><option value="*">Choose a Specialty</option>';
+	echo '<div class="one-third"><h5>Search by specialty</h5>';
+		echo '<div class="multiselect">';
+		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
+		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
+		echo '<label><input type="radio" name="care" value=".services">Services</label>';
+		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '<select id="adc-specialty-select"><option value="*">Choose a Specialty</option>';
 	foreach($medTerms as $medTerm) {
 		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
 		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
 	}
-	echo '</select>';
-	echo '<select id="adc-location-select" class="one-third"><option value="*">Choose a Location</option>';
+	echo '</select></div>';
+	echo '<div class="one-third"><h5>Search by location</h5>';
+	echo '<div class="multiselect">';
+		echo '<label><input type="checkbox" name="option[]" value=".north">North Austin / Round Rock</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".south">South Austin / San Marcos</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".west">West Austin / Steiner Ranch</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
 	foreach($locationTerms as $locationTerm) {
 		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
 	}
-	echo '</select>';
+	echo '</select></div>';
 	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';
 	echo '</div><!--end #filters-->';
 
@@ -80,6 +95,9 @@ function custom_do_biography_archives_loop() {
 			foreach( get_the_terms( $post->ID, 'cliniclocation') as $location) {
 				$classes .= ' ' . $location->slug;
 			}
+			foreach( get_the_terms( $post->ID, 'category') as $category) {
+				$classes .= ' ' . $category->slug;
+			}
 			
 			$classes .= ' ' . genesis_get_custom_field( 'ecpt_gender');
 			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewpatients') == "on") ? " new-patients" : "");
@@ -95,7 +113,7 @@ function custom_do_biography_archives_loop() {
 				adc_display_suffix();
 				echo '</a></h4>';
 				echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
-				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
+				echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
 			echo '</div>';
 			
 			endwhile;

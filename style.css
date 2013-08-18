@@ -2164,7 +2164,8 @@ div#filters h4 {
     display:block;
 	margin-left: 0;
 }
-input[type=checkbox] {
+input[type=checkbox],
+input[type=radio] {
 	margin-right: 4px;
 	margin-right: 0.25rem;
 }

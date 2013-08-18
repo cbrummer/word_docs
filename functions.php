@@ -334,6 +334,30 @@ function is_tree( $pid ) {      // $pid = The ID of the page we're looking for p
 
     return false;  // we arn't at the page, and the page is not an ancestor
 }
+//Exclude some terms from term list
+function adc_get_the_term_list( $id = 0, $taxonomy, $before = '', $sep = '', $after = '', $exclude = array() ) {
+	$terms = get_the_terms( $id, $taxonomy );
+
+	if ( is_wp_error( $terms ) )
+		return $terms;
+
+	if ( empty( $terms ) )
+		return false;
+
+	foreach ( $terms as $term ) {
+
+		if(!in_array($term->term_id,$exclude)) {
+			$link = get_term_link( $term, $taxonomy );
+			if ( is_wp_error( $link ) )
+				return $link;
+			$term_links[] = '<a href="' . $link . '" rel="tag">' . $term->name . '</a>';
+		}
+	}
+
+	$term_links = apply_filters( "term_links-$taxonomy", $term_links );
+
+	return $before . join( $sep, $term_links ) . $after;
+}
 //Redirect archives page to a page
 function adc_archive_redirect(){
 	if( is_post_type_archive ('biography')) {
