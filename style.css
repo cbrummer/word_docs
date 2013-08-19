@@ -1658,13 +1658,15 @@ select,
 textarea {
 	background-color: #fff;
 	border: 1px solid #ddd;
-	/*border-radius: 3px;*/
-	box-shadow: 0 0 5px #ddd inset;*/
+	box-shadow: 0 0 5px #ddd inset;
 	padding: 16px;
 	padding: 1rem;
 	width: 100%;
 }
-
+select {
+	padding: 4px;
+	padding: 0.25rem;
+}
 input[type="checkbox"], input[type="radio"] {
 	padding:0;
 	width:auto;
@@ -1764,7 +1766,7 @@ input:hover[type="submit"],
 	padding: 8px;
 	padding: 0.5rem 0rem 0.5rem 0.25rem;
 }	
-.gform_wrapper .gfield_time_hour input, .gform_wrapper .gfield_time_minute input, .gform_wrapper .gfield_date_month input, .gform_wrapper .gfield_date_day input, .gform_wrapper .gfield_date_year input {
+/*.gform_wrapper .gfield_time_hour input, .gform_wrapper .gfield_time_minute input, .gform_wrapper .gfield_date_month input, .gform_wrapper .gfield_date_day input, .gform_wrapper .gfield_date_year input {
 	width: 60% !important;
 }
 #ui-datepicker-div select {
@@ -1777,7 +1779,7 @@ input:hover[type="submit"],
 .ui-datepicker-inline,
 #ui-datepicker-div {
 	box-sizing: content-box;
-}
+}*/
 /* 12b - Social media ----------- */
 #menu-social-media ul {
 	float: left;
@@ -2225,7 +2227,6 @@ body.landing-page {
 	margin-bottom: 48px;
 	padding: 0 20px 20px 0;
 	position: relative;
-	max-width: 728px;
 }
 .adc-event {
 	background: #eeeeee;
@@ -2717,8 +2718,26 @@ and (orientation : portrait) {
 		float: none;
 		padding: 0.5rem 0;
 	}
-	.excerpt-thumb img{
-			
+	select {
+		padding: 16px;
+		padding: 1rem;
+	}
+	.adc-provider {
+		min-height: 100px;
+	}
+	.excerpt-thumb img {
+		margin: 4px 0;
+		margin: 0.25rem 0;
+	}
+	h4 {
+		margin-top: 8px;
+		margin-top: 0.5rem;
+		margin-bottom: 8px;
+		margin-bottom: 0.5rem;
+	}
+	.entry-content p {
+		margin-bottom: 16px;
+		margin-bottom: 1rem;
 	}
 	/* - Font Size ----------- */
 

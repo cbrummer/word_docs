@@ -1405,7 +1405,14 @@ wp_reset_query();
 }
 //show grid of patient education links
 function adc_patient_links() {
-	if( function_exists ( 'output_quality_reports_links' )){
+	$qareports = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
+	$hasqualityreports = false;
+	while ($qareports->have_posts()): $qareports->the_post();
+		if ( 'qualityreports' == get_post_type()) {
+			$hasqualityreports = true;	
+		}
+	endwhile;
+	if ($hasqualityreports == true){
 			echo '<h3>Patient Resources</h3>';
 			echo '<div class="one-fourth first">';
 			output_patient_visit_links();
@@ -1419,7 +1426,7 @@ function adc_patient_links() {
 			echo '<div class="one-fourth">';
 			output_quality_reports_links();
 			echo '</div><!--end .one-fourth-->';
-	} elseif ( !function_exists ( 'output_quality_reports_links' )) {
+	} else {
 		echo '<h3>Patient Resources</h3>';
 		echo '<div class="one-third first">';
 		output_patient_visit_links();
@@ -1430,9 +1437,7 @@ function adc_patient_links() {
 		echo '<div class="one-third">';
 		output_related_blog_links();
 		echo '</div><!--end .one-third-->';
-	} else {
-		
-	}
+	} 
 }
 //Show list of doctors with thumbnail, title, clinic locations and if they accept new patients
 function output_doctor_list_1() {

@@ -373,7 +373,7 @@ add_action( 'genesis_header', 'adc_archive_redirect' );
 /************************************************************
  /* SCRIPTS
 *************************************************************/
-add_action( 'wp_enqueue_scripts', 'script_managment', 99);
+add_action( 'wp_enqueue_scripts', 'script_managment', 100);
 	/**
 	 * Change the location of jQuery to Google CDN.
 	 *
@@ -384,9 +384,7 @@ add_action( 'wp_enqueue_scripts', 'script_managment', 99);
 		  wp_deregister_script( 'jquery' );
 		  wp_deregister_script( 'jquery-ui' );
 		  wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' );
-		  wp_register_script( 'jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' );
 		  wp_enqueue_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array( 'jquery' ), '4.0', false );
-		  wp_enqueue_script( 'jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js', array( 'jquery' ), '1.8.16' );
 } 
 
 	// Add a style sheet for icon fonts
@@ -440,6 +438,8 @@ add_action( 'genesis_meta', 'adc_load_javascript_files' );
 //	function gforms_add_in_header () {
 //		gravity_form_enqueue_scripts(12, false);
 //	}
+
+
 /************************************************************
 //Load scripts right before opening body tag
 *************************************************************/
@@ -462,7 +462,7 @@ add_action( 'genesis_before', 'adc_add_selectnav', 2 );
 	}
 add_action( 'genesis_after', 'adc_add_isotope_parameters' );
 	function adc_add_isotope_parameters() {
-		if ( is_archive ('biography') ){
+		if ( is_page ('doctors') ){
 			wp_enqueue_script('adc-isotope-parameters');
 		}
 	}
