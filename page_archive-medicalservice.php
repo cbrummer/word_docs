@@ -17,37 +17,86 @@ remove_action ('genesis_loop', 'genesis_do_loop');
 add_action( 'genesis_loop', 'custom_do_medicalservice_archives_loop' );
 
 function custom_do_medicalservice_archives_loop() {
-    	
+    
+	$medTerms = get_terms(array('medicalservice'), array('hierarchical'  => false));
+	$locationTerms = get_terms(array('cliniclocation'), array('hierarchical'  => false));
+	$catTerms = get_terms(array('category'), array('hierarchical'  => false));
+	
 	// Intro Text (from page content)
 	echo '<div class="page hentry entry">';
 	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	echo '<div class="entry-content">' . get_the_content() ;
 	
+	// Set menu for Isotope filters
+	echo '<div id="filters">';
+	echo '<div class="one-half first"><h5>Search by need</h5>';
+		echo '<div class="multiselect">';
+		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
+		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
+		echo '<label><input type="radio" name="care" value=".services">Services</label>';
+		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '<select id="adc-specialty-select"><option value="*">Choose a Specialty or Service</option>';
+	foreach($medTerms as $medTerm) {
+		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
+		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
+	}
+	echo '</select></div>';
+	echo '<div class="one-half"><h5>Search by location</h5>';
+	echo '<div class="multiselect">';
+		echo '<label><input type="checkbox" name="option[]" value=".north">North Austin / Round Rock</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".south">South Austin</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".west">West Austin / Steiner Ranch</label>';
+		echo '<label><input type="checkbox" name="option[]" value=".neph-satellite">Nephrology satellite</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
+	foreach($locationTerms as $locationTerm) {
+		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
+	}
+	echo '</select></div>';
+	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';
+	echo '</div><!--end #filters-->';	
 	
 	
-	
-	echo '<div class="adc-grid-content">';
+	//Show grid content
+	echo '<div id="adc-grid-content" class="adc-grid-content">';
 	$args = array(
 		'post_type' =>array( 
 					'specialty',
 					'service' 
 					),
+		'post_status' => 'publish',
 		'posts_per_page' => -1,
 		'post_parent' => 0,
 		'orderby' => 'title',
-		'order' => 'ASC'
+		'order' => 'ASC',
+		'paged' => get_query_var( 'paged' ),
 	);
 	
 	global $wp_query;
 	$wp_query = new WP_Query( $args );
+	
 	if( $wp_query->have_posts() ): 
 		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
-			$classes = 'one-third';
-			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
-				$classes .= ' first';
-					echo '<div class="'.  $classes . '">';
-						echo '<div class="excerpt-thumb">';
+			$classes = 'one-third adc-service';
+			$service = null;
+			foreach( get_the_terms( $post->ID, 'medicalservice') as $term) {
+				$classes .= ' ' . $term->slug;
+				$service = str_ireplace('adc-', '', $term->slug);
+			}
+			foreach( get_the_terms( $post->ID, 'cliniclocation') as $location) {
+				$classes .= ' ' . $location->slug;
+			}
+			foreach( get_the_terms( $post->ID, 'category') as $category) {
+				$classes .= ' ' . $category->slug;
+			}
+			
+			echo "<div class=\"$classes\" data-category=\"$service\">";
+						echo '<a href="' . 
+						get_permalink();
+						echo '">';
 						adc_get_excerpt_thumb();
+						echo '</a>';
 						echo '<h4><a href="' . 
 						get_permalink();
 						echo '">';
@@ -56,17 +105,13 @@ function custom_do_medicalservice_archives_loop() {
 						echo '<ul><li><strong>Appointments</strong></li><li>';
 						adc_display_appointment_phone();
 						echo '</li></ul>';
-						echo '</div>';	
 					echo '</div>';
 			
 			endwhile;
 			genesis_posts_nav();
 		endif;
 		wp_reset_query();
-	echo '</div><!-- end .adc-grid-content -->';
-	
-	
-	
+	echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
 	
 	echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';

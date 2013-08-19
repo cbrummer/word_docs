@@ -28,8 +28,6 @@ function custom_do_biography_archives_loop() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	//echo '<h3 class="one-half first">Find a Provider</h3>';
-	//echo '<h4 class="one-half"><a href="#" data-filter="*">Show all providers</a></h4>';
 	
 	echo '<div class="multiselect one-third first">';
 		echo '<h5>Search by provider</h5>';

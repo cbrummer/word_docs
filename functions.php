@@ -367,7 +367,19 @@ function adc_archive_redirect(){
 	if( is_post_type_archive ('specialty') || is_post_type_archive( 'service' ) ) {
 		$pagelink = get_page_link (19);
 		header("Location: $pagelink" , TRUE , 301);
-	}	
+	}
+	if(is_category( 'health-articles' )) {
+		$pagelink=get_page_link (9449);
+		header("Location: $pagelink",TRUE,301);
+	}
+	if(is_category( 'clinic-news' )) {
+		$pagelink=get_page_link (9444);
+		header("Location: $pagelink",TRUE,301);
+	}
+	if(is_category( 'patient-education' )) {
+		$pagelink=get_page_link (9447);
+		header("Location: $pagelink",TRUE,301);
+	}			
 }
 add_action( 'genesis_header', 'adc_archive_redirect' );
 /************************************************************
@@ -426,12 +438,14 @@ add_action( 'genesis_meta', 'adc_load_javascript_files' );
 // Create minified isotope-parameters version at http://jscompress.com
 // isotope-parameters file named: isotope-parameters.min.js
 		wp_register_script( 'adc-isotope-parameters', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters.js', array( 'adc-isotope' ), '1.5.21', true );
-		if ( is_archive ('biography') || is_page ( 'doctors' )){
+		wp_register_script( 'adc-isotope-parameters-2', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters-2.js', array( 'adc-isotope' ), '1.5.21', true );
+		if ( is_page ('doctors') ){
 			wp_enqueue_script('adc-isotope-parameters');
 		}
-  // Enqueue Isotope Scripts only when needed (page template, custom field set)
-		//global $post; // Remove if not using get_post_meta()
-		//if ( is_page('doctors') || is_page('medical-services') || get_post_meta( $post->ID, 'adc_isotope' ) );
+		
+		if ( is_page ('medical-services') ) {
+			wp_enqueue_script('adc-isotope-parameters-2');
+		}
 }
 // Enqueue Gravity Forms scripts in header
 //add_action('genesis_header', 'gforms_add_in_header');
@@ -462,7 +476,7 @@ add_action( 'genesis_before', 'adc_add_selectnav', 2 );
 	}
 add_action( 'genesis_after', 'adc_add_isotope_parameters' );
 	function adc_add_isotope_parameters() {
-		if ( is_page ('doctors') ){
+		if ( is_page ('doctors') || is_page ('medical-services') ){
 			wp_enqueue_script('adc-isotope-parameters');
 		}
 	}

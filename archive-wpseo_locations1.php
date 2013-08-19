@@ -31,7 +31,11 @@ function custom_do_location_archives_loop() {
 	//Main locations
 	echo '<div class="adc-grid-content featured-clinics adc-section adc-locations-grid">';
 	echo '<h3>Clinic Locations</h3>';
-	adc_featured_locations();
+	if ( is_mobile()){
+		adc_featured_locations_2();
+	} else {
+		adc_featured_locations();
+	}
 	echo '</div><!-- end .adc-grid-content .featured-clinics .adc-section-->';
 	//Nephrology Satellites
 	echo '<div class="adc-grid-content neph-clinics adc-section">';

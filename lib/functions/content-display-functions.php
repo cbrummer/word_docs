@@ -842,7 +842,7 @@ function adc_start_date() {
  *Locations display
 ******************************************************************/
 
-//Locations grid
+//Locations grids
 function adc_featured_locations() {
 	$args = array(
 		'post_type' =>'wpseo_locations',
@@ -876,6 +876,66 @@ function adc_featured_locations() {
 							'id' => $postid,
 							'zoom' => 14,
 							'show_route' => false
+						);
+						wpseo_local_show_map( $params );
+					}
+						echo '</div>';
+						if( function_exists( 'wpseo_local_show_address' ) ) { 
+							$args = array(
+								'echo' => true,
+								'id' => $postid,
+								'show_state' => false,
+								'show_country' => false,
+								'show_phone' => true,
+								'show_email' => false,
+								'oneline' => false,
+						);
+						echo '<ul><li>';
+						wpseo_local_show_address( $args );
+						echo '</li></ul>';
+						}
+					echo '</div>';
+			
+			endwhile;
+		endif;
+		wp_reset_query();
+}
+//Show locations grid on mobile phones without huge maps
+function adc_featured_locations_2() {
+	$args = array(
+		'post_type' =>'wpseo_locations',
+		'posts_per_page' => -1,
+		'orderby' => 'title',
+		'order' => 'ASC',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'cliniclocation',
+				'field' => 'slug',
+				'terms' => 'neph-satellite',
+				'operator' => 'NOT IN',
+			),
+		  ),
+		);
+	
+	global $wp_query;
+	$wp_query = new WP_Query( $args );
+	if( $wp_query->have_posts() ): 
+		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
+			$classes = 'one-third';
+			$postid = get_the_ID();
+			if( 0 == $wp_query->current_post || 0 == $wp_query->current_post % 3 )
+				$classes .= ' first';
+					echo '<div class="'.  $classes . '">';
+						echo '<div class="excerpt-thumb">';
+						echo '<h4><a href="' . get_permalink() . '">' . get_the_title() . '</a></h4>';
+						if( function_exists( 'wpseo_local_show_map' ) ) {
+						$params = array(
+							'echo' => true,
+							'id' => $postid,
+							'zoom' => 14,
+							'show_route' => false,
+							'width' => 200,
+							'height' => 150
 						);
 						wpseo_local_show_map( $params );
 					}
@@ -1093,13 +1153,39 @@ function adc_display_staff_position() {
 		$position = genesis_get_custom_field( 'ecpt_position' );
         echo $position;
 }
+
+
+//Display is my child sick box on pedi page
+function adc_sick_child_box() {
+	$PostPage = "http://www.pediatricweb.com/webpost/Illness.asp?";
+	$variables = "pw_groupid=270&pw_accesscode=B14D3C17-704F-4BCD-A8ED-D32985D25041&pw_url=&tCategoryId=" . $_GET["tCategoryId"] . $_POST["tCategoryId"] . "&tArticleId=" . $_GET["tArticleId"] . $_POST["tArticleId"] . "&tArticleStyle=" . $_GET["tArticleStyle"] . $_POST["tArticleStyle"] . "&pw_articlepage=/education/pediatric-patient-education/is-my-child-sick/";
+	$query = $PostPage . $variables;
+	$url = parse_url($query);
+	$host = $url["host"];
+	$path = $url["path"] . "?" . $url["query"];
+	$timeout = 1;
+	$fp = fsockopen ($host, 80, $errno, $errstr, $timeout);
+	if ($fp) {
+	fputs ($fp, "GET $path HTTP/1.0\nHost: " . $host . "\n\n");
+	while (!feof($fp)) {
+	$buf .= fgets($fp, 128);
+	}
+	$lines = split("\n", $buf);
+	$varResult = $lines[count($lines)-1];
+	fclose($fp);
+	} else {
+	  # enter error handing code here
+	  echo 'Oops, there has been an error';
+	}
+	echo $varResult;
+}
 /***********************************************************/
 /**********************Blog/Article Display*****************/
 /***********************************************************/
 //* Customize the post info function
 add_action( 'genesis_post_info', 'post_info_filter' );
 function post_info_filter($post_info) {
-	if (is_single() ) {
+	if (in_category( array('39','44') ) ) {
 		if ( genesis_get_custom_field( 'ecpt_physicianapproval' ) ){
 			$articlereview = ' Reviewed by ' . genesis_get_custom_field(  'ecpt_physicianapproval' );
 			} 
@@ -1130,8 +1216,7 @@ add_filter( 'genesis_author_box_gravatar_size', 'author_box_gravatar_size' );
 function author_box_gravatar_size( $size ) {
 	return '100';
 }
-//Add related posts to bottom of posts
-add_action( 'genesis_after_post', 'adc_related_posts', 15 );
+
 /**
  * Outputs related posts with thumbnail
  * Only shows related posts on single posts in Clinic News or Your health life categories
@@ -1176,9 +1261,9 @@ function adc_related_posts() {
             if ( $tag_query->have_posts() ) {                 
                 while ( $tag_query->have_posts() ) {                     
                     $tag_query->the_post(); 
-                    $img = genesis_get_image() ? genesis_get_image( array( 'size' => 'adc_related_post_thumb' ) ) : '<img src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/ADC-site-logo.jpg" width="100" height="100" alt="' . get_the_title() . '" />';
+                    $img = genesis_get_image() ? genesis_get_image( array( 'size' => 'adc_excerpt_thumb' ) ) : '<img src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/ADC-site-logo.jpg" width="150" height="150" alt="' . get_the_title() . '" />';
  
-                    $related .= '<li class="related-thumb"><a href="' . get_permalink() . '" rel="bookmark" title="Permanent Link to ' . get_the_title() . '">' . $img . get_the_title() . '</a></li>';                     
+                    $related .= '<div class="related-thumb one-fourth"><h4><a href="' . get_permalink() . '" rel="bookmark" title="Permanent Link to ' . get_the_title() . '">' . $img . get_the_title() . '</a></h4></div>';                     
                     $postIDs[] = $post->ID; 
                     $count++;
                 }
@@ -1216,17 +1301,21 @@ function adc_related_posts() {
             if ( $cat_query->have_posts() ) {                 
                 while ( $cat_query->have_posts() ) {                    
                     $cat_query->the_post();
-                    $img = genesis_get_image() ? genesis_get_image( array( 'size' => 'adc_related_post_thumb' ) ) : '<img src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/ADC-site-logo.jpg" width="100" height="100" alt="' . get_the_title() . '" />';
-                    $related .= '<li class="related-thumb"><a href="' . get_permalink() . '" rel="bookmark" title="Permanent Link to ' . get_the_title() . '">' . $img . get_the_title() . '</a></li>';
+                    $img = genesis_get_image() ? genesis_get_image( array( 'size' => 'adc_excerpt_thumb' ) ) : '<img src="' . get_bloginfo( 'stylesheet_directory' ) . '/images/ADC-site-logo.jpg" width="150" height="150" alt="' . get_the_title() . '" />';
+                    $related .= '<div class="one-fourth"><h4><a href="' . get_permalink() . '" rel="bookmark" title="Link to ' . get_the_title() . '">' . $img . get_the_title() . '</a></h4></div>';
                 }
             }
         }
         if ( $related ) {           
-            printf( '<div class="adc-related-content"><h3 class="related-title">Related Posts</h3><ul>%s</ul></div>', $related );       
+            printf( '<div class="adc-grid-content adc-section"><h3>Related Articles</h3>%s</div>', $related );       
         }     
         wp_reset_query();         
     }
 }
+
+
+//Add related posts to bottom of posts
+add_action( 'genesis_after_post', 'adc_related_posts', 15 );
 
 function output_testimonials($wp_query) {
 	// Intro Text (from page content)
@@ -1500,7 +1589,7 @@ function adc_provider_related_videos() {
 		if ($relatedvideos->have_posts()){
 			$first = true;
 				while ($relatedvideos->have_posts()): $relatedvideos->the_post();
-					$classes = 'one-fourth';
+					$classes = 'one-fourth related-video';
 					if( 0 == $relatedvideos->current_post || 0 == $relatedvideos->current_post % 4 )
 					static $counter = 0;
 						if ( has_post_format( 'video' )) {
@@ -1518,7 +1607,9 @@ function adc_provider_related_videos() {
 							echo '">';
 							the_title();
 							echo '</a></h4>';
-							echo '<p><span class="adc-date">' . the_time('F j, Y') . '</span><p>';
+							echo '<p><span class="adc-date">';
+							the_time('F j, Y');
+							echo '</span><p>';
 							echo '</div><!-- end .$classes-->';
 							$counter++;
 							};

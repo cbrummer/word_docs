@@ -49,6 +49,13 @@ function custom_do_single_specialty_loop() {
 			// Place location info here
 			echo '<h3>Location & Hours</h3>';
            	output_location_info();
+			//if this is the Pediatrics page, show the symptom checker-->
+			if (is_single( '2067' )) { 
+				echo '<div class="adc-event adc-pediatric-web-illness-widget">';
+				echo '<h4>Symptom Checker</h4>';
+				adc_sick_child_box();
+				echo '</div>';
+			}
 			echo '</div><!-- end .one-third-->';
 			//Education links
 			echo '<div class="adc-grid-content adc-section">';

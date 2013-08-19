@@ -794,7 +794,12 @@ p.pages,
 	clear: both;
 	line-height: 1.25em;
 	padding: 1em 0;
-}	
+}
+.author-box {
+	border-top: #B1B1B1 thin solid;	
+	padding: 16px 16px 0 16px;
+	padding: 1rem 1rem 0 1rem;
+}
 /*
 05 Menus
 ---------------------------------------------------------------------------------------------------- */
@@ -1148,6 +1153,9 @@ h6,
 .entry-content ul li.adc-num-list {
 	list-style-type: none !important;
 	margin-left: 0rem !important;
+}
+.one-fourth.adc-section {
+	height:	300px;
 }
 /*
 * Services/specialties pages styles----------------------------*/
@@ -1766,20 +1774,7 @@ input:hover[type="submit"],
 	padding: 8px;
 	padding: 0.5rem 0rem 0.5rem 0.25rem;
 }	
-/*.gform_wrapper .gfield_time_hour input, .gform_wrapper .gfield_time_minute input, .gform_wrapper .gfield_date_month input, .gform_wrapper .gfield_date_day input, .gform_wrapper .gfield_date_year input {
-	width: 60% !important;
-}
-#ui-datepicker-div select {
-	margin: 5px !important;
-}
-.ui-datepicker {
-	display:block;
-}
-.ui-datepicker-div,
-.ui-datepicker-inline,
-#ui-datepicker-div {
-	box-sizing: content-box;
-}*/
+
 /* 12b - Social media ----------- */
 #menu-social-media ul {
 	float: left;
@@ -2144,6 +2139,9 @@ table.directory{
 .adc-provider {
 	min-height: 430px;
 }
+.adc-service {
+	min-height: 200px;
+}
 div#filters {
 	background-color: #eeeeee;
 	border: solid #B1B1B1 1px;
@@ -2261,9 +2259,10 @@ body.landing-page {
 	background-color: #333333;	
 	color: #FFF;
 	display: none;
-	font-size: 16px;
-	font-size: 1rem;
+	font-size: 22px;
+	font-size: 1.375rem;
 	font-weight: bold;
+	padding: 24px;
 	padding: 1.5rem;
 }
 .adc-mobile-search {
@@ -2722,6 +2721,10 @@ and (orientation : portrait) {
 		padding: 16px;
 		padding: 1rem;
 	}
+	.selectnav select {
+		padding: 32px;
+		padding: 2rem;
+	}
 	.adc-provider {
 		min-height: 100px;
 	}
@@ -2808,7 +2811,8 @@ and (orientation : portrait) {
 	/* - Images ----------- */
 	.entry-content img {
 		margin: 0 auto;
-		width: 75%;	
+		padding: 4px;
+		padding: 0.25rem;
 	}
 	#header ul.menu a {
 		padding: 0.5rem 1rem;	
