@@ -424,26 +424,32 @@ add_action( 'genesis_meta', 'adc_load_javascript_files' );
 			wp_enqueue_script('adc-toggle');
 		}
 		wp_register_script( 'jquery.easytabs', get_bloginfo('stylesheet_directory').'/lib/js/jquery.easytabs.js', array( 'jquery' ), '2013-05-30', true );
-		wp_register_script( 'jquery.hashchange.min', get_bloginfo('stylesheet_directory').'/lib/js/jquery.hashchange.min.js', array( 'jquery' ), '2013-05-30', true);
+		wp_register_script( 'jquery.bbq.min', get_bloginfo('stylesheet_directory').'/lib/js/jquery.bbq.min.js', array( 'jquery' ), '2013-05-30', true);
 		if ( is_home () ){
+			wp_enqueue_script( 'jquery.bbq.min' );
 			wp_enqueue_script( 'jquery.easytabs' );
-			wp_enqueue_script( 'jquery.hashchange.min' );
 		}
 // Register Isotope, so it can be called anytime
 // Prefix everything!
 		wp_register_script( 'adc-isotope', get_bloginfo('stylesheet_directory') . '/lib/js/isotope/jquery.isotope' . $suffix, array( 'jquery' ), '1.5.21', true );
-		wp_enqueue_script('adc-isotope');
   
 // Register Isotope Parameters, so it can be called anytime
 // Create minified isotope-parameters version at http://jscompress.com
 // isotope-parameters file named: isotope-parameters.min.js
-		wp_register_script( 'adc-isotope-parameters', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters.js', array( 'adc-isotope' ), '1.5.21', true );
-		wp_register_script( 'adc-isotope-parameters-2', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters-2.js', array( 'adc-isotope' ), '1.5.21', true );
+		wp_register_script( 'adc-isotope-common', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-common.js', array( 'adc-isotope' ), '1.5.21', true );
+		wp_register_script( 'adc-isotope-parameters', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters.js', array( 'adc-isotope', 'adc-isotope-common', 'jquery.bbq.min' ), '1.5.21', true );
+		wp_register_script( 'adc-isotope-parameters-2', get_bloginfo('stylesheet_directory') . '/lib/js/adc-isotope-parameters-2.js', array( 'adc-isotope', 'adc-isotope-common', 'jquery.bbq.min' ), '1.5.21', true );
 		if ( is_page ('doctors') ){
+			wp_enqueue_script('adc-isotope');
+			wp_enqueue_script('adc-isotope-common');
+			wp_enqueue_script('jquery.bbq.min');
 			wp_enqueue_script('adc-isotope-parameters');
 		}
 		
 		if ( is_page ('medical-services') ) {
+			wp_enqueue_script('adc-isotope');
+			wp_enqueue_script('adc-isotope-common');
+			wp_enqueue_script('jquery.bbq.min');
 			wp_enqueue_script('adc-isotope-parameters-2');
 		}
 }
