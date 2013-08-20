@@ -26,6 +26,12 @@ function custom_do_location_archives_loop() {
 	if ( !get_query_var( 'paged' ) ) {
 		$pt = get_post_type_object( get_post_type() );
 		echo '<h1 class="entry-title">'.$pt->labels->name.'</h1>';
+		// query to show content from the Locations page
+			$locationsquery = new WP_Query( 'pagename=locations' );
+			while ( $locationsquery->have_posts() ) : $locationsquery->the_post();
+				the_content();
+			endwhile;
+			wp_reset_postdata();
 		}
 
 	//Main locations
