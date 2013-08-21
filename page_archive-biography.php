@@ -34,9 +34,9 @@ function custom_do_biography_archives_loop() {
 		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="gender" value=".Female">Female</label>';
 		echo '<label><input type="radio" name="gender" value=".Male" class="current">Male</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".new-patients">Accepting New Patients</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".new-medicare">Accepting New Medicare Patients</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".spanish">Speaks Spanish</label>';
+		echo '<label><input type="checkbox" name="option" value=".new-patients">Accepting New Patients</label>';
+		echo '<label><input type="checkbox" name="option" value=".new-medicare">Accepting New Medicare Patients</label>';
+		echo '<label><input type="checkbox" name="option" value=".spanish">Speaks Spanish</label>';
 	echo '</div><!-- end .multiselect .one-third .first -->';
 	echo '<div class="one-third"><h5>Search by specialty</h5>';
 		echo '<div class="multiselect">';
@@ -53,10 +53,10 @@ function custom_do_biography_archives_loop() {
 	echo '</select></div>';
 	echo '<div class="one-third"><h5>Search by location</h5>';
 	echo '<div class="multiselect">';
-		echo '<label><input type="checkbox" name="option[]" value=".north">North Austin / Round Rock</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".south">South Austin</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".west">West Austin / Steiner Ranch</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".neph-satellite">Nephrology satellite</label>';
+		echo '<label><input type="checkbox" name="loc" value=".north">North Austin / Round Rock</label>';
+		echo '<label><input type="checkbox" name="loc" value=".south">South Austin</label>';
+		echo '<label><input type="checkbox" name="loc" value=".west">West Austin / Steiner Ranch</label>';
+		echo '<label><input type="checkbox" name="loc" value=".neph-satellite">Nephrology satellite</label>';
 	echo '</div><!-- end .multiselect -->';
 	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
 	foreach($locationTerms as $locationTerm) {
@@ -118,7 +118,7 @@ function custom_do_biography_archives_loop() {
 					echo '<a href="' . 
 					get_permalink();
 					echo '">';
-					adc_get_excerpt_bio_thumb();
+					adc_get_lazy_bio_thumb();
 					echo '</a>';
 					echo '<h4><a href="' . 
 					get_permalink();
@@ -140,6 +140,16 @@ function custom_do_biography_archives_loop() {
 	echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';
 }
+
+function adc_get_lazy_bio_thumb() {
+//	echo '<img src="' . get_bloginfo('stylesheet_directory') . '/images/adc-gray-box.png" >';
+	if ('' != get_the_post_thumbnail()) {
+  		echo get_the_post_thumbnail( $post->ID ,array(250, 250, true), array('class' => 'adc_portrait_thumb') );
+	} elseif (get_first_image($post->ID) != '') {
+   		echo get_first_image($post->ID);
+	}
+}
+
 	
 /** Remove Post Info */
 remove_action('genesis_before_post_content','genesis_post_info');
