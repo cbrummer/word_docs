@@ -453,7 +453,7 @@ function adc_subpage_peek() {
 	$args = array(
 		'post_parent' => $post->ID,
 		'post_type' => 'page',
-		'post__not_in' => array(7000, 6067),
+		'post__not_in' => array(7000, 6067, 3872),
 		'orderby' => 'title', 
 		'order' => 'DESC'
 	);
