@@ -37,7 +37,7 @@
 		function adc_add_sub_nav() {
 			echo '<div class="adc-submenu-area">'; 
 			//About SubMenu
-			if ( is_page('about') || is_tree( 31 ) ){
+			if ( is_page('about') || is_tree( '31' ) ){
 				echo '<h4>About ADC</h4>';
 				wp_nav_menu( 
 					array( 
@@ -55,7 +55,7 @@
 					'theme_location' => 'submenu-2') 
 				); 	
 			// Contact Submenu
-			} elseif ( is_page('contact') || is_tree( 27 ) ){
+			} elseif ( is_page('contact') || is_tree( '27' ) ){
 				echo '<h4>Contact Us</h4>';
 				wp_nav_menu( 
 					array( 
@@ -64,7 +64,7 @@
 					'theme_location' => 'submenu-3') 
 				);
 			// Community / Outreach Submenu
-			} elseif ( is_page('outreach') || is_tree( 25 ) ){
+			} elseif ( is_page('outreach') || is_tree( '25' ) ){
 				echo '<h4>Our Community</h4>';
 				wp_nav_menu( 
 					array( 
@@ -73,7 +73,7 @@
 					'theme_location' => 'submenu-4') 
 				); 
 			//Doctors Submenu
-			} elseif ( is_page('doctors') || is_tree( 17 ) || 'biography' == get_post_type() || is_post_type_archive( 'biography' ) || is_singular( 'biography' ) ){
+			} elseif ( is_page('doctors') || is_tree( '17' ) || 'biography' == get_post_type() || is_post_type_archive( 'biography' ) || is_singular( 'biography' ) ){
 				echo '<h4>Our Doctors</h4>';
 				wp_nav_menu( 
 					array( 
@@ -82,7 +82,7 @@
 					'theme_location' => 'submenu-5') 
 				); 	
 			//Locations Submenu
-			} elseif ( is_page('locations') || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_singular( 'location' ) || is_post_type_archive( 'wpseo_locations' ) || 'wpseo_locations' == get_post_type() || is_singular( 'wpseo_locations' )  ){
+			} elseif ( is_page('locations') || is_tree( '21' ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_singular( 'location' ) || is_post_type_archive( 'wpseo_locations' ) || 'wpseo_locations' == get_post_type() || is_singular( 'wpseo_locations' )  ){
 				echo '<h4>Our Locations</h4>';
 				wp_nav_menu( 
 					array( 
@@ -91,7 +91,7 @@
 					'theme_location' => 'submenu-6') 
 				); 
 			// Tools Submenu
-			} elseif ( is_page('patient-tools') || is_tree( 23 ) || is_page( array('qualityreports','quality_reports-2') ) || '2771' == $post->post_parent || 'qualityreports' == get_post_type() || is_post_type_archive( 'qualityreports' ) || is_singular( 'qualityreports' ) ){
+			} elseif ( is_page('patient-tools') || is_tree( '23' ) || is_page( array('qualityreports','quality_reports-2') ) || '2771' == $post->post_parent || 'qualityreports' == get_post_type() || is_post_type_archive( 'qualityreports' ) || is_singular( 'qualityreports' ) ){
 				echo '<h4>Patient Tools</h4>';
 				wp_nav_menu( 
 					array( 
@@ -100,7 +100,7 @@
 					'theme_location' => 'submenu-8') 
 				); 
 			//Billing Submenu
-			} elseif ( is_page('your-bill') || is_tree( 29 )  ){
+			} elseif ( is_page('your-bill') || is_tree( '29' )  ){
 				echo'<h4>Billing</h4>';
 				wp_nav_menu( 
 					array( 
@@ -109,7 +109,7 @@
 					'theme_location' => 'submenu-9') 
 				);
 			//Staff Submenu
-			} elseif ( is_page('for-adc-employees') || is_tree( 2518 ) ){
+			} elseif ( is_page('for-adc-employees') || is_tree( '2518' ) ){
 				echo '<h4>Staff Links</h4>';
 				wp_nav_menu( 
 					array( 
@@ -134,7 +134,7 @@
 					'theme_location' => 'submenu-11') 
 				);	
 			// Specialties Submenu
-			} elseif ( is_tree( 19 ) || 'specialty' == get_post_type() || is_post_type_archive( 'specialty' ) || is_singular( 'biography' )){
+			} elseif ( is_tree( '19' ) || 'specialty' == get_post_type() || is_post_type_archive( 'specialty' ) || is_singular( 'biography' )){
 				echo '<h4>Our Specialties</h4>';
 				wp_nav_menu( 
 					array( 
@@ -151,7 +151,7 @@
 					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
 					'theme_location' => 'submenu-11') 
 				);	
-			} elseif ( is_page('education') || is_tree( 9554 ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
+			} elseif ( is_page('education') || is_tree( '9554' ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
 				echo '<h4>Education</h4>';
 				wp_nav_menu( 
 					array( 

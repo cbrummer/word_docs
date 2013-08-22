@@ -320,20 +320,42 @@ return $return;
 
 //Check if page is parent or child or grandchild
 // Source: http://codex.wordpress.org/Conditional_Tags
-function is_tree( $pid ) {      // $pid = The ID of the page we're looking for pages underneath
-    global $post;               // load details about this page
-    if ( is_page($pid) )
-        return true;            // we're at the page or at a sub page
+//function is_tree( $pid ) {      // $pid = The ID of the page we're looking for pages underneath
+//    global $post;               // load details about this page
+//    if ( is_page()&&($post->post_parent==$pid || is_page($pid)) )
+//        return true;            // we're at the page or at a sub page
 
-    $anc = get_post_ancestors( $post->ID );
-    foreach ( $anc as $ancestor ) {
-        if( is_page() && $ancestor == $pid ) {
-            return true;
-        }
-    }
+//    $anc = get_post_ancestors( $post->ID );
+//    foreach ( $anc as $ancestor ) {
+//        if( is_page() && $ancestor == $pid ) {
+//            return true;
+ //       }
+//    }
 
-    return false;  // we arn't at the page, and the page is not an ancestor
-}
+//    return false;  // we arn't at the page, and the page is not an ancestor
+//}
+
+//Updated function- Check if page is parent or child or grandchild
+// Source: http://wordpress.org/support/topic/is_tree-function
+function is_tree($pid)
+{
+	global $post;
+
+	$ancestors = get_post_ancestors($post->$pid);
+	$root = count($ancestors) - 1;
+	$parent = $ancestors[$root];
+
+	if(is_page() && (is_page($pid) || $post->post_parent == $pid || in_array($pid, $ancestors)))
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+};
+
+
 //Exclude some terms from term list
 function adc_get_the_term_list( $id = 0, $taxonomy, $before = '', $sep = '', $after = '', $exclude = array() ) {
 	$terms = get_the_terms( $id, $taxonomy );
