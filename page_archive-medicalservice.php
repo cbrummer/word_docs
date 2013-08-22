@@ -31,15 +31,27 @@ function custom_do_medicalservice_archives_loop() {
 	echo '<div id="filters">';
 	echo '<div class="one-third first"><h5>Search by need</h5>';
 		echo '<div class="multiselect">';
+		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
 		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
 		echo '<label><input type="radio" name="care" value=".services">Services</label>';
-		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
 	echo '</div><!-- end .multiselect -->';
 	echo '<select id="adc-specialty-select"><option value="*">Choose a Specialty or Service</option>';
 	foreach($medTerms as $medTerm) {
 		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
 		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
+	}
+	echo '</select></div>';
+	echo '<div class="one-third"><h5>Search by location</h5>';
+	echo '<div class="multiselect">';
+		echo '<label><input type="checkbox" name="loc" value=".north">North Austin / Round Rock</label>';
+		echo '<label><input type="checkbox" name="loc" value=".south">South Austin</label>';
+		echo '<label><input type="checkbox" name="loc" value=".west">West Austin / Steiner Ranch</label>';
+		echo '<label><input type="checkbox" name="loc" value=".neph-satellite">Nephrology satellite</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
+	foreach($locationTerms as $locationTerm) {
+		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
 	}
 	echo '</select></div>';
 	echo '<div class="one-third"><h5>Search by focus</h5>';
@@ -48,18 +60,6 @@ function custom_do_medicalservice_archives_loop() {
 		echo '<label><input type="checkbox" name="option" value=".childrens-service">Specialties & services that see children</label>';
 	echo '</div><!-- end .multiselect .one-third -->';
 	echo '</div>';
-	echo '<div class="one-third"><h5>Search by location</h5>';
-	echo '<div class="multiselect">';
-		echo '<label><input type="checkbox" name="option[]" value=".north">North Austin / Round Rock</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".south">South Austin</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".west">West Austin / Steiner Ranch</label>';
-		echo '<label><input type="checkbox" name="option[]" value=".neph-satellite">Nephrology satellite</label>';
-	echo '</div><!-- end .multiselect -->';
-	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
-	foreach($locationTerms as $locationTerm) {
-		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
-	}
-	echo '</select></div>';
 	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';
 	echo '</div><!--end #filters-->';	
 	
@@ -98,6 +98,7 @@ function custom_do_medicalservice_archives_loop() {
 			}
 			$classes .= ((genesis_get_custom_field( 'ecpt_adc_womens_service') == "on") ? " womens-service" : "");
 			$classes .= ((genesis_get_custom_field( 'ecpt_adc_childrens_service') == "on") ? " childrens-service" : "");
+			
 			echo "<div class=\"$classes\" data-category=\"$service\">";
 						echo '<a href="' . 
 						get_permalink();

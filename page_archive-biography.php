@@ -40,10 +40,10 @@ function custom_do_biography_archives_loop() {
 	echo '</div><!-- end .multiselect .one-third .first -->';
 	echo '<div class="one-third"><h5>Search by specialty</h5>';
 		echo '<div class="multiselect">';
+		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
 		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
 		echo '<label><input type="radio" name="care" value=".services">Services</label>';
-		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
 	echo '</div><!-- end .multiselect -->';
 	echo '<select id="adc-specialty-select"><option value="*">Choose a Specialty</option>';
 	foreach($medTerms as $medTerm) {
