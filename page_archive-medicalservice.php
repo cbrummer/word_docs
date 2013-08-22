@@ -29,7 +29,7 @@ function custom_do_medicalservice_archives_loop() {
 	
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	echo '<div class="one-half first"><h5>Search by need</h5>';
+	echo '<div class="one-third first"><h5>Search by need</h5>';
 		echo '<div class="multiselect">';
 		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
 		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
@@ -42,7 +42,13 @@ function custom_do_medicalservice_archives_loop() {
 		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
 	}
 	echo '</select></div>';
-	echo '<div class="one-half"><h5>Search by location</h5>';
+	echo '<div class="one-third"><h5>Search by focus</h5>';
+	echo '<div class="multiselect">';
+		echo '<label><input type="checkbox" name="option" value=".womens-service">Specialties & services that treat women’s health conditions</label>';
+		echo '<label><input type="checkbox" name="option" value=".childrens-service">Specialties & services that see children</label>';
+	echo '</div><!-- end .multiselect .one-third -->';
+	echo '</div>';
+	echo '<div class="one-third"><h5>Search by location</h5>';
 	echo '<div class="multiselect">';
 		echo '<label><input type="checkbox" name="option[]" value=".north">North Austin / Round Rock</label>';
 		echo '<label><input type="checkbox" name="option[]" value=".south">South Austin</label>';
@@ -90,7 +96,8 @@ function custom_do_medicalservice_archives_loop() {
 			foreach( get_the_terms( $post->ID, 'category') as $category) {
 				$classes .= ' ' . $category->slug;
 			}
-			
+			$classes .= ((genesis_get_custom_field( 'ecpt_adc_womens_service') == "on") ? " womens-service" : "");
+			$classes .= ((genesis_get_custom_field( 'ecpt_adc_childrens_service') == "on") ? " childrens-service" : "");
 			echo "<div class=\"$classes\" data-category=\"$service\">";
 						echo '<a href="' . 
 						get_permalink();
