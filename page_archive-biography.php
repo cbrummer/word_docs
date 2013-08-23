@@ -28,8 +28,20 @@ function custom_do_biography_archives_loop() {
 	echo '<div class="entry-content">' . get_the_content() ;
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	
-	echo '<div class="multiselect one-third first">';
+	echo '<div class="one-third first"><h5>Search by location</h5>';
+	echo '<div class="multiselect">';
+		echo '<label><input type="radio" name="loc" value="" checked>All Locations</label>';
+		echo '<label><input type="radio" name="loc" value=".north">North Austin / Round Rock</label>';
+		echo '<label><input type="radio" name="loc" value=".south">South Austin</label>';
+		echo '<label><input type="radio" name="loc" value=".west">West Austin / Steiner Ranch</label>';
+		echo '<label><input type="radio" name="loc" value=".neph-satellite">Nephrology satellite</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
+	foreach($locationTerms as $locationTerm) {
+		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
+	}
+	echo '</select></div><!--end .one-third .first-->';
+	echo '<div class="multiselect one-third">';
 		echo '<h5>Search by provider</h5>';
 		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="gender" value=".female">Female</label>';
@@ -37,7 +49,7 @@ function custom_do_biography_archives_loop() {
 		echo '<label><input type="checkbox" name="option" value=".new-patients">Accepting New Patients</label>';
 		echo '<label><input type="checkbox" name="option" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option" value=".spanish">Speaks Spanish</label>';
-	echo '</div><!-- end .multiselect .one-third .first -->';
+	echo '</div><!-- end .multiselect .one-third -->';
 	echo '<div class="one-third"><h5>Search by specialty</h5>';
 		echo '<div class="multiselect">';
 		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
@@ -49,19 +61,6 @@ function custom_do_biography_archives_loop() {
 	foreach($medTerms as $medTerm) {
 		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
 		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
-	}
-	echo '</select></div>';
-	echo '<div class="one-third"><h5>Search by location</h5>';
-	echo '<div class="multiselect">';
-		echo '<label><input type="radio" name="loc" value="" checked>All Locations</label>';
-		echo '<label><input type="radio" name="loc" value=".north">North Austin / Round Rock</label>';
-		echo '<label><input type="radio" name="loc" value=".south">South Austin</label>';
-		echo '<label><input type="radio" name="loc" value=".west">West Austin / Steiner Ranch</label>';
-		echo '<label><input type="radio" name="loc" value=".neph-satellite">Nephrology satellite</label>';
-	echo '</div><!-- end .multiselect -->';
-	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
-	foreach($locationTerms as $locationTerm) {
-		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
 	}
 	echo '</select></div>';
 	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';

@@ -29,15 +29,7 @@ function custom_do_medicalservice_archives_loop() {
 	
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	echo '<div class="one-third first"><h5>Search by need</h5>';
-		echo '<div class="multiselect">';
-		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
-		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
-		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
-		echo '<label><input type="radio" name="care" value=".services">Services</label>';
-	echo '</div><!-- end .multiselect -->';
-	echo '</div>';
-	echo '<div class="one-third"><h5>Search by location</h5>';
+	echo '<div class="one-third first"><h5>Search by location</h5>';
 	echo '<div class="multiselect">';
 		echo '<label><input type="radio" name="loc" value="" checked>All Locations</label>';
 		echo '<label><input type="radio" name="loc" value=".north">North Austin / Round Rock</label>';
@@ -49,7 +41,15 @@ function custom_do_medicalservice_archives_loop() {
 	foreach($locationTerms as $locationTerm) {
 		echo '<option value=".'. $locationTerm->slug .'">'. $locationTerm->name .'</option>';
 	}
-	echo '</select></div>';
+	echo '</select></div><!-- end .one-third first-->';
+	echo '<div class="one-third"><h5>Search by need</h5>';
+		echo '<div class="multiselect">';
+		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
+		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
+		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
+		echo '<label><input type="radio" name="care" value=".services">Services</label>';
+	echo '</div><!-- end .multiselect -->';
+	echo '</div>';
 	echo '<div class="one-third"><h5>Search by focus</h5>';
 	echo '<div class="multiselect">';
 		echo '<label><input type="checkbox" name="option" value=".womens-service">Specialties & services that treat women’s health conditions</label>';
