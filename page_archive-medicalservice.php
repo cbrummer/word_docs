@@ -39,10 +39,11 @@ function custom_do_medicalservice_archives_loop() {
 	echo '</div>';
 	echo '<div class="one-third"><h5>Search by location</h5>';
 	echo '<div class="multiselect">';
-		echo '<label><input type="checkbox" name="loc" value=".north">North Austin / Round Rock</label>';
-		echo '<label><input type="checkbox" name="loc" value=".south">South Austin</label>';
-		echo '<label><input type="checkbox" name="loc" value=".west">West Austin / Steiner Ranch</label>';
-		echo '<label><input type="checkbox" name="loc" value=".neph-satellite">Nephrology satellite</label>';
+		echo '<label><input type="radio" name="loc" value="" checked>All Locations</label>';
+		echo '<label><input type="radio" name="loc" value=".north">North Austin / Round Rock</label>';
+		echo '<label><input type="radio" name="loc" value=".south">South Austin</label>';
+		echo '<label><input type="radio" name="loc" value=".west">West Austin / Steiner Ranch</label>';
+		echo '<label><input type="radio" name="loc" value=".neph-satellite">Nephrology satellite</label>';
 	echo '</div><!-- end .multiselect -->';
 	echo '<select id="adc-location-select"><option value="*">Choose a Location</option>';
 	foreach($locationTerms as $locationTerm) {
