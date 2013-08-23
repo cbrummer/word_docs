@@ -32,8 +32,8 @@ function custom_do_biography_archives_loop() {
 	echo '<div class="multiselect one-third first">';
 		echo '<h5>Search by provider</h5>';
 		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
-		echo '<label><input type="radio" name="gender" value=".Female">Female</label>';
-		echo '<label><input type="radio" name="gender" value=".Male" class="current">Male</label>';
+		echo '<label><input type="radio" name="gender" value=".female">Female</label>';
+		echo '<label><input type="radio" name="gender" value=".male" class="current">Male</label>';
 		echo '<label><input type="checkbox" name="option" value=".new-patients">Accepting New Patients</label>';
 		echo '<label><input type="checkbox" name="option" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option" value=".spanish">Speaks Spanish</label>';
@@ -98,7 +98,7 @@ function custom_do_biography_archives_loop() {
 				$classes .= ' ' . $category->slug;
 			}
 			
-			$classes .= ' ' . genesis_get_custom_field( 'ecpt_gender');
+			$classes .= ' ' . strtolower(genesis_get_custom_field( 'ecpt_gender'));
 			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewpatients') == "on") ? " new-patients" : "");
 			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewmedicarepatients') == "on") ? " new-medicare" : "");
 			$classes .= ((genesis_get_custom_field( 'ecpt_spanish') == "on") ? " spanish" : "");

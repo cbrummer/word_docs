@@ -445,10 +445,11 @@ add_action( 'genesis_meta', 'adc_load_javascript_files' );
 		if ( is_page( '2599' )  ) {
 			wp_enqueue_script('adc-toggle');
 		}
+		wp_register_script( 'jquery.hashchange.min', get_bloginfo('stylesheet_directory').'/lib/js/jquery.ba-hashchange.min.js', array( 'jquery' ), '2013-05-30', true);
 		wp_register_script( 'jquery.easytabs', get_bloginfo('stylesheet_directory').'/lib/js/jquery.easytabs.js', array( 'jquery' ), '2013-05-30', true );
 		wp_register_script( 'jquery.bbq.min', get_bloginfo('stylesheet_directory').'/lib/js/jquery.bbq.min.js', array( 'jquery' ), '2013-05-30', true);
 		if ( is_home () ){
-			wp_enqueue_script( 'jquery.bbq.min' );
+			wp_enqueue_script( 'jquery.hashchange.min' );
 			wp_enqueue_script( 'jquery.easytabs' );
 		}
 // Register Isotope, so it can be called anytime
@@ -501,10 +502,4 @@ add_action( 'genesis_before', 'adc_add_selectnav', 2 );
 			label: " -- Click here for Navigation -- "
 			}); 
 		});</script>';
-	}
-add_action( 'genesis_after', 'adc_add_isotope_parameters' );
-	function adc_add_isotope_parameters() {
-		if ( is_page ('doctors') || is_page ('medical-services') ){
-			wp_enqueue_script('adc-isotope-parameters');
-		}
 	}

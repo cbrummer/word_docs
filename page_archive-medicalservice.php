@@ -36,12 +36,7 @@ function custom_do_medicalservice_archives_loop() {
 		echo '<label><input type="radio" name="care" value=".specialty-care" class="current">Specialty care</label>';
 		echo '<label><input type="radio" name="care" value=".services">Services</label>';
 	echo '</div><!-- end .multiselect -->';
-	echo '<select id="adc-specialty-select"><option value="*">Choose a Specialty or Service</option>';
-	foreach($medTerms as $medTerm) {
-		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
-		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
-	}
-	echo '</select></div>';
+	echo '</div>';
 	echo '<div class="one-third"><h5>Search by location</h5>';
 	echo '<div class="multiselect">';
 		echo '<label><input type="checkbox" name="loc" value=".north">North Austin / Round Rock</label>';
