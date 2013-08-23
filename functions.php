@@ -156,6 +156,11 @@
 			// For non-Retina iPhone, iPod Touch, and Android 2.1+ devices
 			echo '<link rel="apple-touch-icon-precomposed" href="'. get_stylesheet_directory_uri() . '/images/apple-touch-icon-precomposed.png">'; 
 		}
+	// Add Humans.txt to head
+	add_action( 'wp_head', 'adc_add_humans_txt', 12);
+		function adc_add_humans_txt() {
+			echo '<link type="text/plain" rel="author" href="'. network_site_url() . '/humans.txt" />';	
+		}
 	// Footer
 	add_filter( 'genesis_footer_backtotop_text', 'adc_footer_backtotop_text' );
 	add_filter( 'genesis_footer_creds_text', 'adc_footer_creds_text' );
