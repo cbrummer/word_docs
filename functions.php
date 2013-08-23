@@ -141,6 +141,21 @@
 	// Responsive Meta Tag
 	add_action( 'genesis_meta', 'adc_viewport_meta_tag' );
 
+
+	// Add apple touch icons to head
+	add_action( 'wp_head', 'adc_apple_icons', 10 );
+		function adc_apple_icons() {
+			// For third-generation iPad with high-resolution Retina display
+			echo '<link rel="apple-touch-icon-precomposed" sizes="144x144" href="'. get_stylesheet_directory_uri() . '/images/apple-touch-icon-144x144-precomposed.png">'; 
+			// For iPhone with high-resolution Retina display running iOS
+			echo '<link rel="apple-touch-icon-precomposed" sizes="120x120" href="'. get_stylesheet_directory_uri() . '/images/apple-touch-icon-120x120-precomposed.png">'; 
+			// For iPhone with high-resolution Retina display running iOS 
+			echo '<link rel="apple-touch-icon-precomposed" sizes="114x114" href="'. get_stylesheet_directory_uri() . '/images/apple-touch-icon-114x114-precomposed.png">'; 
+			// For first- and second-generation iPad
+			echo '<link rel="apple-touch-icon-precomposed" sizes="72x72" href="'. get_stylesheet_directory_uri() . '/images/apple-touch-icon-72x72-precomposed.png">'; 
+			// For non-Retina iPhone, iPod Touch, and Android 2.1+ devices
+			echo '<link rel="apple-touch-icon-precomposed" href="'. get_stylesheet_directory_uri() . '/images/apple-touch-icon-precomposed.png">'; 
+		}
 	// Footer
 	add_filter( 'genesis_footer_backtotop_text', 'adc_footer_backtotop_text' );
 	add_filter( 'genesis_footer_creds_text', 'adc_footer_creds_text' );
@@ -217,7 +232,7 @@ function adc_footer_creds_text() {
 //Display post thumbnail in Edit Post and Page Overview
 if ( !function_exists('fb_AddThumbColumn') && function_exists('add_theme_support') ) {
 // for post and page
-add_theme_support('post-thumbnails', array( 'post', 'page', 'biography', 'directory', 'job', 'location', 'service', 'specialty') );
+add_theme_support('post-thumbnails', array( 'post', 'page', 'biography', 'directory', 'testimonial', 'location', 'service', 'specialty') );
 function fb_AddThumbColumn($cols) {
 	$cols['thumbnail'] = __('Thumbnail');
 	return $cols;

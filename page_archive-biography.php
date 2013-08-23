@@ -112,7 +112,7 @@ function custom_do_biography_archives_loop() {
 					the_title();
 					adc_display_suffix();
 					echo '</a></h4>';
-					echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
+					echo '<strong>' . get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' ) . '</strong>';
 					echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
 				} else {
 					echo '<a href="' . 
@@ -126,7 +126,7 @@ function custom_do_biography_archives_loop() {
 					the_title();
 					adc_display_suffix();
 					echo '</a></h4>';
-					echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
+					echo '<strong>' . get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' ) . '</strong>';
 					echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
 				}
 				
