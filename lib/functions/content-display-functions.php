@@ -284,12 +284,11 @@ function adc_get_custom_field( $field, $wrap = '%value%', $echo = false ){
  * @link http://stackoverflow.com/questions/12257090/how-to-display-custom-posts-from-a-related-custom-taxonomy
 */	
 function get_posts_related_by_taxonomy($post_id,$taxonomy,$args=array()) {
-  $query = new WP_Query();
   $terms = wp_get_object_terms($post_id, $taxonomy);
   if (count($terms)) {
 	  
     // Assumes only one term for per post in this taxonomy
-    $post_ids = get_objects_in_term($terms[0]->term_id,$taxonomy);
+    $post_ids = get_objects_in_term($terms[0]->term_id, $taxonomy);
     $post = get_post($post_id);
     $args = wp_parse_args($args,array(
       'post_type' => $post->post_type, // The assumes the post types match
@@ -301,9 +300,9 @@ function get_posts_related_by_taxonomy($post_id,$taxonomy,$args=array()) {
 	  'orderby' => 'title',
 	  'order' => 'ASC',
     ));
-    $query = new WP_Query($args);
+    return new WP_Query($args);
   }
-  return $query;
+  return new WP_Query();
 }
 
 /* This adds a function to get blog posts related by taxonomy
@@ -1501,6 +1500,7 @@ function adc_patient_links() {
 			$hasqualityreports = true;	
 		}
 	endwhile;
+	wp_reset_query();
 	if ($hasqualityreports == true){
 			echo '<h3>Patient Resources</h3>';
 			echo '<div class="one-fourth first">';
