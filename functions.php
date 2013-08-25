@@ -421,6 +421,10 @@ function adc_archive_redirect(){
 	if(is_category( 'patient-education' )) {
 		$pagelink=get_page_link (9447);
 		header("Location: $pagelink",TRUE,301);
+	}
+	if(is_tax( 'cliniclocation', 'neph-satellite' ) ) {
+		$pagelink=get_page_link (21);
+		header("Location: $pagelink",TRUE,301);
 	}			
 }
 add_action( 'genesis_header', 'adc_archive_redirect' );

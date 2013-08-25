@@ -2137,10 +2137,14 @@ table.directory{
 }
 
 .adc-provider {
-	min-height: 320px;
+	min-height: 350px;
 }
 .adc-service {
-	min-height: 200px;
+	min-height: 250px;
+}
+.page-template-page_archive-biography-php .adc-provider img {
+	height: 250px;
+	width:auto;	
 }
 div#filters {
 	background-color: #eeeeee;
@@ -2500,7 +2504,8 @@ and (max-width : 768px) {
 		width: 95%;	
 	}
 }
-@media all and (max-width: 600px) {
+@media all and (max-width: 37.5em) {
+	/*600px*/
 	.wrap {
 		
 	}
@@ -2617,6 +2622,7 @@ and (max-width : 768px) {
 	.footer-widgets {
 		width: 95%;	
 	}
+	.two-thirds
 	.one-third,
 	.one-fourth {
 		float: none;
@@ -2626,8 +2632,9 @@ and (max-width : 768px) {
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px) {
+and (min-device-width : 48em)
+and (max-device-width : 64em) {
+/* min 768px to max 1025px */
 /* Styles */
 	.header-image #description {
 		padding-top: 0.5rem;
@@ -2635,9 +2642,10 @@ and (max-device-width : 1024px) {
 }
 /* iPads (landscape) ----------- */
 @media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
+and (min-device-width : 48em)
+and (max-device-width : 64em)
 and (orientation : landscape) {
+/* min 768px to max 1025px */
 /* Styles */
 	#header .widget-area,
 	#title-area {
@@ -2656,9 +2664,10 @@ and (orientation : landscape) {
 }
 /* iPads (portrait) ----------- */
 @media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
+and (min-device-width : 48em)
+and (max-device-width : 64em)
 and (orientation : portrait) {
+/* min 768px to max 1025px */
 /* Styles */
 	.footer-widgets-1,
 	.footer-widgets-2,
@@ -2702,7 +2711,8 @@ and (orientation : portrait) {
 	}
 }
 /* Mobile phones (portrait and landscape) ----------- */
-@media all and (min-device-width : 320px) and (max-device-width: 768px) {
+@media all and (min-device-width : 20em) and (max-device-width: 48em) {
+/*min 320px to max 768px*/
 /*These are styles to display the proper navigation for small screens*/	
     .js #menu-mobile, #nav, #subnav { 
 		display: none; 

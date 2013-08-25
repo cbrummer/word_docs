@@ -284,11 +284,12 @@ function adc_get_custom_field( $field, $wrap = '%value%', $echo = false ){
  * @link http://stackoverflow.com/questions/12257090/how-to-display-custom-posts-from-a-related-custom-taxonomy
 */	
 function get_posts_related_by_taxonomy($post_id,$taxonomy,$args=array()) {
+  $query = new WP_Query();
   $terms = wp_get_object_terms($post_id, $taxonomy);
   if (count($terms)) {
 	  
     // Assumes only one term for per post in this taxonomy
-    $post_ids = get_objects_in_term($terms[0]->term_id, $taxonomy);
+    $post_ids = get_objects_in_term($terms[0]->term_id,$taxonomy);
     $post = get_post($post_id);
     $args = wp_parse_args($args,array(
       'post_type' => $post->post_type, // The assumes the post types match
@@ -300,9 +301,9 @@ function get_posts_related_by_taxonomy($post_id,$taxonomy,$args=array()) {
 	  'orderby' => 'title',
 	  'order' => 'ASC',
     ));
-    return new WP_Query($args);
+    $query = new WP_Query($args);
   }
-  return new WP_Query();
+  return $query;
 }
 
 /* This adds a function to get blog posts related by taxonomy
@@ -705,9 +706,15 @@ function adc_video_post(){
 function adc_next_HRM_event() {
 	global $post;
 	$all_events = tribe_get_events(array(
-		'eventCat'=> '505',
 		'eventDisplay'=>'upcoming',
-		'posts_per_page'=>'1'
+		'posts_per_page'=>'2',
+		//'tax_query'=> array(
+		//		array(
+		//			'taxonomy' => 'tribe_events_cat',
+		//			'field' => 'slug',
+		//			'terms' => 'orientation'
+		//		)
+		//	)
 	));
 	foreach($all_events as $post) {
 	setup_postdata($post);
@@ -716,19 +723,9 @@ function adc_next_HRM_event() {
 		echo '">';
 		the_title();
 		echo '</a></h4>';
-		if ( function_exists('has_post_thumbnail') && has_post_thumbnail() ) {
-			echo '<a href="';
-			the_permalink(); 
-			echo '">';
-			the_post_thumbnail('thumbnail', array('class' => 'alignright') );
-			echo '</a><p>';
-			echo tribe_get_start_date( $post->ID, true, 'D. M j, Y' );
-			echo '</p></div>';
-		} else {
-			echo '<p>';
-			echo tribe_get_start_date( $post->ID, true, 'D. M j, Y' );
-			echo '</p>';
-		}
+		echo '<p>';
+		echo tribe_get_start_date( $post->ID, true, 'D. M j, Y' );
+		echo '</p>';
 		wp_reset_query();
 	}
 }
@@ -738,11 +735,15 @@ function adc_next_HRM_event() {
 //Display appointment phone fields
 function adc_display_appointment_phone() {
     if( genesis_get_custom_field( 'ecpt_mainappointmentphone' ) )
-		echo '<a href="tel://';
-		echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
-		echo '" title="Dial phone number from a mobile device">';
-        echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
-		echo '</a>';
+		if (is_mobile()) {
+			echo '<a href="tel://';
+			echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
+			echo '" title="Dial phone number from a mobile device">';
+			echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
+			echo '</a>';
+		} else {
+			echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
+		}
 }
 function adc_second_location_appt_phone() {
     if( genesis_get_custom_field( 'ecpt_secondarylocationappointmentphone' ) )
@@ -1500,7 +1501,7 @@ function adc_patient_links() {
 			$hasqualityreports = true;	
 		}
 	endwhile;
-	wp_reset_query();
+	wp_reset_query();	
 	if ($hasqualityreports == true){
 			echo '<h3>Patient Resources</h3>';
 			echo '<div class="one-fourth first">';
@@ -1548,7 +1549,7 @@ if ($providers->have_posts()){
 				echo '</a></h4>';
 				echo '<ul class="adc-provider-basic-info">';
 				adc_display_accept_new_patients();
-				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
+				//echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
 				echo '</ul>';
 				echo '</div><!-- end .$classes-->';
 			}
@@ -1575,7 +1576,7 @@ if ($providers->have_posts()){
 				echo '</a></h4>';
 				echo '<ul class="adc-provider-basic-info">';
 				adc_display_accept_new_patients();
-				echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
+				//echo get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>' );
 				echo '</ul>';
 				echo '</div><!-- end .$classes-->';
 			}
