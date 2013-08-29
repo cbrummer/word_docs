@@ -28,6 +28,6 @@ function genesis_do_search_title() {
 	echo apply_filters( 'genesis_search_title_output', $title ) . "\n";
 
 }
-
 remove_action( 'genesis_after_post', 'adc_related_posts', 15 );
+
 genesis();

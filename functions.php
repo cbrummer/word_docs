@@ -411,19 +411,36 @@ function adc_archive_redirect(){
 		header("Location: $pagelink" , TRUE , 301);
 	}
 	if(is_category( 'health-articles' )) {
-		$pagelink=get_page_link (9449);
+		$pagelink=get_page_link (9788);
 		header("Location: $pagelink",TRUE,301);
 	}
 	if(is_category( 'clinic-news' )) {
-		$pagelink=get_page_link (9444);
+		$pagelink=get_page_link (9786);
 		header("Location: $pagelink",TRUE,301);
 	}
 	if(is_category( 'patient-education' )) {
-		$pagelink=get_page_link (9447);
+		$pagelink=get_page_link (9787);
+		header("Location: $pagelink",TRUE,301);
+	}
+	if(is_tax( 'cliniclocation', 'neph-satellite' ) ) {
+		$pagelink=get_page_link (21);
 		header("Location: $pagelink",TRUE,301);
 	}			
 }
 add_action( 'genesis_header', 'adc_archive_redirect' );
+
+//Added to work around the issue with Events Calendar Pro returning 404 titles.
+ if( function_exists('avoid_404_event_titles')){
+	 function avoid_404_event_titles() {
+        global $wp_query;
+ 
+        if (property_exists($wp_query, 'tribe_is_event') && $wp_query->tribe_is_event && $wp_query->is_404)
+                $wp_query->is_404 = false;
+}
+
+	 add_action('template_include', 'avoid_404_event_titles', 1);
+ };
+ 
 /************************************************************
  /* SCRIPTS
 *************************************************************/

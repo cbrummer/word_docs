@@ -38,7 +38,8 @@ function custom_do_single_biography_loop() {
 			  
 			//Display all of the locations assigned to this provider-->
             echo '<div class="adc-bio-locations"><h3>Locations</h3>';
-			echo get_the_term_list( get_the_ID(), 'cliniclocation', '<p>', '<br />', '</p>' );
+			echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
+			//echo get_the_term_list( get_the_ID(), 'cliniclocation', '<p>', '<br />', '</p>' );
             echo '</div><!-- end .adc-bio-locations-->';
 			//Display metabox info for this provider
         	echo '<ul class="adc-provider-basic-info">';

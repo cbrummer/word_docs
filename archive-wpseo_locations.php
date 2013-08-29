@@ -33,7 +33,7 @@ function custom_do_location_archives_loop() {
 			endwhile;
 			wp_reset_postdata();
 		}
-
+		do_action('addthis_widget',get_permalink($post->ID), get_the_title($post->ID), 'small_toolbox');
 	//Main locations
 	echo '<div class="adc-grid-content featured-clinics adc-section adc-locations-grid">';
 	echo '<h3>Clinic Locations</h3>';

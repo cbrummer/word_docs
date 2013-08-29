@@ -151,7 +151,7 @@
 					'menu_class' => 'menu genesis-nav-menu adc-sub-menu superfish sf-js-enabled', 
 					'theme_location' => 'submenu-11') 
 				);	
-			} elseif ( is_page('education') || is_tree( '9554' ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
+			} elseif ( is_page('education') || is_tree( '9785' ) || is_category( array ('39', '44', '50') ) || in_category( array( '39', '44', '50' ) )  ){
 				echo '<h4>Education</h4>';
 				wp_nav_menu( 
 					array( 

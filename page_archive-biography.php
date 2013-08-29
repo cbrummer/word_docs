@@ -26,6 +26,7 @@ function custom_do_biography_archives_loop() {
 	echo '<div class="page hentry entry">';
 	echo '<h1 class="entry-title">'. get_the_title() .'</h1>';
 	echo '<div class="entry-content">' . get_the_content() ;
+	do_action('addthis_widget',get_permalink($post->ID), get_the_title($post->ID), 'small_toolbox');
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
 	echo '<div class="one-third first"><h5>Search by location</h5>';
