@@ -56,6 +56,13 @@ function custom_do_single_specialty_loop() {
 				adc_sick_child_box();
 				echo '</div>';
 			}
+			//if this is the Pediatrics page, show school physical links-->
+            if (is_single('2067')) {
+				echo '<div>';
+				adc_school_physical_forms();
+				echo '</div>';
+			} else {
+			}
 			echo '</div><!-- end .one-third-->';
 			//Education links
 			echo '<div class="adc-grid-content adc-section">';

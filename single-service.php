@@ -55,6 +55,20 @@ function custom_do_single_service_loop() {
 				echo '</div>';
 			} else {
 			}
+			//if this is the EasyCare page, show school physical links
+            if (is_single('2077')) {
+				echo '<div>';
+				adc_school_physical_forms();
+				echo '</div>';
+			} else {
+			}
+			//if this is the travel clinic, show list of external bookmarks
+			if(is_single( '2082' )) {
+				echo '<div>';
+				adc_travel_links();	
+				echo '</div>';
+			} else {
+			}
 			echo '</div><!-- end .one-third-->';
 			//Education links
 			echo '<div class="adc-grid-content adc-section">';

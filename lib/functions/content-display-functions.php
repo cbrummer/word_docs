@@ -1678,6 +1678,34 @@ function adc_display_doctor_honors() {
 		echo '<div class="adc-provider-awards"><h4>Awards</h4>' . genesis_get_custom_field( 'ecpt_honorsawards' ) . '</div>';	
 	}	
 }
+
+
+// List of external links
+function adc_school_physical_forms(){
+$args = array (
+			'category' => '865',
+			'category_before'  => '',
+			'category_after'   => '' ,
+			'title_li' => __('School Physical Forms'),
+			'title_before'     => '<h4>',
+			'title_after'      => '</h4>',
+		);
+		
+	  wp_list_bookmarks($args);
+wp_reset_query();
+}
+function adc_travel_links() {
+$args = array (
+		'category' => '814',
+		'category_before'  => '',
+		'category_after'   => '' ,
+		'title_li' => __('Travel Resources'),
+		'title_before'     => '<h4>',
+		'title_after'      => '</h4>',
+	);
+  wp_list_bookmarks($args);
+wp_reset_query();
+}
 /************************************************************/
 /*********************** ECOMMERCE *********************
 /*************************************************************/ 
