@@ -233,3 +233,7 @@ function adc_do_imaging_sidebar() {
 function adc_do_education_sidebar() {
 	dynamic_sidebar( 'education-sidebar' );
 }
+// HRM custom sidebar
+function adc_do_hrm_sidebar() {
+	dynamic_sidebar( 'hrm-sidebar' );
+}

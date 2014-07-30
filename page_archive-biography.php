@@ -12,6 +12,14 @@
  *
  *
  */
+ 
+ add_action('wp_enqueue_scripts', 'bio_scripts');
+ function bio_scripts() {
+	 wp_register_script('adc-select2', get_stylesheet_directory_uri() . '/lib/js/select2/select2.js');
+	 wp_enqueue_script('adc-select2');
+	 wp_register_style('adc-select2-css', get_stylesheet_directory_uri() . '/lib/js/select2/select2.css');
+	 wp_enqueue_style('adc-select2-css');
+ };
 
 remove_action ('genesis_loop', 'genesis_do_loop');
 add_action( 'genesis_loop', 'custom_do_biography_archives_loop' );
@@ -29,7 +37,7 @@ function custom_do_biography_archives_loop() {
 	do_action('addthis_widget',get_permalink($post->ID), get_the_title($post->ID), 'small_toolbox');
 	// Set menu for Isotope filters
 	echo '<div id="filters">';
-	echo '<div class="one-third first"><h5>Search by location</h5>';
+	echo '<div class="one-third first"><h5><span class="icon-oxp-pin"></span> Search by location</h5>';
 	echo '<div class="multiselect">';
 		echo '<label><input type="radio" name="loc" value="" checked>All Locations</label>';
 		echo '<label><input type="radio" name="loc" value=".north">North Austin / Round Rock</label>';
@@ -43,15 +51,16 @@ function custom_do_biography_archives_loop() {
 	}
 	echo '</select></div><!--end .one-third .first-->';
 	echo '<div class="multiselect one-third">';
-		echo '<h5>Search by provider</h5>';
+		echo '<h5><span class="icon-oxp-avatar-01"></span> Search by provider</h5>';
 		echo '<label><input type="radio" name="gender" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="gender" value=".female">Female</label>';
 		echo '<label><input type="radio" name="gender" value=".male" class="current">Male</label>';
 		echo '<label><input type="checkbox" name="option" value=".new-patients">Accepting New Patients</label>';
 		echo '<label><input type="checkbox" name="option" value=".new-medicare">Accepting New Medicare Patients</label>';
 		echo '<label><input type="checkbox" name="option" value=".spanish">Speaks Spanish</label>';
+		echo '<input type="hidden" id="adcProviderSelect" value="*" style="width:100%">';
 	echo '</div><!-- end .multiselect .one-third -->';
-	echo '<div class="one-third"><h5>Search by specialty</h5>';
+	echo '<div class="one-third"><h5><span class="icon-oxp-search"></span> Search by specialty</h5>';
 		echo '<div class="multiselect">';
 		echo '<label><input type="radio" name="care" value="" checked>Any</label>';
 		echo '<label><input type="radio" name="care" value=".primary-care">Primary care</label>';
@@ -63,11 +72,12 @@ function custom_do_biography_archives_loop() {
 		//echo '<li><a href="#" data-filter=".'. $medTerm->slug .'" class="current">'. $medTerm->name .'</a></li>';
 		echo '<option value=".'. $medTerm->slug .'">'. $medTerm->name .'</option>';
 	}
+
 	echo '</select></div>';
-	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Clear Filters</a></div>';
+	echo '<div class="adc-clear-filters"><a href="#" id="adc-clear-filters" class="btn">Reset Search Filters</a></div>';
 	echo '</div><!--end #filters-->';
 
-
+	echo '<div class="adc-no-results" style="display:none;">We are sorry. No providers match your filter selections. Please review or <a id="adc-clear-filters" href="#">reset</a> your filters.</div>';
 	//Show grid content
 	echo '<div id="adc-grid-content" class="adc-grid-content">';
 	$args = array(
@@ -81,12 +91,13 @@ function custom_do_biography_archives_loop() {
 		'cat'=>'-550' 
 	);
 	
+	$providers = array();
 	global $wp_query;
 	$wp_query = new WP_Query( $args );
 	
 	if( $wp_query->have_posts() ): 
 		while( $wp_query->have_posts() ): $wp_query->the_post(); global $post;
-			$classes = 'one-third adc-provider';
+			$classes = 'one-fourth adc-provider';
 			$service = null;
 			foreach( get_the_terms( $post->ID, 'medicalservice') as $term) {
 				$classes .= ' ' . $term->slug;
@@ -103,6 +114,9 @@ function custom_do_biography_archives_loop() {
 			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewpatients') == "on") ? " new-patients" : "");
 			$classes .= ((genesis_get_custom_field( 'ecpt_acceptsnewmedicarepatients') == "on") ? " new-medicare" : "");
 			$classes .= ((genesis_get_custom_field( 'ecpt_spanish') == "on") ? " spanish" : "");
+			$classes .= ' name-' . sanitize_title(get_the_title());
+			
+			array_push($providers,  array('id' => '.name-' . sanitize_title(get_the_title()), 'text' => get_the_title()));
 			
 			echo "<div class=\"$classes\" data-category=\"$service\">";
 				if ( is_mobile()){
@@ -114,7 +128,7 @@ function custom_do_biography_archives_loop() {
 					adc_display_suffix();
 					echo '</a></h4>';
 					echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
-					//echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
+					echo '<div class="btn"><a href="/request-appointment-provider/?adc-provider-name='.get_the_title().'" title="Request Appt Link"><span class="icon-oxp-calendar"></span> Request Appointment</a></div>';
 				} else {
 					echo '<a href="' . 
 					get_permalink();
@@ -128,7 +142,7 @@ function custom_do_biography_archives_loop() {
 					adc_display_suffix();
 					echo '</a></h4>';
 					echo get_the_term_list( $post->ID, 'medicalservice', '', ' ', '' );
-					//echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
+					echo '<div class="btn"><a href="/request-appointment/?adc-provider-name='.get_the_title().'" title="Request Appt Link"><span class="icon-oxp-calendar"></span> Request Appointment</a></div>';
 				}
 				
 			echo '</div>';
@@ -137,6 +151,7 @@ function custom_do_biography_archives_loop() {
 			genesis_posts_nav();
 		endif;
 		wp_reset_query();
+	echo '<script type="text/javascript">var adcProviders = ' . json_encode($providers) . '; adcProviders.unshift({id:"*", text:"Choose a Provider"}); jQuery("#adcProviderSelect").select2({ data: adcProviders }); </script>';		
 	echo '</div><!-- end #adc-grid-content .adc-grid-content -->';
 	echo '</div><!-- end .entry-content -->';
 	echo '</div><!-- end .page .hentry .entry -->';

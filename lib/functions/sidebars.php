@@ -342,3 +342,14 @@
         'after_title' => '</h4>'
 		)
 	);
+//HRM page sidebar area that goes in right column
+	genesis_register_sidebar( array(
+		'name' => ('HRM Sidebar'),
+		'id' => 'hrm-sidebar',
+		'description' => ('The sidebar that holds custom widgets for the HRM page)'),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h4 class="widget-title">',
+        'after_title' => '</h4>'
+		)
+	);

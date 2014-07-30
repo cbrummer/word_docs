@@ -29,17 +29,13 @@ function custom_do_single_biography_loop() {
 			adc_display_suffix();
 			adc_display_more_suffix();
 			echo '</h1>';
-			echo '<div class="two-thirds first"><div class="adc-specialty-link">';
-			echo get_the_term_list( get_the_ID(), 'medicalservice', '', ' ', '' );
-			echo '</div><!--end .adc-specialty-link-->';
 			
+			echo '<div class="two-thirds first">';
 			//Check to see if provider is a hospitlist and display appropriate phone number
 			adc_display_provider_appointment();
-			  
-			//Display all of the locations assigned to this provider-->
-            echo '<div class="adc-bio-locations"><h3>Locations</h3>';
-			echo get_the_term_list( get_the_ID(), 'cliniclocation', '<p>', '<br />', '</p>' );
-            echo '</div><!-- end .adc-bio-locations-->';
+			echo '<div class="adc-specialty-link">';
+			echo get_the_term_list( get_the_ID(), 'medicalservice', '', ' ', '' );
+			echo '</div><!--end .adc-specialty-link-->';			  
 			//Display metabox info for this provider
         	echo '<ul class="adc-provider-basic-info">';
 			adc_display_accept_new_patients();
@@ -59,6 +55,11 @@ function custom_do_single_biography_loop() {
 			//Display doctor photo
 			echo '<div class="one-third">';
 			adc_featured_image_medium();
+			//Display all of the locations assigned to this provider-->
+            echo '<div class="adc-bio-locations"><h3><span class="icon-oxp-pin"></span> Locations</h3>';
+			//echo adc_get_the_term_list( $post->ID, 'cliniclocation', '<p>', '<br />', '</p>', array(247,248,249,556) );
+			output_doc_location_info();
+            echo '</div><!-- end .adc-bio-locations-->';
 			//Doctor start date
 			adc_display_start_date();
 			//Doctor quote

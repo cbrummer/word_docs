@@ -49,9 +49,22 @@ function custom_do_single_service_loop() {
             output_location_info();
 			//if this is the HRM page, show the next HRM event-->
             if (is_single('2079')) {
-				echo '<div class="adc-event">';
-                echo '<h4>Register for Our Next Event</h4>';
-				adc_next_HRM_event();
+				 if ( is_active_sidebar('hrm-sidebar') ) {
+						dynamic_sidebar( 'hrm-sidebar' );
+					}
+			} else {
+			}
+			//if this is the EasyCare page, show school physical links
+            if (is_single('2077')) {
+				echo '<div>';
+				adc_school_physical_forms();
+				echo '</div>';
+			} else {
+			}
+			//if this is the travel clinic, show list of external bookmarks
+			if(is_single( '2082' )) {
+				echo '<div>';
+				adc_travel_links();	
 				echo '</div>';
 			} else {
 			}

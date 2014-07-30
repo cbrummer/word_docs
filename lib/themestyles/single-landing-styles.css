@@ -1,0 +1,49 @@
+/*
+	Theme Name: ADC Twenty Thirteen
+	Description: This is a custom theme created for The Austin Diagnostic Clinic using the Genesis Framework.
+	Author: Cindy Brummer
+	Author URI: http://www.adclinic.com/
+ 
+	Version: 1.9
+ 
+	Template: genesis
+	Template Version: 1.9
+ 
+	License: GPL-2.0+
+	License URI: http://www.opensource.org/licenses/gpl-license.php 
+*/
+/*These are styles specific to landing pages created for ADClinic.com*/
+/*
+Landing Pages
+---------------------------------------------------------------------------------------------------- */
+body.landing-page {
+	line-height:1.5em;
+	text-align: center;	
+}
+.landing-page h1{
+	font-size: 48px;
+	font-size: 3rem;
+}
+.landing-page h2 {
+	color: #b50043;	
+	font-size: 28px;
+	font-size: 1.75rem;
+}
+.landing-page h3 {
+	font-size: 24px;	
+	font-size: 1.5rem;	
+}
+
+.single-landing {
+	
+}
+#inner .wrap {
+	margin: 0 auto;
+	max-width: 1480px;
+	padding: 0;
+}
+.adc-landing-header {
+	background: url(lib/themestyles/landingimages/busy-woman.jpg) no-repeat 0 0 transparent; 
+	height: 470px;
+}
+

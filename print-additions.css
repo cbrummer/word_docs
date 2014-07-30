@@ -1,0 +1,61 @@
+@charset "utf-8";
+/**
+* Plugin: Genesis Printstyle Plus: Custom Print Additions File
+*
+* @package    Genesis Printstyle Plus
+* @subpackage Additional User Styles
+* @author     David Decker - DECKERWEB
+* @copyright  Copyright (c) 2011-2014, David Decker - DECKERWEB
+* @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
+* @link       https://gist.github.com/deckerweb/9230551
+*
+* @uses       charset UTF-8
+*/
+ 
+/* HTML5 Rules:
+------------------------------------------------------------ */
+ 
+/** Remove URL address output for hyperlinks */
+.site-header a[href]:after,
+.site-footer a[href]:after,
+.content span a[href]:after,
+.content p a[href]:after,
+#genesis-box a[href]:after,
+.genesis-box a[href]:after {
+	display: none;
+}
+ 
+ 
+/* XHTML Rules:
+------------------------------------------------------------ */
+ 
+/** Remove URL address output for hyperlinks */
+#header a[href]:after,
+#footer a[href]:after,
+#content span a[href]:after,
+#content p a[href]:after,
+#genesis-box a[href]:after {
+	display: none;
+}
+body {
+	font: 12pt Georgia, "Times New Roman", Times, serif;
+	line-height: 1.3;
+}
+h1 {
+	font-size: 20pt;
+}
+h2 {
+	font-size: 14pt;
+	margin-top: 25px;
+}
+aside h2 {
+	font-size: 16pt;
+}
+blockquote, ul {
+	margin: 0;
+}
+li {
+	content: "» ";
+}
+
+

@@ -72,8 +72,8 @@ function adc_dashboard_help_widget_function() {
 	// Entering the text between the quotes
 	echo "<ul>
 	<li>Cindy Brummer, Web Designer, Developer & Content Manager</li>
-	<li><a href='mailto:cbrummer@adclinic.com?subject=Wordpress Dashboard Help!'>cbrummer@adclinic.com</a></li>
-	<li>901-4453</li>
+	<li>Email: <a href='mailto:cindybrummer@standardbeagle.com?subject=Wordpress Dashboard Help!'>cindybrummer@standardbeagle.com</a></li>
+	<li>Phone: 512-653-7651</li>
 	</ul>";
 }
 function wpc_add_dashboard_widgets() {
@@ -109,7 +109,7 @@ function adc_remove_genesis_widgets() {
 
 //This function customizes the information displayed in the dashboard/admin area footer
  function modify_footer_admin () {
-  echo 'Created by Cindy Brummer, ADC Web Designer. Powered by <a href="http://www.wordpress.org">WordPress</a>';
+  echo 'Created by Cindy Brummer, Standard Beagle Studio. Powered by <a href="http://www.wordpress.org">WordPress</a>. Hosted by WP Engine.';
 } 
  add_filter('admin_footer_text', 'modify_footer_admin');
 ?>

@@ -17,6 +17,12 @@ function add_body_class( $classes ) {
    $classes[] = 'landing-page';
    return $classes;
 }
+//Enqueue stylesheet
+add_action('genesis_meta', 'call_adc_landing_styles');
+function call_adc_landing_styles() {
+	wp_register_script('single-landing-styles', get_stylesheet_directory() . '/lib/theme-styles/single-landing-styles.css');
+	wp_enqueue_script('single-landing-styles');
+}
 
 // Remove header, navigation, breadcrumbs, footer widgets, footer 
 add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );

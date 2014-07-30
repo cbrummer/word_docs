@@ -224,16 +224,6 @@ function adc_footer_creds_text() {
 	echo '<div id="footer-right">' . wpautop( genesis_get_option( 'footer-right', 'child-settings' ) ) . '</div>';
 }
 
-//This filter adds a new default avatar for users. It's a tree avatar.
-	function new_avatar($avatar_defaults) {
-		$new_avatar = get_stylesheet_directory_uri() . '/images/ADC-avatar.png';
-		$avatar_defaults[$new_avatar] = "ADC";
-		$new_avatar = get_stylesheet_directory_uri() . '/images/tree-default-avatar.png';
-    	$avatar_defaults[$new_avatar] = "Tree";
-		return $avatar_defaults;
-	}
-	add_filter( 'avatar_defaults', 'new_avatar' );
-
 //Display post thumbnail in Edit Post and Page Overview
 if ( !function_exists('fb_AddThumbColumn') && function_exists('add_theme_support') ) {
 // for post and page
@@ -411,15 +401,15 @@ function adc_archive_redirect(){
 		header("Location: $pagelink" , TRUE , 301);
 	}
 	if(is_category( 'health-articles' )) {
-		$pagelink=get_page_link (9449);
+		$pagelink=get_page_link (9788);
 		header("Location: $pagelink",TRUE,301);
 	}
 	if(is_category( 'clinic-news' )) {
-		$pagelink=get_page_link (9444);
+		$pagelink=get_page_link (9786);
 		header("Location: $pagelink",TRUE,301);
 	}
 	if(is_category( 'patient-education' )) {
-		$pagelink=get_page_link (9447);
+		$pagelink=get_page_link (9787);
 		header("Location: $pagelink",TRUE,301);
 	}
 	if(is_tax( 'cliniclocation', 'neph-satellite' ) ) {
@@ -428,6 +418,19 @@ function adc_archive_redirect(){
 	}			
 }
 add_action( 'genesis_header', 'adc_archive_redirect' );
+
+//Added to work around the issue with Events Calendar Pro returning 404 titles.
+ if( function_exists('avoid_404_event_titles')){
+	 function avoid_404_event_titles() {
+        global $wp_query;
+ 
+        if (property_exists($wp_query, 'tribe_is_event') && $wp_query->tribe_is_event && $wp_query->is_404)
+                $wp_query->is_404 = false;
+}
+
+	 add_action('template_include', 'avoid_404_event_titles', 1);
+ };
+ 
 /************************************************************
  /* SCRIPTS
 *************************************************************/
@@ -474,6 +477,9 @@ add_action( 'genesis_meta', 'adc_load_javascript_files' );
 		wp_register_script( 'jquery.bbq.min', get_bloginfo('stylesheet_directory').'/lib/js/jquery.bbq.min.js', array( 'jquery' ), '2013-05-30', true);
 		if ( is_home () ){
 			wp_enqueue_script( 'jquery.hashchange.min' );
+			wp_enqueue_script( 'jquery.easytabs' );
+		}
+		if ( is_singular( 'location' ) || is_page( 'locations' ) || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_post_type_archive( 'wpseo_locations' ) || 'wpseo_locations' == get_post_type() || is_singular( 'wpseo_locations' ) ){
 			wp_enqueue_script( 'jquery.easytabs' );
 		}
 // Register Isotope, so it can be called anytime

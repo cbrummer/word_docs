@@ -29,7 +29,7 @@ if (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) {
 		} elseif (get_first_image($post->ID) != '')
 			echo get_first_image($post->ID);
 		 else { ?>
-			<img src="<?php bloginfo('stylesheet_directory'); ?>/images/ADC-site-logo.jpg" alt="<?php the_title(); ?>" class="alignleft" />
+			<img src="<?php bloginfo('stylesheet_directory'); ?>/images/ADC-site-logo.jpg" alt="ADC logo" class="alignleft" />
 <?php }
 }
 // Replace header hook to include logo 
@@ -63,10 +63,10 @@ function child_do_layout( $opt ) {
 
 }
 
-//Home Page tabs
+//Home and Location Page tabs
 add_action( 'genesis_after_footer', 'adc_add_easytabs' );
 	function adc_add_easytabs() {
-		if ( is_home () ){
+		if ( is_home () || is_singular( 'location' ) || is_page( 'locations' ) || is_tree( 21 ) || 'location' == get_post_type() || is_post_type_archive( 'location' ) || is_post_type_archive( 'wpseo_locations' ) || 'wpseo_locations' == get_post_type() || is_singular( 'wpseo_locations' ) ){
 			echo '<script>jQuery( function() { jQuery(".tab-container").easytabs() });</script>';	
 		}
 	}
@@ -386,7 +386,7 @@ function adc_leader_story() {
 function adc_check_if_hospitalist() {
 	$hospitalist = genesis_get_custom_field('ecpt_hospitalist');
 	if( ($hospitalist) ) { //check to see if this doctor is a hospitalist
-		echo 'howdy';
+		echo '';
 	} elseif (pa_in_taxonomy('otherdepartment', 'administration')) {
 		echo '<div class="adc-provider-appt"><h3>Information</h3>512-901-1111</div>';
 	} else {
@@ -453,7 +453,7 @@ function adc_subpage_peek() {
 	$args = array(
 		'post_parent' => $post->ID,
 		'post_type' => 'page',
-		'post__not_in' => array(7000, 6067, 3872),
+		'post__not_in' => array(7000, 6067, 3872, 8251),
 		'orderby' => 'title', 
 		'order' => 'DESC'
 	);
@@ -738,11 +738,11 @@ function adc_display_appointment_phone() {
 		if (is_mobile()) {
 			echo '<a href="tel://';
 			echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
-			echo '" title="Dial phone number from a mobile device">';
+			echo '" title="Dial phone number from a mobile device"><span class="icon-oxp-phone"></span> ';
 			echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
 			echo '</a>';
 		} else {
-			echo genesis_get_custom_field( 'ecpt_mainappointmentphone' );
+			echo '<span class="icon-oxp-phone"></span> ' . genesis_get_custom_field( 'ecpt_mainappointmentphone' );
 		}
 }
 function adc_second_location_appt_phone() {
@@ -1130,6 +1130,47 @@ function adc_display_location_6_list(){
 	 echo '<li><strong>Hours:</strong> ' . $hours6 . '</li>';
 	 }		
 }
+//Display doctor location information
+function adc_display_doc_location_1_list(){
+	$dochours1 = genesis_get_custom_field( 'ecpt_doc_hours1'); 
+	$docfloor1 = genesis_get_custom_field( 'ecpt_doc_floor1' );
+	 if( $dochours1 ) {	
+		echo '<li>' . $dochours1 . '</li>';
+	 }
+	 if( $docfloor1) {	
+		echo '<li> ' . $docfloor1 . '</li>';
+	 }
+}
+function adc_display_doc_location_2_list(){
+	$dochours2 = genesis_get_custom_field( 'ecpt_doc_hours2'); 
+	$docfloor2 = genesis_get_custom_field( 'ecpt_doc_floor2' );
+	 if( $dochours2 ) {	
+		echo '<li>' . $dochours2 . '</li>';
+	 }
+	 if( $docfloor2) {	
+		echo '<li> ' . $docfloor2 . '</li>';
+	 }
+}
+function adc_display_doc_location_3_list(){
+	$dochours3 = genesis_get_custom_field( 'ecpt_doc_hours3'); 
+	$docfloor3 = genesis_get_custom_field( 'ecpt_doc_floor3' );
+	 if( $dochours3 ) {	
+		echo '<li>' . $dochours3 . '</li>';
+	 }
+	 if( $docfloor3) {	
+		echo '<li> ' . $docfloor3 . '</li>';
+	 }
+}
+function adc_display_doc_location_4_list(){
+	$dochours4 = genesis_get_custom_field( 'ecpt_doc_hours4'); 
+	$docfloor4 = genesis_get_custom_field( 'ecpt_doc_floor4' );
+	 if( $dochours4 ) {	
+		echo '<li>' . $dochours4 . '</li>';
+	 }
+	 if( $docfloor4) {	
+		echo '<li> ' . $docfloor4 . '</li>';
+	 }
+}
 //Display insurance meta fields
 function adc_display_insurance_notes() {
     if( genesis_get_custom_field( 'ecpt_notes' ) )
@@ -1387,15 +1428,72 @@ function output_location_info() {
 	 $location5 = genesis_get_custom_field( 'ecpt_location5' );
 		if( $location5 ) {
 			echo '<h4 class="adc-info-numbers"><a href="';
-			echo bloginfo('url') . '/locations/' . sanitize_title( $location4 ) . '/';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $location5 ) . '/';
 			echo '">';
-			echo $location4;
+			echo $location5;
 			echo '</a></h4>';
 			echo '<ul class="adc-num-list">';
 			adc_display_location_5_list();
 			echo '</ul><!--end important numbers list-->';
 		}	
+	 $location6 = genesis_get_custom_field( 'ecpt_location6' );
+		if( $location6 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $location6 ) . '/';
+			echo '">';
+			echo $location6;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_location_6_list();
+			echo '</ul><!--end important numbers list-->';
+		}			
 }
+//Display doctor location information
+function output_doc_location_info() {
+	$doclocation1 = genesis_get_custom_field( 'ecpt_doc_location1' );
+		echo '<h4 class="adc-info-numbers"><a href="';
+		echo bloginfo('url') . '/locations/' . sanitize_title( $doclocation1 ) .'/';
+		echo '">';
+		echo $doclocation1;
+		echo '</a></h4>';
+		echo '<ul class="adc-num-list">';
+		adc_display_doc_location_1_list();
+		echo'</ul><!--end doc location 1 important numbers list-->';
+	$doclocation2 = genesis_get_custom_field( 'ecpt_doc_location2' );	
+		if( $doclocation2 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $doclocation2 ) . '/';
+			echo '">';
+			echo $doclocation2;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_doc_location_2_list();
+			echo '</ul><!--end doc location 2 important numbers list-->';
+		}
+	$doclocation3 = genesis_get_custom_field( 'ecpt_doc_location3' );
+		if( $doclocation3 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $doclocation3 ) . '/';
+			echo '">';
+			echo $doclocation3;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_doc_location_3_list();
+			echo '</ul><!--end doc location 3 important numbers list-->';
+		}
+	 $doclocation4 = genesis_get_custom_field( 'ecpt_doc_location4' );
+		if( $doclocation4 ) {
+			echo '<h4 class="adc-info-numbers"><a href="';
+			echo bloginfo('url') . '/locations/' . sanitize_title( $doclocation4 ) . '/';
+			echo '">';
+			echo $doclocation4;
+			echo '</a></h4>';
+			echo '<ul class="adc-num-list">';
+			adc_display_doc_location_4_list();
+			echo '</ul><!--end doc important numbers list-->';
+		}			
+}
+
 //Show list of patient visit materials EXCEPT those in patient education category 
 function output_patient_visit_links(){
 	$visitinfo = get_posts_related_by_taxonomy(get_the_ID(), 'medicalservice');
@@ -1604,7 +1702,7 @@ function adc_provider_related_videos() {
 							echo '<div class="'.  $classes . '">';
 							adc_get_excerpt_thumb();
 							echo '<h4><a href="';
-							get_permalink();
+							the_permalink();
 							echo '">';
 							the_title();
 							echo '</a></h4>';
@@ -1625,7 +1723,7 @@ function adc_display_provider_appointment(){
 		echo '';
 	} elseif (pa_in_taxonomy('otherdepartment', 'administration')) {
 		echo '<div class="adc-provider-appt">';
-		echo '<h3>Information</h3><a href="tel://512.901.1111/" title="Dial phone number from a mobile device">512-901-1111</a>';
+		echo '<h3><span class="icon-oxp-phone"></span> Information</h3><a href="tel://512.901.1111/" title="Dial phone number from a mobile device">512-901-1111</a>';
 		echo '</div>';
 	} else {
 	//Display appointment phone number of a section related by the provider's name
@@ -1633,20 +1731,20 @@ function adc_display_provider_appointment(){
 	if ($providerphone->have_posts()){
 		while ($providerphone->have_posts()): $providerphone->the_post();
 			if ( 'specialty' == get_post_type() ) {
-				if ( is_single( array( 447, 3342, 3352, 3389, 3130 )) ) {
-					echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
+				if ( is_single( array( 447, 3342, 3352, 3389, 3130, 10661 )) ) {
+					echo '<div class="adc-provider-appt btn"><h3><span class="icon-oxp-phone"></span> Appointments</h3>';
 					echo '<a href="tel://';
 					adc_second_location_appt_phone();
 					echo '">';
 					adc_second_location_appt_phone();
 					echo '</a></div><!--end .adc-provider-appt-->';
 				} else {
-					echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
+					echo '<div class="adc-provider-appt btn"><h3><span class="icon-oxp-phone"></span> Appointments</h3>';
 					adc_display_appointment_phone();
 					echo '</div><!--end .adc-provider-appt-->';
 				}
 			}  elseif ( 'service' == get_post_type()) {
-				echo '<div class="adc-provider-appt btn"><h3>Appointments</h3>';
+				echo '<div class="adc-provider-appt btn"><h3><span class="icon-oxp-phone"></span> Appointments</h3>';
 				echo '<a href="tel://';
 				adc_display_main_phone();
 				echo '">';
@@ -1677,6 +1775,33 @@ function adc_display_doctor_honors() {
 	if ( genesis_get_custom_field( 'ecpt_honorsawards' )) {
 		echo '<div class="adc-provider-awards"><h4>Awards</h4>' . genesis_get_custom_field( 'ecpt_honorsawards' ) . '</div>';	
 	}	
+}
+
+// List of external links
+function adc_school_physical_forms(){
+$args = array (
+			'category' => '865',
+			'category_before'  => '',
+			'category_after'   => '' ,
+			'title_li' => __('School Physical Forms'),
+			'title_before'     => '<h4>',
+			'title_after'      => '</h4>',
+		);
+		
+	  wp_list_bookmarks($args);
+wp_reset_query();
+}
+function adc_travel_links() {
+$args = array (
+		'category' => '814',
+		'category_before'  => '',
+		'category_after'   => '' ,
+		'title_li' => __('Travel Resources'),
+		'title_before'     => '<h4>',
+		'title_after'      => '</h4>',
+	);
+  wp_list_bookmarks($args);
+wp_reset_query();
 }
 /************************************************************/
 /*********************** ECOMMERCE *********************
