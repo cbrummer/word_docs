@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Insurance List
+ * Template Name: DO NOT USE- Insurance List
  * Description: A Page Template for the Insurance list in the Patient Tools section pages
  *
  * @package      adc-twenty-thirteen

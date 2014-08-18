@@ -1186,7 +1186,9 @@ function adc_display_insurance_acceptance() {
 function adc_display_insurance_url() {
     if( genesis_get_custom_field( 'ecpt_website' ) )
 		$insuranceurl = genesis_get_custom_field( 'ecpt_website' );
-        echo '<a href="'. $insuranceurl .'" title="" target="_blank">' . the_title() .' website</a>';
+        echo '<a href="'. $insuranceurl .'" title="" target="_blank">';
+		the_title();
+		echo '</a>';
 }
 //Testimonial excerpts
 function adc_display_staff_position() {

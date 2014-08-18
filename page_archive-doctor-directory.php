@@ -56,7 +56,7 @@ function custom_do_doctor_directory_archives_loop() {
 				get_permalink();
 				echo '">';
 				the_title();
-				echo ', ';
+				//echo ', ';
 				adc_display_suffix();
 				echo '</a></h4>';
 				echo '</td>';
